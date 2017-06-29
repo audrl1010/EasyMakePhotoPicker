@@ -1,0 +1,6 @@
+framework module Pods_EasyMakePhotoPicker_Tests {
+  umbrella header "Pods-EasyMakePhotoPicker_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

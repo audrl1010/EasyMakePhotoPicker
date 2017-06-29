@@ -1,0 +1,22 @@
+{
+  "name": "EasyMakePhotoPicker",
+  "version": "0.1.0",
+  "summary": "A short description of EasyMakePhotoPicker.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/audrl1010/EasyMakePhotoPicker",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "audrl1010": "audrl1010@naver.com"
+  },
+  "source": {
+    "git": "https://github.com/audrl1010/EasyMakePhotoPicker.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "EasyMakePhotoPicker/Classes/**/*"
+}

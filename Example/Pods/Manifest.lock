@@ -1,0 +1,16 @@
+PODS:
+  - EasyMakePhotoPicker (0.1.0)
+
+DEPENDENCIES:
+  - EasyMakePhotoPicker (from `../`)
+
+EXTERNAL SOURCES:
+  EasyMakePhotoPicker:
+    :path: ../
+
+SPEC CHECKSUMS:
+  EasyMakePhotoPicker: c2f27b785704f02dda566809464f35ffb90f9405
+
+PODFILE CHECKSUM: 347c4ca027021492a07e5be22ba339c304dc8e0f
+
+COCOAPODS: 1.2.1
