@@ -2,10 +2,11 @@ use_frameworks!
 
 target 'EasyMakePhotoPicker_Example' do
   pod 'EasyMakePhotoPicker', :path => '../'
-
+  pod 'RxSwift', '~> 3.0’
+  pod 'RxCocoa', '~> 3.0’
+ 
   target 'EasyMakePhotoPicker_Tests' do
     inherit! :search_paths
-
     
   end
 end
