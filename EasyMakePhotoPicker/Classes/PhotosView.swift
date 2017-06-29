@@ -13,28 +13,28 @@ import RxSwift
 
 
 public protocol PhotosViewInput {
-  public var inputs: PhotosViewInput { get }
+  var inputs: PhotosViewInput { get }
   
   // only support when PhotosViewConfigure`s 'allowsMultipleSelection' property is true
-  public var selectionDidComplete: PublishSubject<Void> { get }
+  var selectionDidComplete: PublishSubject<Void> { get }
 }
 
 public protocol PhotosViewOutput {
-  public var outputs: PhotosViewOutput { get }
+  var outputs: PhotosViewOutput { get }
 
-  public var photoDidSelected: PublishSubject<PhotoAsset> { get }
+  var photoDidSelected: PublishSubject<PhotoAsset> { get }
   
   // only support when PhotosViewConfigure`s 'allowsCameraSelection' property is true
-  public var cameraDidClick: PublishSubject<Void> { get }
+  var cameraDidClick: PublishSubject<Void> { get }
   
   // only support when PhotosViewConfigure`s 'allowsMultipleSelection' property is true
-  public var selectedPhotosDidComplete: PublishSubject<[PhotoAsset]> { get }
+  var selectedPhotosDidComplete: PublishSubject<[PhotoAsset]> { get }
   
   // only support when PhotosViewConfigure`s 'allowsMultipleSelection' property is true
-  public var selectedPhotosCount: PublishSubject<Int> { get }
+  var selectedPhotosCount: PublishSubject<Int> { get }
   
   // only support when PhotosViewConfigure`s 'allowsMultipleSelection' property is true
-  public var photoDidDeselected: PublishSubject<PhotoAsset> { get }
+  var photoDidDeselected: PublishSubject<PhotoAsset> { get }
 }
 
 public class PhotosView: BaseView,
@@ -193,9 +193,8 @@ public class PhotosView: BaseView,
       .observeOn(MainScheduler.instance)
       .subscribe(onNext: { [weak self] in
         guard let `self` = self else { return }
-        UIAlertController.show(
-          title: "",
-          message: self.configure.messageWhenMaxCountSelectedPhotosIsExceeded)
+        let alertController = UIAlertController(title: "", message: self.configure.messageWhenMaxCountSelectedPhotosIsExceeded, preferredStyle: .alert)
+        
       })
       .disposed(by: disposeBag)
     

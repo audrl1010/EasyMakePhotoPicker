@@ -13,9 +13,9 @@ import UIKit
 extension UIView {
   
   public class Animator {
-    typealias AnimationsBlock = () -> Void
-    typealias CompletionBlock = (Bool) -> Void
-    typealias BlockBeforeExcutingAnimations = () -> Void
+    public typealias AnimationsBlock = () -> Void
+    public typealias CompletionBlock = (Bool) -> Void
+    public typealias BlockBeforeExcutingAnimations = () -> Void
     
     fileprivate var _beforeAnimations: BlockBeforeExcutingAnimations
     fileprivate var _animations: AnimationsBlock

@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum CellChangeEvent {
+public enum CellChangeEvent {
   case scrollTo(IndexPath)
   case insert([IndexPath])
   case update([IndexPath])

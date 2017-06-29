@@ -13,55 +13,55 @@ import RxSwift
 
 public protocol PhotosViewModelInput {
 
-  public var photoSizeDidInput: PublishSubject<CGSize> { get }
+  var photoSizeDidInput: PublishSubject<CGSize> { get }
   
-  public var viewDidLoad: PublishSubject<Void> { get }
+  var viewDidLoad: PublishSubject<Void> { get }
   
-  public var currentPhotoAssetCollectionDidChange: PublishSubject<PhotoAssetCollection> { get }
+  var currentPhotoAssetCollectionDidChange: PublishSubject<PhotoAssetCollection> { get }
   
-  public var cellDidSelect: PublishSubject<IndexPath> { get }
+  var cellDidSelect: PublishSubject<IndexPath> { get }
   
-  public var displayingCellDidEnd: PublishSubject<IndexPath> { get }
+  var displayingCellDidEnd: PublishSubject<IndexPath> { get }
   
-  public var scrollingDidStop: PublishSubject<[IndexPath]> { get }
+  var scrollingDidStop: PublishSubject<[IndexPath]> { get }
   
-  public var cachedRectDidUpdate:
+  var cachedRectDidUpdate:
     PublishSubject<(addedIndexPaths: [IndexPath], removedIndexPaths:[IndexPath])> { get }
   
   // only support when PhotosViewConfigure`s 'allowsMultipleSelection' property is true
-  public var selectionDidComplete: PublishSubject<Void> { get }
+  var selectionDidComplete: PublishSubject<Void> { get }
 }
 
 public protocol PhotosViewModelOutput {
 
-  public var cellDidChange: PublishSubject<CellChangeEvent> { get }
+  var cellDidChange: PublishSubject<CellChangeEvent> { get }
   
-  public var maxCountSelectedPhotosIsExceeded: PublishSubject<Void> { get }
+  var maxCountSelectedPhotosIsExceeded: PublishSubject<Void> { get }
   
-  public var videoDidPlay: PublishSubject<PlayEvent> { get }
+  var videoDidPlay: PublishSubject<PlayEvent> { get }
   
   // only support when PhotosViewConfigure`s 'allowsCameraSelection' property is true
-  public var cameraDidClick: PublishSubject<Void> { get }
+  var cameraDidClick: PublishSubject<Void> { get }
   
   // only support when PhotosViewConfigure`s 'allowsMultipleSelection' property is true
-  public var selectedPhotoAssetsDidComplete: PublishSubject<[PhotoAsset]> { get }
+  var selectedPhotoAssetsDidComplete: PublishSubject<[PhotoAsset]> { get }
   
   // only support when PhotosViewConfigure`s 'allowsMultipleSelection' property is true
-  public var selectedPhotosCount: PublishSubject<Int> { get }
+  var selectedPhotosCount: PublishSubject<Int> { get }
   
-  public var photoAssetDidSelected: PublishSubject<PhotoAsset> { get }
+  var photoAssetDidSelected: PublishSubject<PhotoAsset> { get }
   
   // only support when PhotosViewConfigure`s 'allowsMultipleSelection' property is true
-  public var photoAssetDidDeselected: PublishSubject<PhotoAsset> { get }
+  var photoAssetDidDeselected: PublishSubject<PhotoAsset> { get }
 }
 
 public protocol PhotosViewModelType {
-  public var inputs: PhotosViewModelInput { get }
-  public var outputs: PhotosViewModelOutput { get }
+  var inputs: PhotosViewModelInput { get }
+  var outputs: PhotosViewModelOutput { get }
   
-  public func numberOfSection() -> Int
-  public func numberOfItems() -> Int
-  public func cellViewModel(at indexPath: IndexPath) -> PhotoCellViewModel
+  func numberOfSection() -> Int
+  func numberOfItems() -> Int
+  func cellViewModel(at indexPath: IndexPath) -> PhotoCellViewModel
 }
 
 class PhotosViewModel:

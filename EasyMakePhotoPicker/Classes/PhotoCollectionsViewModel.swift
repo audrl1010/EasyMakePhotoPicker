@@ -11,21 +11,21 @@ import RxSwift
 import Photos
 
 public protocol PhotoCollectionsViewModelOutput {
-  public var cellDidChange: PublishSubject<CellChangeEvent> { get }
-  public var photoCollectionDidSelectWhenCellDidSelect: PublishSubject<(IndexPath, PhotoAssetCollection)> { get }
+  var cellDidChange: PublishSubject<CellChangeEvent> { get }
+  var photoCollectionDidSelectWhenCellDidSelect: PublishSubject<(IndexPath, PhotoAssetCollection)> { get }
 }
 
 public protocol PhotoCollectionsViewModelInput {
-  public var cellDidSelect: PublishSubject<IndexPath> { get }
+  var cellDidSelect: PublishSubject<IndexPath> { get }
 }
 
 public protocol PhotoCollectionsViewModelType {
-  public var outputs: PhotoCollectionsViewModelOutput { get }
-  public var inputs: PhotoCollectionsViewModelInput { get }
+  var outputs: PhotoCollectionsViewModelOutput { get }
+  var inputs: PhotoCollectionsViewModelInput { get }
   
-  public func numberOfSection() -> Int
-  public func numberOfItems() -> Int
-  public func cellViewModel(at indexPath: IndexPath) -> PhotoCollectionCellViewModel
+  func numberOfSection() -> Int
+  func numberOfItems() -> Int
+  func cellViewModel(at indexPath: IndexPath) -> PhotoCollectionCellViewModel
 }
 
 public class PhotoCollectionsViewModel:

@@ -11,13 +11,13 @@ import PhotosUI
 import RxSwift
 
 public protocol PhotoCollectionsViewOutput {
-  public var output: PhotoCollectionsViewOutput { get }
+  var output: PhotoCollectionsViewOutput { get }
   
-  public var selectedPhotoCollectionWhenCellDidSelect:
+  var selectedPhotoCollectionWhenCellDidSelect:
     PublishSubject<(IndexPath, PhotoAssetCollection)> { get }
   
   // force cell selection
-  public var cellDidSelect: PublishSubject<IndexPath> { get }
+  var cellDidSelect: PublishSubject<IndexPath> { get }
 }
 
 public class PhotoCollectionsView:
