@@ -17,7 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     _ application: UIApplication,
     didFinishLaunchingWithOptions
     launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-      return true
+    window = UIWindow(frame: UIScreen.main.bounds)
+    window?.rootViewController = ViewController()
+    window?.makeKeyAndVisible()
+    return true
   }
 }
 

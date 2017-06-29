@@ -14,11 +14,11 @@ public class PhotoCell: BaseCollectionViewCell {
   
   // MARK: - Constant
   public struct Constant {
-    static var selectedViewBorderWidth = CGFloat(2)
+    public static var selectedViewBorderWidth = CGFloat(2)
   }
   
   public struct Color {
-    static var selectedViewBorderColor = UIColor(
+    public static var selectedViewBorderColor = UIColor(
       red: 255/255,
       green: 255/255,
       blue: 0/255,
@@ -26,15 +26,15 @@ public class PhotoCell: BaseCollectionViewCell {
   }
   
   public struct Metric {
-    static var orderLabelWidth = CGFloat(30)
-    static var orderLabelHeight = CGFloat(30)
-    static var orderLabelRight = CGFloat(-10)
-    static var orderLabelTop = CGFloat(10)
+    public static var orderLabelWidth = CGFloat(30)
+    public static var orderLabelHeight = CGFloat(30)
+    public static var orderLabelRight = CGFloat(-10)
+    public static var orderLabelTop = CGFloat(10)
     
-    static var checkImageViewWidth = CGFloat(30)
-    static var checkImageViewHeight = CGFloat(30)
-    static var checkImageViewRight = CGFloat(-10)
-    static var checkImageViewTop = CGFloat(10)
+    public static var checkImageViewWidth = CGFloat(30)
+    public static var checkImageViewHeight = CGFloat(30)
+    public static var checkImageViewRight = CGFloat(-10)
+    public static var checkImageViewTop = CGFloat(10)
   }
   
   // MARK: - Properties

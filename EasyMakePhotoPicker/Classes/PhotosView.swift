@@ -193,8 +193,7 @@ public class PhotosView: BaseView,
       .observeOn(MainScheduler.instance)
       .subscribe(onNext: { [weak self] in
         guard let `self` = self else { return }
-        let alertController = UIAlertController(title: "", message: self.configure.messageWhenMaxCountSelectedPhotosIsExceeded, preferredStyle: .alert)
-        
+        UIAlertController.show(title: "", message: self.configure.messageWhenMaxCountSelectedPhotosIsExceeded)
       })
       .disposed(by: disposeBag)
     

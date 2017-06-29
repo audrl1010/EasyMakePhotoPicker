@@ -36,7 +36,7 @@ public class BaseCollectionViewCell: UICollectionViewCell {
   
   // MARK: - Properties
   
-  class var cellIdentifier: String { return "\(self)" }
+  public class var cellIdentifier: String { return "\(self)" }
   
   // MARK: - View Life Cycle
   
