@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'EasyMakePhotoPicker_Example' do
+  pod 'EasyMakePhotoPicker', :path => '../'
+
+  target 'EasyMakePhotoPicker_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
