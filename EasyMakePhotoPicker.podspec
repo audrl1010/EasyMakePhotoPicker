@@ -24,7 +24,7 @@ EasyMakePhotoPicker allows you to easily create your own PhotoPicker by providin
   s.homepage         = 'https://github.com/audrl1010/EasyMakePhotoPicker'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'audrl1010' => 'audrl1010@naver.com' }
+  s.author           = { 'Myung gi son' => 'audrl1010@naver.com' }
   s.source           = { :git => 'https://github.com/audrl1010/EasyMakePhotoPicker.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 

@@ -22,7 +22,7 @@ pod "EasyMakePhotoPicker"
 
 ## Author
 
-audrl1010, audrl1010@naver.com
+Myung gi son, audrl1010@naver.com
 
 ## License
 
