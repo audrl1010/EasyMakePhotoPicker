@@ -12,7 +12,7 @@ import Photos
 
 extension PhotoManager {
   
-  public func startCaching(
+  open func startCaching(
     assets: [PHAsset],
     targetSize: CGSize,
     contentMode: PHImageContentMode,
@@ -25,7 +25,7 @@ extension PhotoManager {
       options: options)
   }
   
-  public func stopCaching(
+  open func stopCaching(
     assets: [PHAsset],
     targetSize: CGSize,
     contentMode: PHImageContentMode,
@@ -38,12 +38,12 @@ extension PhotoManager {
       options: options)
   }
   
-  public func stopCachingForAllAssets() {
+  open func stopCachingForAllAssets() {
     imageManager.stopCachingImagesForAllAssets()
   }
   
   // cancel image request for requestID.
-  public func cancel(imageRequest requestID: PHImageRequestID) {
+  open func cancel(imageRequest requestID: PHImageRequestID) {
     imageManager.cancelImageRequest(requestID)
   }
 }

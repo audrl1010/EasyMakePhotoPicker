@@ -20,19 +20,19 @@ public protocol PhotoCollectionsViewOutput {
   var cellDidSelect: PublishSubject<IndexPath> { get }
 }
 
-public class PhotoCollectionsView:
+open class PhotoCollectionsView:
   BaseView,
   PhotoCollectionsViewOutput {
   
   // MARK: - Properties
-  public var output: PhotoCollectionsViewOutput { return self }
+  open var output: PhotoCollectionsViewOutput { return self }
   
-  public var selectedPhotoCollectionWhenCellDidSelect:
+  open var selectedPhotoCollectionWhenCellDidSelect:
     PublishSubject<(IndexPath, PhotoAssetCollection)> {
     return viewModel.outputs.photoCollectionDidSelectWhenCellDidSelect
   }
   
-  public var cellDidSelect: PublishSubject<IndexPath> {
+  open var cellDidSelect: PublishSubject<IndexPath> {
     return viewModel.inputs.cellDidSelect
   }
   
@@ -75,11 +75,11 @@ public class PhotoCollectionsView:
     fatalError("init(coder:) has not been implemented")
   }
   
-  override public func setupViews() {
+  override open func setupViews() {
     addSubview(collectionView)
   }
   
-  override public func setupConstraints() {
+  override open func setupConstraints() {
     collectionView
       .fs_leftAnchor(equalTo: leftAnchor)
       .fs_topAnchor(equalTo: topAnchor)
@@ -88,7 +88,7 @@ public class PhotoCollectionsView:
       .fs_endSetup()
   }
   
-  fileprivate func bindViewModel() {
+  open func bindViewModel() {
     viewModel.outputs.cellDidChange
       .observeOn(MainScheduler.instance)
       .subscribe(onNext: { [weak self] changeEvent in
@@ -122,18 +122,18 @@ public class PhotoCollectionsView:
 }
 
 extension PhotoCollectionsView: UICollectionViewDataSource {
-  public func numberOfSections(
+  open func numberOfSections(
     in collectionView: UICollectionView) -> Int {
     return viewModel.numberOfSection()
   }
   
-  public func collectionView(
+  open func collectionView(
     _ collectionView: UICollectionView,
     numberOfItemsInSection section: Int) -> Int {
     return viewModel.numberOfItems()
   }
   
-  public func collectionView(
+  open func collectionView(
     _ collectionView: UICollectionView,
     cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(
@@ -145,7 +145,7 @@ extension PhotoCollectionsView: UICollectionViewDataSource {
 }
 
 extension PhotoCollectionsView: UICollectionViewDelegate {
-  public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+  open func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     viewModel.inputs.cellDidSelect.onNext(indexPath)
   }
 }

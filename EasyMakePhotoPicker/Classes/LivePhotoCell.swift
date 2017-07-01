@@ -9,48 +9,48 @@
 import UIKit
 import PhotosUI
 
-public class LivePhotoCell: PhotoCell {
+open class LivePhotoCell: PhotoCell {
   public struct Metric {
-    static let livePhotoBadgeImageViewWidth = CGFloat(20)
-    static let livePhotoBadgeImageViewHeight = CGFloat(20)
-    static let livePhotoBadgeImageViewRight = CGFloat(-10)
-    static let livePhotoBadgeImageViewBottom = CGFloat(-10)
+    public static let livePhotoBadgeImageViewWidth = CGFloat(20)
+    public static let livePhotoBadgeImageViewHeight = CGFloat(20)
+    public static let livePhotoBadgeImageViewRight = CGFloat(-10)
+    public static let livePhotoBadgeImageViewBottom = CGFloat(-10)
   }
   
   public struct Color {
-    static var selectedViewBGC = UIColor(white: 1.0, alpha: 0.0)
+    public static var selectedViewBGC = UIColor(white: 1.0, alpha: 0.0)
   }
   
-  override public var viewModel: PhotoCellViewModel? {
+  override open var viewModel: PhotoCellViewModel? {
     didSet {
       guard let viewModel = viewModel as? LivePhotoCellViewModel else { return }
       bind(viewModel: viewModel)
     }
   }
   
-  public var livePhotoView = PHLivePhotoView().then {
+  open var livePhotoView = PHLivePhotoView().then {
     $0.isHidden = true
   }
   
-  public var livePhotoBadgeImageView = UIImageView().then {
+  open var livePhotoBadgeImageView = UIImageView().then {
     $0.contentMode = .scaleAspectFit
   }
   
-  override public func prepareForReuse() {
+  override open func prepareForReuse() {
     super.prepareForReuse()
     livePhotoBadgeImageView.image = nil
     
     livePhotoView.isHidden = true
   }
   
-  override public func setupViews() {
+  override open func setupViews() {
     super.setupViews()
     selectedView.backgroundColor = Color.selectedViewBGC
     contentView.insertSubview(livePhotoView, at: 1)
     contentView.addSubview(livePhotoBadgeImageView)
   }
   
-  override public func setupConstraints() {
+  override open func setupConstraints() {
     super.setupConstraints()
     livePhotoBadgeImageView
       .fs_widthAnchor(
@@ -73,7 +73,7 @@ public class LivePhotoCell: PhotoCell {
       .fs_endSetup()
   }
   
-  public func play() {
+  open func play() {
     guard let viewModel = viewModel as? LivePhotoCellViewModel,
       let livePhoto = viewModel.livePhoto else { return }
     
@@ -82,13 +82,13 @@ public class LivePhotoCell: PhotoCell {
     livePhotoView.livePhoto = livePhoto
   }
   
-  public func stop() {
+  open func stop() {
     self.livePhotoView.stopPlayback()
     self.livePhotoView.isHidden = true
     self.livePhotoView.livePhoto = nil 
   }
   
-  public func bind(viewModel: LivePhotoCellViewModel) {
+  open func bind(viewModel: LivePhotoCellViewModel) {
     livePhotoBadgeImageView.image = viewModel.badgeImage
     
     viewModel.playEvent.asObserver()

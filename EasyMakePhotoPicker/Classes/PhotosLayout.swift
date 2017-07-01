@@ -8,14 +8,14 @@
 
 import UIKit
 
-public class PhotosLayout: UICollectionViewFlowLayout {
+open class PhotosLayout: UICollectionViewFlowLayout {
   
   fileprivate struct Constant {
     static let padding = CGFloat(1)
     static let numberOfColumns = CGFloat(3)
   }
   
-  override public func prepare() {
+  override open func prepare() {
     super.prepare()
     
     // set up itemSize

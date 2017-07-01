@@ -28,22 +28,22 @@ public protocol PhotoCollectionsViewModelType {
   func cellViewModel(at indexPath: IndexPath) -> PhotoCollectionCellViewModel
 }
 
-public class PhotoCollectionsViewModel:
+open class PhotoCollectionsViewModel:
   PhotoCollectionsViewModelOutput,
   PhotoCollectionsViewModelInput,
   PhotoCollectionsViewModelType {
   
-  public var outputs: PhotoCollectionsViewModelOutput { return self }
-  public var inputs: PhotoCollectionsViewModelInput { return self }
+  open var outputs: PhotoCollectionsViewModelOutput { return self }
+  open var inputs: PhotoCollectionsViewModelInput { return self }
   
   // MARK: - Input
-  public var cellDidSelect = PublishSubject<IndexPath>()
+  open var cellDidSelect = PublishSubject<IndexPath>()
   
   // MARK: - Output
   
-  public var photoCollectionDidSelectWhenCellDidSelect = PublishSubject<(IndexPath, PhotoAssetCollection)>()
+  open var photoCollectionDidSelectWhenCellDidSelect = PublishSubject<(IndexPath, PhotoAssetCollection)>()
   
-  public var cellDidChange = PublishSubject<CellChangeEvent>()
+  open var cellDidChange = PublishSubject<CellChangeEvent>()
   
   fileprivate var disposeBag: DisposeBag = DisposeBag()
   
@@ -216,15 +216,15 @@ public class PhotoCollectionsViewModel:
       .disposed(by: disposeBag)
   }
   
-  public func numberOfSection() -> Int {
+  open func numberOfSection() -> Int {
     return 1
   }
   
-  public func numberOfItems() -> Int {
+  open func numberOfItems() -> Int {
     return photoAssetCollections.count
   }
   
-  public func cellViewModel(at indexPath: IndexPath) -> PhotoCollectionCellViewModel {
+  open func cellViewModel(at indexPath: IndexPath) -> PhotoCollectionCellViewModel {
     if let cellViewModel = cellViewModels[indexPath] {
       return cellViewModel
     }

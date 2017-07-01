@@ -30,7 +30,7 @@ public enum CloudPhotoDownLoadEvent {
 extension PhotoManager {
   
   /// get photoAssetCollections
-  public func fetchCollections(
+  open func fetchCollections(
     assetCollectionTypes: [PHAssetCollectionSubtype],
     thumbnailImageSize: CGSize,
     options: PHFetchOptions? = nil) -> Observable<[PhotoAssetCollection]> {
@@ -88,7 +88,7 @@ extension PhotoManager {
   }
   
   /// get image for asset.
-  public func image(
+  open func image(
     for asset: PHAsset,
     size: CGSize = CGSize(width: 720, height: 1280),
     options: PHImageRequestOptions? = nil) -> Observable<UIImage> {
@@ -122,7 +122,7 @@ extension PhotoManager {
   }
   
   /// get livePhoto for asset.
-  public func livePhoto(
+  open func livePhoto(
     for asset: PHAsset,
     size: CGSize = CGSize(width: 720, height: 1280)) -> Observable<LivePhotoDownloadEvent> {
     
@@ -157,7 +157,7 @@ extension PhotoManager {
   
   
   /// get video for asset.
-  public func video(
+  open func video(
     for asset: PHAsset,
     size: CGSize = CGSize(width: 720, height: 1280)) -> Observable<VideoDownloadEvent> {
     
@@ -193,7 +193,7 @@ extension PhotoManager {
   
   
   /// get cloud image for asset.
-  public func cloudImage(
+  open func cloudImage(
     for asset: PHAsset,
     size: CGSize = PHImageManagerMaximumSize) -> Observable<CloudPhotoDownLoadEvent> {
     return Observable.create { [weak self] observer in
@@ -227,7 +227,7 @@ extension PhotoManager {
   }
   
   /// get full resolution image.
-  public func fullResolutionImage(
+  open func fullResolutionImage(
     for asset: PHAsset) -> Observable<UIImage> {
     return Observable.create { observer in
       let options = PHImageRequestOptions()

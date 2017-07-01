@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class NumberLabel: UILabel {
+open class NumberLabel: UILabel {
   public struct Color {
     public static let labelTextColor = UIColor.black
     public static let backgroundColor = UIColor(
@@ -32,7 +32,7 @@ public class NumberLabel: UILabel {
     commonInit()
   }
   
-  public func commonInit() {
+  open func commonInit() {
     font = Font.labelFont
     textColor = Color.labelTextColor
     backgroundColor = Color.backgroundColor
@@ -40,7 +40,7 @@ public class NumberLabel: UILabel {
     clipsToBounds = true
   }
   
-  override public func layoutSubviews() {
+  override open func layoutSubviews() {
     super.layoutSubviews()
     layer.cornerRadius = frame.height / 2
   }

@@ -9,14 +9,14 @@
 import Foundation
 import Photos
 
-public class PhotoCollectionsViewConfigure {
+open class PhotoCollectionsViewConfigure {
   
-  public var fetchOptions = PHFetchOptions().then {
+  open var fetchOptions = PHFetchOptions().then {
     $0.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
   }
   
   // to show collection types.
-  public var showsCollectionTypes: [PHAssetCollectionSubtype] = [
+  open var showsCollectionTypes: [PHAssetCollectionSubtype] = [
     .smartAlbumUserLibrary,
     .smartAlbumGeneric,
     .smartAlbumFavorites,
@@ -34,13 +34,15 @@ public class PhotoCollectionsViewConfigure {
   
   // * recommand: To provide image according to device resolution,
   //              must multiply thumbnailSize to UIScreen.main.scale
-  public var photoCollectionThumbnailSize = CGSize(
+  open var photoCollectionThumbnailSize = CGSize(
     width: 54 * UIScreen.main.scale,
     height: 54 * UIScreen.main.scale)
   
-  public var layout: UICollectionViewFlowLayout = PhotoCollectionsLayout()
+  open var layout: UICollectionViewFlowLayout = PhotoCollectionsLayout()
   
-  public var photoCollectionCellClass: PhotoCollectionCell.Type = PhotoCollectionCell.self
+  open var photoCollectionCellClass: PhotoCollectionCell.Type = PhotoCollectionCell.self
+  
+  public init() { }
 }
 
 

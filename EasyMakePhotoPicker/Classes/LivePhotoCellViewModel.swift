@@ -10,16 +10,16 @@ import UIKit
 import PhotosUI
 import RxSwift
 
-public class LivePhotoCellViewModel: PhotoCellViewModel {
+open class LivePhotoCellViewModel: PhotoCellViewModel {
   
   // MARK: - Output
-  public var livePhoto: PHLivePhoto? {
+  open var livePhoto: PHLivePhoto? {
     return photoAsset.livePhoto
   }
   
-  public var playEvent = PublishSubject<PlayEvent>()
+  open var playEvent = PublishSubject<PlayEvent>()
   
-  public var badgeImage: UIImage {
+  open var badgeImage: UIImage {
     return PHLivePhotoView.livePhotoBadgeImage(options: .overContent)
   }
 }

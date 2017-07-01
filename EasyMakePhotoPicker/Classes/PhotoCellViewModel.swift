@@ -9,16 +9,16 @@
 import UIKit
 import RxSwift
 
-public class PhotoCellViewModel {
+open class PhotoCellViewModel {
   
-  public var photoAsset: PhotoAsset
+  open var photoAsset: PhotoAsset
   
-  public var image = Variable<UIImage?>(nil)
-  public var isSelect = BehaviorSubject<Bool>(value: false)
-  public var selectedOrder = BehaviorSubject<Int>(value: 0)
-  public var configure: PhotosViewConfigure
+  open var image = Variable<UIImage?>(nil)
+  open var isSelect = BehaviorSubject<Bool>(value: false)
+  open var selectedOrder = BehaviorSubject<Int>(value: 0)
+  open var configure: PhotosViewConfigure
   
-  public var disposeBag = DisposeBag()
+  open var disposeBag = DisposeBag()
   
   public init(
     photoAsset: PhotoAsset,

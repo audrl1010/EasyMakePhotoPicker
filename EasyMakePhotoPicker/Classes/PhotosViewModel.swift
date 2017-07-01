@@ -69,54 +69,54 @@ class PhotosViewModel:
   PhotosViewModelInput,
   PhotosViewModelOutput {
   
-  public var inputs: PhotosViewModelInput { return self }
-  public var outputs: PhotosViewModelOutput { return self }
+  open var inputs: PhotosViewModelInput { return self }
+  open var outputs: PhotosViewModelOutput { return self }
   
   // MARK: - Input
   
-  public var viewDidLoad = PublishSubject<Void>()
+  open var viewDidLoad = PublishSubject<Void>()
   
-  public var photoSizeDidInput = PublishSubject<CGSize>()
+  open var photoSizeDidInput = PublishSubject<CGSize>()
   
-  public var currentPhotoAssetCollectionDidChange = PublishSubject<PhotoAssetCollection>()
+  open var currentPhotoAssetCollectionDidChange = PublishSubject<PhotoAssetCollection>()
   
-  public var cellDidSelect = PublishSubject<IndexPath>()
+  open var cellDidSelect = PublishSubject<IndexPath>()
   
-  public var displayingCellDidEnd = PublishSubject<IndexPath>()
+  open var displayingCellDidEnd = PublishSubject<IndexPath>()
   
-  public var scrollingDidStop = PublishSubject<[IndexPath]>()
+  open var scrollingDidStop = PublishSubject<[IndexPath]>()
   
-  public var cachedRectDidUpdate =
+  open var cachedRectDidUpdate =
     PublishSubject<(addedIndexPaths: [IndexPath], removedIndexPaths: [IndexPath])>()
   
   // only support when PhotosViewConfigure`s 'allowsMultipleSelection' property is true
-  public var selectionDidComplete = PublishSubject<Void>()
+  open var selectionDidComplete = PublishSubject<Void>()
   
   // MARK: - Output
   
-  public var cellDidChange = PublishSubject<CellChangeEvent>()
+  open var cellDidChange = PublishSubject<CellChangeEvent>()
   
-  public var maxCountSelectedPhotosIsExceeded = PublishSubject<Void>()
+  open var maxCountSelectedPhotosIsExceeded = PublishSubject<Void>()
   
-  public var videoDidPlay = PublishSubject<PlayEvent>()
+  open var videoDidPlay = PublishSubject<PlayEvent>()
   
-  public var photoAssetDidSelected = PublishSubject<PhotoAsset>()
+  open var photoAssetDidSelected = PublishSubject<PhotoAsset>()
 
   // only support when PhotosViewConfigure`s 'allowsMultipleSelection' property is true
-  public var photoAssetDidDeselected = PublishSubject<PhotoAsset>()
+  open var photoAssetDidDeselected = PublishSubject<PhotoAsset>()
   
   // only support when PhotosViewConfigure`s 'allowsMultipleSelection' property is true
-  public var selectedPhotoAssetsDidComplete = PublishSubject<[PhotoAsset]>()
+  open var selectedPhotoAssetsDidComplete = PublishSubject<[PhotoAsset]>()
   
   // only support when PhotosViewConfigure`s 'allowsMultipleSelection' property is true
-  public var selectedPhotosCount = PublishSubject<Int>()
+  open var selectedPhotosCount = PublishSubject<Int>()
   
   // only support when PhotosViewConfigure`s 'allowsCameraSelection' property is true
-  public var cameraDidClick = PublishSubject<Void>()
+  open var cameraDidClick = PublishSubject<Void>()
   
   // MARK: - Properties
   
-  public var photoSize: CGSize = CGSize(width: 1280, height: 720)
+  open var photoSize: CGSize = CGSize(width: 1280, height: 720)
 
   fileprivate var configure: PhotosViewConfigure
 
@@ -639,11 +639,11 @@ class PhotosViewModel:
       .disposed(by: disposeBag)
   }
   
-  public func numberOfSection() -> Int {
+  open func numberOfSection() -> Int {
     return 1
   }
   
-  public func numberOfItems() -> Int {
+  open func numberOfItems() -> Int {
     guard let currentPhotoAssetCollection = currentPhotoAssetCollection else {
       return 0
     }
@@ -652,7 +652,7 @@ class PhotosViewModel:
       (self.configure.allowsCameraSelection ? 1 : 0)
   }
   
-  public func cellViewModel(at indexPath: IndexPath) -> PhotoCellViewModel {
+  open func cellViewModel(at indexPath: IndexPath) -> PhotoCellViewModel {
     
     guard let currentPhotoAssetCollection = currentPhotoAssetCollection else {
       return PhotoCellViewModel(

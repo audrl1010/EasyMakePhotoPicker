@@ -10,7 +10,7 @@ import UIKit
 import Photos
 import RxSwift
 
-public class CameraCellViewModel: PhotoCellViewModel {
+open class CameraCellViewModel: PhotoCellViewModel {
   override public init(photoAsset: PhotoAsset, configure: PhotosViewConfigure) {
     super.init(photoAsset: photoAsset, configure: configure)
     isSelect.onCompleted()

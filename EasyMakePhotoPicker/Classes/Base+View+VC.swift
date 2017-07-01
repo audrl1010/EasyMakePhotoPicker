@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class BaseView: UIView {
+open class BaseView: UIView {
   
   // MARK: - View Life Cycle
   
@@ -26,17 +26,17 @@ public class BaseView: UIView {
   
   // MARK: - Public Methods
   
-  public func setupViews() { }
-  public func setupConstraints() { }
+  open func setupViews() { }
+  open func setupConstraints() { }
 }
 
 
 
-public class BaseCollectionViewCell: UICollectionViewCell {
+open class BaseCollectionViewCell: UICollectionViewCell {
   
   // MARK: - Properties
   
-  public class var cellIdentifier: String { return "\(self)" }
+  open class var cellIdentifier: String { return "\(self)" }
   
   // MARK: - View Life Cycle
   
@@ -54,16 +54,16 @@ public class BaseCollectionViewCell: UICollectionViewCell {
   
   // MARK: - Public Methods
   
-  public func setupViews() { }
-  public func setupConstraints() { }
+  open func setupViews() { }
+  open func setupConstraints() { }
 }
 
 
-public class BaseTableViewCell: UITableViewCell {
+open class BaseTableViewCell: UITableViewCell {
   
   // MARK: - Properties
   
-  public class var cellIdentifier: String { return "\(self)" }
+  open class var cellIdentifier: String { return "\(self)" }
   
   // MARK: - View Life Cycle
   
@@ -84,14 +84,14 @@ public class BaseTableViewCell: UITableViewCell {
   
   // MARK: - Public Methods
   
-  public func setupViews() { }
-  public func setupConstraints() { }
+  open func setupViews() { }
+  open func setupConstraints() { }
 }
 
-public class BaseVC: UIViewController {
+open class BaseVC: UIViewController {
   
   // MARK: - View Life Cycle
-  override public func viewDidLoad() {
+  override open func viewDidLoad() {
     super.viewDidLoad()
     setupViews()
     setupConstraints()
@@ -99,8 +99,8 @@ public class BaseVC: UIViewController {
   
   // MARK: - Public Methods
   
-  public func setupViews() { }
-  public func setupConstraints() { }
+  open func setupViews() { }
+  open func setupConstraints() { }
 }
 
 

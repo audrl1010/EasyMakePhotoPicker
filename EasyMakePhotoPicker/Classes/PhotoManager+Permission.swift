@@ -13,7 +13,7 @@ import RxSwift
 
 extension PhotoManager {
   
-  public func checkPhotoPermission() -> Observable<Bool> {
+  open func checkPhotoPermission() -> Observable<Bool> {
     return Observable.create { observer in
       if PHPhotoLibrary.authorizationStatus() == .authorized {
         observer.onNext(true)

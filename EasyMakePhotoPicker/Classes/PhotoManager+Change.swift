@@ -12,7 +12,7 @@ import RxSwift
 // MARK: - Change
 
 extension PhotoManager: PHPhotoLibraryChangeObserver {
-  public func photoLibraryDidChange(_ changeInstance: PHChange) {
+  open func photoLibraryDidChange(_ changeInstance: PHChange) {
     photoLibraryChangeEvent.onNext(changeInstance)
   }
 }
@@ -22,7 +22,7 @@ public enum PerformChangesEvent {
 }
 
 extension PhotoManager {
-  public func performChanges(changeBlock: @escaping () -> Void) -> Observable<PerformChangesEvent> {
+  open func performChanges(changeBlock: @escaping () -> Void) -> Observable<PerformChangesEvent> {
     return Observable.create { observer in
       PHPhotoLibrary.shared().performChanges({
         changeBlock()

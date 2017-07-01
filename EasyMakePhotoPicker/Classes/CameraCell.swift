@@ -10,22 +10,22 @@ import UIKit
 import PhotosUI
 import RxSwift
 
-public class CameraCell: PhotoCell {
+open class CameraCell: PhotoCell {
   
-  public var cameraIcon: UIImage {
+  open var cameraIcon: UIImage {
     return #imageLiteral(resourceName: "camera")
   }
   
-  public var bgColor: UIColor {
+  open var bgColor: UIColor {
     return .white
   }
   
-  override public func setupViews() {
+  override open func setupViews() {
     super.setupViews()
     checkView.isHidden = true
   }
   
-  override public func layoutSubviews() {
+  override open func layoutSubviews() {
     super.layoutSubviews()
     imageView.image = centerAtRect(
       image: cameraIcon,
@@ -33,7 +33,7 @@ public class CameraCell: PhotoCell {
       bgColor: bgColor)
   }
   
-  fileprivate func centerAtRect(
+  open func centerAtRect(
     image: UIImage?,
     rect: CGRect,
     bgColor: UIColor) -> UIImage? {

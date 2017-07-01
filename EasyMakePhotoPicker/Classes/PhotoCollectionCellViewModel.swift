@@ -9,11 +9,11 @@
 import Foundation
 import RxSwift
 
-public class PhotoCollectionCellViewModel {
-  public var count = BehaviorSubject<Int>(value: 0)
-  public var thumbnail = BehaviorSubject<UIImage?>(value: nil)
-  public var title = BehaviorSubject<String>(value: "")
-  public var isSelect = Variable<Bool>(false)
+open class PhotoCollectionCellViewModel {
+  open var count = BehaviorSubject<Int>(value: 0)
+  open var thumbnail = BehaviorSubject<UIImage?>(value: nil)
+  open var title = BehaviorSubject<String>(value: "")
+  open var isSelect = Variable<Bool>(false)
 }
 
 

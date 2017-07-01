@@ -8,29 +8,29 @@
 
 import UIKit
 
-public class CheckImageView: BaseView {
+open class CheckImageView: BaseView {
   
-  public var lineWidth: CGFloat = 2.5 {
+  open var lineWidth: CGFloat = 2.5 {
     didSet {
       setNeedsLayout()
     }
   }
   
-  public var checkColor: UIColor = UIColor.white {
+  open var checkColor: UIColor = UIColor.white {
     didSet {
       setNeedsLayout()
     }
   }
   
-  override public func setupViews() {
+  open override func setupViews() {
     super.setupViews()
   }
   
-  override public func layoutSubviews() {
+  open override func layoutSubviews() {
     super.layoutSubviews()
   }
   
-  override public func draw(_ rect: CGRect) {
+  open override func draw(_ rect: CGRect) {
     super.draw(rect)
     
     let path = UIBezierPath()

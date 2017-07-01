@@ -9,7 +9,7 @@
 import UIKit
 
 
-public class DurationLabel: UILabel {
+open class DurationLabel: UILabel {
   
   public struct Constant {
     public static let padding = UIEdgeInsets(top: 5, left: 3, bottom: 5, right: 3)
@@ -39,18 +39,18 @@ public class DurationLabel: UILabel {
     commonInit()
   }
   
-  public func commonInit() {
+  open func commonInit() {
     backgroundColor = Color.bgColor
     textColor = Color.durationLabelTextColor
     font = Font.durationLabelFont
     text = "00:00"
   }
   
-  override public func drawText(in rect: CGRect) {
+  override open func drawText(in rect: CGRect) {
     super.drawText(in: UIEdgeInsetsInsetRect(rect, Constant.padding))
   }
   
-  override public var intrinsicContentSize: CGSize {
+  override open var intrinsicContentSize: CGSize {
     let size = super.intrinsicContentSize
     return CGSize(
       width: size.width + Constant.padding.left + Constant.padding.right,

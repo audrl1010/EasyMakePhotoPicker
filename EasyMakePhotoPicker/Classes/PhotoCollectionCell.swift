@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 
-public class PhotoCollectionCell: BaseCollectionViewCell {
+open class PhotoCollectionCell: BaseCollectionViewCell {
   // MARK: - Constant
   
   public struct Color {
@@ -48,44 +48,44 @@ public class PhotoCollectionCell: BaseCollectionViewCell {
   
   // MARK: - Properties
   
-  public var disposeBag = DisposeBag()
+  open var disposeBag = DisposeBag()
   
-  public var viewModel: PhotoCollectionCellViewModel? {
+  open var viewModel: PhotoCollectionCellViewModel? {
     didSet {
       guard let viewModel = viewModel else { return }
       bind(viewModel: viewModel)
     }
   }
   
-  public var thumbnailImageView = UIImageView().then {
+  open var thumbnailImageView = UIImageView().then {
     $0.contentMode = .scaleAspectFill
     $0.clipsToBounds = true
   }
   
-  public var titleLabel = UILabel().then() {
+  open var titleLabel = UILabel().then() {
     $0.textColor = Color.titleLabelTextColor
     $0.font = Font.titleLabelFont
   }
   
-  public var countLabel = UILabel().then() {
+  open var countLabel = UILabel().then() {
     $0.textColor = Color.countLabelTextColor
     $0.font = Font.countLabelFont
   }
   
-  public var lineView = UIView().then {
+  open var lineView = UIView().then {
     $0.backgroundColor = Color.lineViewBGColor
   }
   
   // MARK: - Life Cycle
   
-  override public func prepareForReuse() {
+  override open func prepareForReuse() {
     super.prepareForReuse()
     viewModel = nil
     thumbnailImageView.image = nil
     disposeBag = DisposeBag()
   }
   
-  override public func setupViews() {
+  override open func setupViews() {
     super.setupViews()
     contentView.addSubview(thumbnailImageView)
     contentView.addSubview(titleLabel)
@@ -93,7 +93,7 @@ public class PhotoCollectionCell: BaseCollectionViewCell {
     contentView.addSubview(lineView)
   }
   
-  override public func setupConstraints() {
+  override open func setupConstraints() {
     super.setupConstraints()
     
     thumbnailImageView
@@ -130,7 +130,7 @@ public class PhotoCollectionCell: BaseCollectionViewCell {
       .fs_endSetup()
   }
   
-  fileprivate func bind(viewModel: PhotoCollectionCellViewModel) {
+  open func bind(viewModel: PhotoCollectionCellViewModel) {
     viewModel.count
       .subscribe(onNext: { [weak self] count in
         guard let `self` = self else { return }

@@ -9,7 +9,7 @@
 import UIKit
 import PhotosUI
 
-public class VideoCell: PhotoCell {
+open class VideoCell: PhotoCell {
   
   public struct Color {
     static let selectedViewBGC = UIColor(white: 1.0, alpha: 0.0)
@@ -20,21 +20,21 @@ public class VideoCell: PhotoCell {
     static let durationLabelTop = CGFloat(5)
   }
 
-  override public var viewModel: PhotoCellViewModel? {
+  override open var viewModel: PhotoCellViewModel? {
     didSet {
       guard let viewModel = viewModel as? VideoCellViewModel else { return }
       bind(viewModel: viewModel)
     }
   }
   
-  public var durationLabel = DurationLabel()
+  open var durationLabel = DurationLabel()
   
-  public var playerView = PlayerView().then {
+  open var playerView = PlayerView().then {
     $0.playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
     $0.isHidden = true
   }
   
-  public var player: AVPlayer? {
+  open var player: AVPlayer? {
     didSet {
       if let player = player {
         playerView.playerLayer.player = player
@@ -56,27 +56,27 @@ public class VideoCell: PhotoCell {
     }
   }
 
-  public var duration: TimeInterval = 0.0 {
+  open var duration: TimeInterval = 0.0 {
     didSet {
       durationLabel.text = timeFormatted(timeInterval: duration)
     }
   }
   
-  override public func setupViews() {
+  override open func setupViews() {
     super.setupViews()
     selectedView.backgroundColor = Color.selectedViewBGC
     contentView.insertSubview(playerView, at: 1)
     contentView.addSubview(durationLabel)
   }
   
-  override public func prepareForReuse() {
+  override open func prepareForReuse() {
     super.prepareForReuse()
     
     player = nil
     playerView.isHidden = true
   }
   
-  override public func setupConstraints() {
+  override open func setupConstraints() {
     super.setupConstraints()
 
     durationLabel
@@ -96,7 +96,7 @@ public class VideoCell: PhotoCell {
       .fs_endSetup()
   }
   
-  public func bind(viewModel: VideoCellViewModel) {
+  open func bind(viewModel: VideoCellViewModel) {
     duration = viewModel.duration
     
     viewModel.playEvent.asObserver()
@@ -110,7 +110,7 @@ public class VideoCell: PhotoCell {
       .disposed(by: disposeBag)
   }
   
-  public func play() {
+  open func play() {
     guard let viewModel = viewModel as? VideoCellViewModel,
       let playerItem = viewModel.playerItem else { return }
     
@@ -122,7 +122,7 @@ public class VideoCell: PhotoCell {
     }
   }
   
-  public func stop() {
+  open func stop() {
     if let player = player {
       player.pause();
       self.player = nil

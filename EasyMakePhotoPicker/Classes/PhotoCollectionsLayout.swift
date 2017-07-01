@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class PhotoCollectionsLayout: UICollectionViewFlowLayout {
+open class PhotoCollectionsLayout: UICollectionViewFlowLayout {
   override public init() {
     super.init()
     setupLayout()
@@ -19,7 +19,7 @@ public class PhotoCollectionsLayout: UICollectionViewFlowLayout {
     setupLayout()
   }
   
-  public func setupLayout() {
+  open func setupLayout() {
     minimumInteritemSpacing = 0
     minimumLineSpacing = 0
     scrollDirection = .vertical

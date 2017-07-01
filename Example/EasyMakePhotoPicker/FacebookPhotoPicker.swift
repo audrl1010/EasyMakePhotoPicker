@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
-
+import EasyMakePhotoPicker
 
 class FacebookPhotoPicker: UINavigationController, FacebookPhotoPickerOutput {
   var output: FacebookPhotoPickerOutput { return self }

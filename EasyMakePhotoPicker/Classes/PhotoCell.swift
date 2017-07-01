@@ -10,7 +10,7 @@ import UIKit
 import PhotosUI
 import RxSwift
 
-public class PhotoCell: BaseCollectionViewCell {
+open class PhotoCell: BaseCollectionViewCell {
   
   // MARK: - Constant
   public struct Constant {
@@ -39,44 +39,44 @@ public class PhotoCell: BaseCollectionViewCell {
   
   // MARK: - Properties
   
-  public var disposeBag: DisposeBag = DisposeBag()
+  open var disposeBag: DisposeBag = DisposeBag()
   
-  public var viewModel: PhotoCellViewModel? {
+  open var viewModel: PhotoCellViewModel? {
     didSet {
       guard let viewModel = viewModel else { return }
       bind(viewModel: viewModel)
     }
   }
   
-  public var cellAnimationWhenSelectedCell: () -> () {
+  open var cellAnimationWhenSelectedCell: () -> () {
     // implementation...
     return { }
   }
   
   // only support when PhotosViewConfigure`s 'allowsMultipleSelection' property is true
-  public var cellAnimationWhenDeselectedCell: () -> () {
+  open var cellAnimationWhenDeselectedCell: () -> () {
     // implementation...
     return { }
   }
   
-  public var checkView: UIView = CheckImageView()
+  open var checkView: UIView = CheckImageView()
   
-  public var selectedView = UIView().then {
+  open var selectedView = UIView().then {
     $0.layer.borderWidth = Constant.selectedViewBorderWidth
     $0.layer.borderColor = Color.selectedViewBorderColor.cgColor
     $0.isHidden = true
   }
   
-  public var orderLabel: UILabel = NumberLabel().then {
+  open var orderLabel: UILabel = NumberLabel().then {
     $0.isHidden = true
   }
   
-  public var imageView = UIImageView().then {
+  open var imageView = UIImageView().then {
     $0.contentMode = .scaleAspectFill
     $0.clipsToBounds = true
   }
   
-  override public func prepareForReuse() {
+  override open func prepareForReuse() {
     super.prepareForReuse()
     disposeBag = DisposeBag()
     viewModel = nil
@@ -86,7 +86,7 @@ public class PhotoCell: BaseCollectionViewCell {
     selectedView.isHidden = true
   }
   
-  override public func setupViews() {
+  override open func setupViews() {
     super.setupViews()
     contentView.addSubview(imageView)
     contentView.addSubview(selectedView)
@@ -94,7 +94,7 @@ public class PhotoCell: BaseCollectionViewCell {
     contentView.addSubview(checkView)
   }
   
-  override public func setupConstraints() {
+  override open func setupConstraints() {
     super.setupConstraints()
     
     imageView
@@ -138,7 +138,7 @@ public class PhotoCell: BaseCollectionViewCell {
       .fs_endSetup()
   }
   
-  public func bind(viewModel: PhotoCellViewModel) {
+  open func bind(viewModel: PhotoCellViewModel) {
     viewModel.isSelect
       .observeOn(MainScheduler.instance)
       .subscribe(onNext: { [weak self, weak viewModel] isSelect in

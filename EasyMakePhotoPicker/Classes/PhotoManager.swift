@@ -11,22 +11,22 @@ import RxSwift
 
 // MARK: - PhotoManager
 
-public class PhotoManager: NSObject {
+open class PhotoManager: NSObject {
   // MARK: - Properties
   
-  public class var shared: PhotoManager {
+  open class var shared: PhotoManager {
     struct Singleton {
       static var sharedInstance = PhotoManager()
     }
     return Singleton.sharedInstance
   }
   
-  public var photoLibraryChangeEvent =
+  open var photoLibraryChangeEvent =
     PublishSubject<PHChange>()
 
-  public var imageManager: PHCachingImageManager = PHCachingImageManager()
+  open var imageManager: PHCachingImageManager = PHCachingImageManager()
   
-  public var disposeBag: DisposeBag = DisposeBag()
+  open var disposeBag: DisposeBag = DisposeBag()
   
   // MARK: - Life Cycle
   

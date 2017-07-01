@@ -9,35 +9,37 @@
 import UIKit
 import Photos
 
-public class PhotosViewConfigure {
-  public var fetchOptions = PHFetchOptions().then {
+open class PhotosViewConfigure {
+  open var fetchOptions = PHFetchOptions().then {
     $0.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
   }
   
-  public var allowsMultipleSelection: Bool = true
+  open var allowsMultipleSelection: Bool = true
   
-  public var allowsCameraSelection: Bool = true
+  open var allowsCameraSelection: Bool = true
   
-  public var allowsPlayTypes: [AssetType] = [
+  open var allowsPlayTypes: [AssetType] = [
     .video, .livePhoto
   ]
   
-  public var messageWhenMaxCountSelectedPhotosIsExceeded: String = "max count that can select photos is exceeded !!!!"
+  open var messageWhenMaxCountSelectedPhotosIsExceeded: String = "max count that can select photos is exceeded !!!!"
   
-  public var maxCountSelectedPhotos: Int = 30
+  open var maxCountSelectedPhotos: Int = 30
 
   // get item image from PHCachingImageManager
   // based on the UICollectionViewFlowLayout`s itemSize,
   // therefore must set well itemSize in UICollectionViewFlowLayout.
-  public var layout: UICollectionViewFlowLayout = PhotosLayout()
+  open var layout: UICollectionViewFlowLayout = PhotosLayout()
   
-  public var cameraCellClass: CameraCell.Type = CameraCell.self
+  open var cameraCellClass: CameraCell.Type = CameraCell.self
   
-  public var photoCellClass: PhotoCell.Type = PhotoCell.self
+  open var photoCellClass: PhotoCell.Type = PhotoCell.self
   
-  public var livePhotoCellClass: LivePhotoCell.Type = LivePhotoCell.self
+  open var livePhotoCellClass: LivePhotoCell.Type = LivePhotoCell.self
   
-  public var videoCellClass: VideoCell.Type = VideoCell.self
+  open var videoCellClass: VideoCell.Type = VideoCell.self
+  
+  public init() {}
 }
 
 
