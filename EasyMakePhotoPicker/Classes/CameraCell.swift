@@ -13,7 +13,8 @@ import RxSwift
 open class CameraCell: PhotoCell {
   
   open var cameraIcon: UIImage {
-    return #imageLiteral(resourceName: "camera")
+    return EasyMakePickerBundle
+      .bundleImage(named: "camera")
   }
   
   open var bgColor: UIColor {

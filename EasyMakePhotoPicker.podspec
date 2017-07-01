@@ -37,7 +37,7 @@ EasyMakePhotoPicker allows you to easily create your own PhotoPicker by providin
   }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
-  s.frameworks = 'UIKit', 'Photos', 'PhotosUI'
+  # s.frameworks = 'UIKit', 'Photos', 'PhotosUI'
   s.dependency 'RxSwift', '~> 3.0'
   s.dependency 'RxCocoa', '~> 3.0'
 end

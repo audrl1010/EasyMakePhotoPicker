@@ -13,9 +13,9 @@ import EasyMakePhotoPicker
 
 class FacebookCameraCell: CameraCell {
   
-  override var cameraIcon: UIImage {
-    return #imageLiteral(resourceName: "camera")
-  }
+//  override var cameraIcon: UIImage {
+//    return UIImage(named: "camera")!
+//  }
   
   override var bgColor: UIColor {
     return .gray

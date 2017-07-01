@@ -173,6 +173,7 @@
 		8B6AA032F79359F55688A6157BF624C2 /* Deprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B487619275823E618BFC83B87DA2C65 /* Deprecated.swift */; };
 		8BB960031F04F93B000EBB20 /* UIAlertViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB960021F04F93B000EBB20 /* UIAlertViewController+Extension.swift */; };
 		8BD666901AF9E6F31A8C315DD3B58639 /* Then.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF22E791744656C9126CF369D77EEE84 /* Then.swift */; };
+		8BF415671F07BCF5001D766F /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF415661F07BCF5001D766F /* Bundle.swift */; };
 		8D52F21161053195AA94451474CF8613 /* ElementAt.swift in Sources */ = {isa = PBXBuildFile; fileRef = E666D6AC165C750DAFF85C04FD6C7A58 /* ElementAt.swift */; };
 		8E18955702BDCDCC3613707FF4E8C0C9 /* DelaySubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81E4E0B50051E26E92A1AF6FF388597 /* DelaySubscription.swift */; };
 		8F5C73C5F7D6B7AF2F085621D2F74CBC /* NotificationCenter+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64538D886E7FE59C6F85192B9B00F6D6 /* NotificationCenter+Rx.swift */; };
@@ -572,6 +573,7 @@
 		8A0A7E5AB1F6070DB5F9FDF3DDF9A2BE /* Pods-EasyMakePhotoPicker_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-EasyMakePhotoPicker_Example.modulemap"; sourceTree = "<group>"; };
 		8AD892E3E5B5E1C7B3219594C1CC9093 /* Reactive.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Reactive.swift; path = RxSwift/Reactive.swift; sourceTree = "<group>"; };
 		8BB960021F04F93B000EBB20 /* UIAlertViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertViewController+Extension.swift"; sourceTree = "<group>"; };
+		8BF415661F07BCF5001D766F /* Bundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		8D2DB0A7EF87A8690A5AA72BAF57782A /* HistoricalScheduler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HistoricalScheduler.swift; path = RxSwift/Schedulers/HistoricalScheduler.swift; sourceTree = "<group>"; };
 		8D5A91675067315D272D6411BB174F3A /* RxTableViewDelegateProxy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RxTableViewDelegateProxy.swift; path = RxCocoa/iOS/Proxies/RxTableViewDelegateProxy.swift; sourceTree = "<group>"; };
 		8DC8833F96F34C7428BD92A338F2BF50 /* UIActivityIndicatorView+Rx.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIActivityIndicatorView+Rx.swift"; path = "RxCocoa/iOS/UIActivityIndicatorView+Rx.swift"; sourceTree = "<group>"; };
@@ -1177,6 +1179,7 @@
 				0643B153423EC6C7B445953605852C10 /* UIView+FluidStyleAutoLayout.swift */,
 				F7CA8D10DFE8B8FD2A9FDC2904B74A1E /* VideoCell.swift */,
 				DE299712BD5D8A22516E54A44923E879 /* VideoCellViewModel.swift */,
+				8BF415661F07BCF5001D766F /* Bundle.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1480,6 +1483,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0FFF8D408067E67DF77CFB92EB02E26D /* Base+View+VC.swift in Sources */,
+				8BF415671F07BCF5001D766F /* Bundle.swift in Sources */,
 				281AFF1B43642761BFFFD7E6DEE7D012 /* CameraCell.swift in Sources */,
 				CC4448E140A88ED57447DC725CF4FA5E /* CameraCellViewModel.swift in Sources */,
 				36F7F1FFBA59A831D696754AD164B5B1 /* CheckImageView.swift in Sources */,
