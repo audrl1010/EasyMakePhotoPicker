@@ -18,9 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     didFinishLaunchingWithOptions
     launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     window = UIWindow(frame: UIScreen.main.bounds)
-    window?.rootViewController = ViewController()
+    //window?.rootViewController = InstagramMainVC()
+    window?.rootViewController = FacebookMainVC()
     window?.makeKeyAndVisible()
     return true
   }
 }
+
 
