@@ -31,8 +31,45 @@ PhotoManager is a wrapper class for PhotoCacheImageManager, it provides the func
 # PhotosView
 
 ## Initializer
+```
 init(configure: PhotosViewConfigure, photoAssetCollection: PhotoAssetCollection)
 init(configure: PhotosViewConfigure, collectionType: PHAssetCollectionSubtype)
+```
+
+## PhotosViewConfigure
+```
+class PhotosViewConfigure {
+  var fetchOptions = PHFetchOptions().then {
+    $0.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+  }
+
+  var allowsMultipleSelection: Bool = true
+
+  var allowsCameraSelection: Bool = true
+
+  var allowsPlayTypes: [AssetType] = [
+    .video, .livePhoto
+  ]
+
+  var messageWhenMaxCountSelectedPhotosIsExceeded: String = "max count that can select photos is exceeded !!!!"
+
+  var maxCountSelectedPhotos: Int = 30
+
+  // get item image from PHCachingImageManager
+  // based on the UICollectionViewFlowLayout`s itemSize,
+  // therefore must set well itemSize in UICollectionViewFlowLayout.
+  var layout: UICollectionViewFlowLayout = PhotosLayout()
+
+  var cameraCellClass: CameraCell.Type = CameraCell.self
+
+  var photoCellClass: PhotoCell.Type = PhotoCell.self
+
+  var livePhotoCellClass: LivePhotoCell.Type = LivePhotoCell.self
+
+  var videoCellClass: VideoCell.Type = VideoCell.self
+}
+
+```
 
 ## Inputs
 ```
@@ -65,11 +102,53 @@ func change(photoAssetCollection: PhotoAssetCollection)
 
 # PhotoCollectionsView
 
-a
+## Initializer
+```
+init(frame: CGRect, configure: PhotoCollectionsViewConfigure)
+init(configure: PhotoCollectionsViewConfigure)
+```
+
+## Inputs
+```
+// force cell selection.
+var cellDidSelect: PublishSubject<IndexPath>
+```
+## Outputs
+```
+var selectedPhotoCollectionWhenCellDidSelect: PublishSubject<(IndexPath, PhotoAssetCollection)>
+```
+
 
 # PhotoManager
+```
+func startCaching(assets: [PHAsset], targetSize: CGSize, contentMode: PHImageContentMode, options: PHImageRequestOptions?)
 
-a
+func stopCaching(assets: [PHAsset], targetSize: CGSize, contentMode: PHImageContentMode, options: PHImageRequestOptions?)
+
+func stopCachingForAllAssets()
+
+func cancel(imageRequest requestID: PHImageRequestID)
+
+func photoLibraryDidChange(_ changeInstance: PHChange)
+
+func performChanges(changeBlock: @escaping () -> Void) -> Observable<PerformChangesEvent>
+
+func fetchCollections(assetCollectionTypes: [PHAssetCollectionSubtype], thumbnailImageSize: CGSize, options: PHFetchOptions? = nil) -> Observable<[PhotoAssetCollection]>
+
+func image(for asset: PHAsset, size: CGSize = CGSize(width: 720, height: 1280), options: PHImageRequestOptions? = nil) -> Observable<UIImage>
+
+func livePhoto(for asset: PHAsset, size: CGSize = CGSize(width: 720, height: 1280)) -> Observable<LivePhotoDownloadEvent>
+
+func video(for asset: PHAsset, size: CGSize = CGSize(width: 720, height: 1280)) -> Observable<VideoDownloadEvent>
+
+func cloudImage(for asset: PHAsset, size: CGSize = PHImageManagerMaximumSize) -> Observable<CloudPhotoDownLoadEvent>
+
+func fullResolutionImage(for asset: PHAsset) -> Observable<UIImage>
+
+func checkPhotoLibraryPermission() -> Observable<Bool>
+
+func checkCameraPermission() -> Observable<Bool>
+```
 
 # Example making your own PhotoPicker.
 

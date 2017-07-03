@@ -15,6 +15,10 @@ public protocol PhotoCollectionsViewOutput {
   
   var selectedPhotoCollectionWhenCellDidSelect:
     PublishSubject<(IndexPath, PhotoAssetCollection)> { get }
+}
+
+public protocol PhotoCollectionsViewInput {
+  var input: PhotoCollectionsViewInput { get }
   
   // force cell selection
   var cellDidSelect: PublishSubject<IndexPath> { get }
@@ -22,16 +26,21 @@ public protocol PhotoCollectionsViewOutput {
 
 open class PhotoCollectionsView:
   BaseView,
-  PhotoCollectionsViewOutput {
+  PhotoCollectionsViewOutput,
+  PhotoCollectionsViewInput {
   
   // MARK: - Properties
   open var output: PhotoCollectionsViewOutput { return self }
+  open var input: PhotoCollectionsViewInput { return self }
   
+  
+  // MARK: - Outputs
   open var selectedPhotoCollectionWhenCellDidSelect:
     PublishSubject<(IndexPath, PhotoAssetCollection)> {
     return viewModel.outputs.photoCollectionDidSelectWhenCellDidSelect
   }
   
+  // MARK: - Inputs
   open var cellDidSelect: PublishSubject<IndexPath> {
     return viewModel.inputs.cellDidSelect
   }
