@@ -10,24 +10,47 @@ import UIKit
 
 open class CheckImageView: BaseView {
   
-  open var lineWidth: CGFloat = 2.5 {
+  struct Color {
+    static let bgColor = UIColor(
+      red: 132/255,
+      green: 132/255,
+      blue: 132/255,
+      alpha: 0.6)
+    
+    static let checkColor = UIColor.white
+  }
+  
+  struct Constant {
+    static let lineWidth = CGFloat(2.5)
+  }
+  
+  open var bgColor: UIColor = Color.bgColor {
     didSet {
       setNeedsLayout()
     }
   }
   
-  open var checkColor: UIColor = UIColor.white {
+  open var lineWidth: CGFloat = Constant.lineWidth {
     didSet {
       setNeedsLayout()
     }
   }
   
-  open override func setupViews() {
+  open var checkColor: UIColor =  Color.checkColor {
+    didSet {
+      setNeedsLayout()
+    }
+  }
+  
+  override open func setupViews() {
     super.setupViews()
+    backgroundColor = Color.bgColor
+    clipsToBounds = true
   }
   
-  open override func layoutSubviews() {
+  override open func layoutSubviews() {
     super.layoutSubviews()
+    layer.cornerRadius = bounds.height / 2
   }
   
   open override func draw(_ rect: CGRect) {

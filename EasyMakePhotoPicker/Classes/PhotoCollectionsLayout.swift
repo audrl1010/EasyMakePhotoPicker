@@ -24,4 +24,10 @@ open class PhotoCollectionsLayout: UICollectionViewFlowLayout {
     minimumLineSpacing = 0
     scrollDirection = .vertical
   }
+  
+  override open func prepare() {
+    super.prepare()
+    guard let collectionView = collectionView else { return }
+    itemSize = CGSize(width: collectionView.frame.width, height: 120)
+  }
 }
