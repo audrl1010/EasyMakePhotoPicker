@@ -12,6 +12,11 @@ import RxCocoa
 import EasyMakePhotoPicker
 
 class MainVC: UIViewController {
+  
+  var photosViewInChatInputBarButton = UIButton(type: .system).then() {
+    $0.setTitle("Show PhotosView in ChatInputBar", for: .normal)
+  }
+  
   var basicPhotoPickerButton = UIButton(type: .system).then {
     $0.setTitle("Show Basic PhotoPicker", for: .normal)
   }
@@ -26,6 +31,19 @@ class MainVC: UIViewController {
     super.viewDidLoad()
     
     view.backgroundColor = .white
+    
+    photosViewInChatInputBarButton.rx.controlEvent(.touchUpInside)
+      .subscribe(onNext: { [weak self] in
+        guard let `self` = self else { return }
+        let chatNavController = UINavigationController(
+          rootViewController: ChatVC())
+        self.present(
+          chatNavController,
+          animated: true,
+          completion: nil)
+      })
+      .disposed(by: disposeBag)
+    
     
     basicPhotoPickerButton.rx.controlEvent(.touchUpInside)
       .subscribe(onNext: { [weak self] in
@@ -89,11 +107,11 @@ class MainVC: UIViewController {
       })
       .disposed(by: disposeBag)
     
-    
+    view.addSubview(photosViewInChatInputBarButton)
     view.addSubview(basicPhotoPickerButton)
     view.addSubview(facebookPhotoPickerButton)
     
-    basicPhotoPickerButton
+    photosViewInChatInputBarButton
       .fs_leftAnchor(
         equalTo: view.leftAnchor,
         constant: 30)
@@ -103,6 +121,19 @@ class MainVC: UIViewController {
       .fs_heightAnchor(equalToConstant: 50)
       .fs_centerXAnchor(equalTo: view.centerXAnchor)
       .fs_centerYAnchor(equalTo: view.centerYAnchor)
+      .fs_endSetup()
+    
+    basicPhotoPickerButton
+      .fs_topAnchor(
+        equalTo: photosViewInChatInputBarButton.bottomAnchor,
+        constant: 20)
+      .fs_leftAnchor(
+        equalTo: view.leftAnchor,
+        constant: 30)
+      .fs_rightAnchor(
+        equalTo: view.rightAnchor,
+        constant: -30)
+      .fs_heightAnchor(equalToConstant: 50)
       .fs_endSetup()
     
     facebookPhotoPickerButton

@@ -29,6 +29,11 @@
 		8BBF47A81F0A0AA20012B611 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBF47A71F0A0AA20012B611 /* MainVC.swift */; };
 		8BBF47AA1F0A0BA10012B611 /* PermissionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBF47A91F0A0BA10012B611 /* PermissionVC.swift */; };
 		8BBF47AD1F0A13650012B611 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBF47AC1F0A13650012B611 /* ChatVC.swift */; };
+		8BBF47B11F0A1A250012B611 /* InputBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBF47AE1F0A1A250012B611 /* InputBar.swift */; };
+		8BBF47B21F0A1A250012B611 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBF47AF1F0A1A250012B611 /* TextView.swift */; };
+		8BBF47B31F0A1A250012B611 /* PlusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBF47B01F0A1A250012B611 /* PlusButton.swift */; };
+		8BBF47B51F0A1A390012B611 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBF47B41F0A1A390012B611 /* ChatCell.swift */; };
+		8BBF47B71F0A1D020012B611 /* ChatLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBF47B61F0A1D020012B611 /* ChatLayout.swift */; };
 		8BF415701F07C1AA001D766F /* InstagramPhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF4156F1F07C1AA001D766F /* InstagramPhotoPicker.swift */; };
 		8BF415861F07C369001D766F /* InstagramImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF415851F07C369001D766F /* InstagramImageScrollView.swift */; };
 		8BF415881F07C851001D766F /* Base+View+VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF415871F07C851001D766F /* Base+View+VC.swift */; };
@@ -78,6 +83,11 @@
 		8BBF47A71F0A0AA20012B611 /* MainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		8BBF47A91F0A0BA10012B611 /* PermissionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionVC.swift; sourceTree = "<group>"; };
 		8BBF47AC1F0A13650012B611 /* ChatVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
+		8BBF47AE1F0A1A250012B611 /* InputBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputBar.swift; sourceTree = "<group>"; };
+		8BBF47AF1F0A1A250012B611 /* TextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
+		8BBF47B01F0A1A250012B611 /* PlusButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlusButton.swift; sourceTree = "<group>"; };
+		8BBF47B41F0A1A390012B611 /* ChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
+		8BBF47B61F0A1D020012B611 /* ChatLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLayout.swift; sourceTree = "<group>"; };
 		8BF4156F1F07C1AA001D766F /* InstagramPhotoPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramPhotoPicker.swift; sourceTree = "<group>"; };
 		8BF415851F07C369001D766F /* InstagramImageScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramImageScrollView.swift; sourceTree = "<group>"; };
 		8BF415871F07C851001D766F /* Base+View+VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Base+View+VC.swift"; sourceTree = "<group>"; };
@@ -241,6 +251,11 @@
 			isa = PBXGroup;
 			children = (
 				8BBF47AC1F0A13650012B611 /* ChatVC.swift */,
+				8BBF47AE1F0A1A250012B611 /* InputBar.swift */,
+				8BBF47AF1F0A1A250012B611 /* TextView.swift */,
+				8BBF47B01F0A1A250012B611 /* PlusButton.swift */,
+				8BBF47B41F0A1A390012B611 /* ChatCell.swift */,
+				8BBF47B61F0A1D020012B611 /* ChatLayout.swift */,
 			);
 			name = PhotoPickerInChat;
 			sourceTree = "<group>";
@@ -491,7 +506,9 @@
 				8BF415701F07C1AA001D766F /* InstagramPhotoPicker.swift in Sources */,
 				8BBF47AD1F0A13650012B611 /* ChatVC.swift in Sources */,
 				8BB9607D1F04FB99000EBB20 /* FacebookLivePhotoCell.swift in Sources */,
+				8BBF47B71F0A1D020012B611 /* ChatLayout.swift in Sources */,
 				8B60A36B1F0A09D600D1BDC6 /* PhotoPickerVC.swift in Sources */,
+				8BBF47B21F0A1A250012B611 /* TextView.swift in Sources */,
 				8BB960811F04FB99000EBB20 /* FacebookCollectionCell.swift in Sources */,
 				8BBF47A81F0A0AA20012B611 /* MainVC.swift in Sources */,
 				8BB960791F04FB99000EBB20 /* FacebookPhotoPickerVC.swift in Sources */,
@@ -500,7 +517,10 @@
 				8BB9607C1F04FB99000EBB20 /* FacebookVideoCell.swift in Sources */,
 				8BB9607B1F04FB99000EBB20 /* FacebookPhotosLayout.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				8BBF47B11F0A1A250012B611 /* InputBar.swift in Sources */,
 				8BB960801F04FB99000EBB20 /* FacebookNumberLabel.swift in Sources */,
+				8BBF47B31F0A1A250012B611 /* PlusButton.swift in Sources */,
+				8BBF47B51F0A1A390012B611 /* ChatCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,6 +9,16 @@
 import UIKit
 
 open class PhotoCollectionsLayout: UICollectionViewFlowLayout {
+
+  open override var itemSize: CGSize {
+    set { }
+    
+    get {
+      guard let collectionView = collectionView else { return .zero }
+      return CGSize(width: collectionView.frame.width, height: 120)
+    }
+  }
+  
   override public init() {
     super.init()
     setupLayout()
@@ -23,11 +33,5 @@ open class PhotoCollectionsLayout: UICollectionViewFlowLayout {
     minimumInteritemSpacing = 0
     minimumLineSpacing = 0
     scrollDirection = .vertical
-  }
-  
-  override open func prepare() {
-    super.prepare()
-    guard let collectionView = collectionView else { return }
-    itemSize = CGSize(width: collectionView.frame.width, height: 120)
   }
 }

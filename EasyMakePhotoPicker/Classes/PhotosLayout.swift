@@ -15,19 +15,39 @@ open class PhotosLayout: UICollectionViewFlowLayout {
     static let numberOfColumns = CGFloat(3)
   }
   
-  override open func prepare() {
-    super.prepare()
+  open override var itemSize: CGSize {
+    set { }
     
-    // set up itemSize
-    guard let collectionView = collectionView else { return }
-    let collectionViewWidth = (collectionView.bounds.width)
-    
-    let columnWidth = (collectionViewWidth -
-      Constant.padding * (Constant.numberOfColumns - 1)) / Constant.numberOfColumns
-    
+    get {
+      guard let collectionView = collectionView else { return .zero }
+      let collectionViewWidth = (collectionView.bounds.width)
+      
+      let columnWidth = (collectionViewWidth -
+        Constant.padding * (Constant.numberOfColumns - 1)) / Constant.numberOfColumns
+      return CGSize(width: columnWidth, height: columnWidth)
+    }
+  }
+  
+  override public init() {
+    super.init()
+    setupLayout()
+  }
+  
+  required public init?(coder aDecoder: NSCoder) {
+    super.init()
+    setupLayout()
+  }
+  
+  func setupLayout() {
     minimumLineSpacing = Constant.padding
     minimumInteritemSpacing = Constant.padding
-    
-    itemSize = CGSize(width: columnWidth, height: columnWidth)
   }
 }
+
+
+
+
+
+
+
+
