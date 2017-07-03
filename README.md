@@ -30,7 +30,34 @@ PhotoManager is a wrapper class for PhotoCacheImageManager, it provides the func
 
 # PhotosView
 
-a
+## Initializer
+init(configure: PhotosViewConfigure, photoAssetCollection: PhotoAssetCollection)
+init(configure: PhotosViewConfigure, collectionType: PHAssetCollectionSubtype)
+
+## Inputs
+// Note: 'selectedPhotosDidComplete' reacts when the signal come from selectionDidComplete.
+var selectionDidComplete: PublishSubject<Void>
+
+## Outputs
+var photoDidSelected: PublishSubject<PhotoAsset>
+
+// Note: 'selectedPhotosDidComplete' reacts when the signal come from selectionDidComplete.
+// only support when PhotosViewConfigure`s 'allowsMultipleSelection' property is true.
+var selectedPhotosDidComplete: PublishSubject<[PhotoAsset]>
+
+// only support when PhotosViewConfigure`s 'allowsMultipleSelection' property is true.
+var selectedPhotosCount: PublishSubject<Int>
+
+// only support when PhotosViewConfigure`s 'allowsMultipleSelection' property is true.
+var photoDidDeselected: PublishSubject<PhotoAsset>
+
+// only support when PhotosViewConfigure`s 'allowsCameraSelection' property is true.
+var cameraDidClick: PublishSubject<Void>
+
+
+## Public Methods
+func change(photoAssetCollection: PhotoAssetCollection)
+
 
 # PhotoCollectionsView
 
