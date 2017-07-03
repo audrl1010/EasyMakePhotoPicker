@@ -66,6 +66,8 @@ class FacebookPhotoPickerVC: UIViewController, FacebookPhotoPickerOutput {
       height: 54 * UIScreen.main.scale)
   }
 
+  fileprivate var currentPhotoAssetCollection: PhotoAssetCollection?
+  
   fileprivate var hasCollectionCellBeenForcedToBeSelected = false
   
   fileprivate var isTitleViewSelected: Bool = false
@@ -129,6 +131,7 @@ class FacebookPhotoPickerVC: UIViewController, FacebookPhotoPickerOutput {
       .subscribe(onNext: { [weak self] photoAssetCollections in
         guard let `self` = self,
           let photoAssetCollection = photoAssetCollections.first else { return }
+        self.currentPhotoAssetCollection = photoAssetCollection
         self.setup(with: photoAssetCollection)
       })
       .disposed(by: disposeBag)
@@ -215,13 +218,27 @@ extension FacebookPhotoPickerVC {
     photoCollectionsView.selectedPhotoCollectionWhenCellDidSelect
       .observeOn(MainScheduler.instance)
       .skip(1) // because first force collectionCell selection
+      .do(onNext: { [weak self] (_, _) in
+        guard let `self` = self else { return }
+        self.animatePhotoCollectionsView()
+      })
+      .filter { [weak self] (_, photoAssetCollection) in
+        guard let `self` = self,
+          let currentPhotoAssetCollection = self.currentPhotoAssetCollection else {
+          return true
+        }
+        return currentPhotoAssetCollection.localIdentifier != photoAssetCollection.localIdentifier
+      }
+      .do(onNext: { [weak self] (selectedIndexPath, selectedPhotoAssetCollection) in
+        guard let `self` = self else { return }
+        self.currentPhotoAssetCollection = selectedPhotoAssetCollection
+      })
       .subscribe(onNext: { [weak self] (selectedIndexPath, selectedPhotoAssetCollection) in
         guard let `self` = self else { return }
         self.isTitleViewSelected = false
         self.titleView.text =
           selectedPhotoAssetCollection.title + (self.isTitleViewSelected ? "▴" : "▾")
         self.photosView.change(photoAssetCollection: selectedPhotoAssetCollection)
-        self.animatePhotoCollectionsView()
       })
       .disposed(by: disposeBag)
     
