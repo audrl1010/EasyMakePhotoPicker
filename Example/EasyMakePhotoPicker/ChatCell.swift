@@ -41,7 +41,7 @@ class ChatCell: BaseTableViewCell {
   }
   
   override func setupViews() {
-    contentView.addSubview(label)
+    addSubview(label)
   }
   
   override func setupConstraints() {

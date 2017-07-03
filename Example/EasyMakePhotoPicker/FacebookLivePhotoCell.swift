@@ -31,17 +31,17 @@ class FacebookLivePhotoCell: LivePhotoCell {
   override func setupConstraints() {
     
     imageView
-      .fs_leftAnchor(equalTo: contentView.leftAnchor)
-      .fs_topAnchor(equalTo: contentView.topAnchor)
-      .fs_rightAnchor(equalTo: contentView.rightAnchor)
-      .fs_bottomAnchor(equalTo: contentView.bottomAnchor)
+      .fs_leftAnchor(equalTo: leftAnchor)
+      .fs_topAnchor(equalTo: topAnchor)
+      .fs_rightAnchor(equalTo: rightAnchor)
+      .fs_bottomAnchor(equalTo: bottomAnchor)
       .fs_endSetup()
     
     selectedView
-      .fs_leftAnchor(equalTo: contentView.leftAnchor)
-      .fs_topAnchor(equalTo: contentView.topAnchor)
-      .fs_rightAnchor(equalTo: contentView.rightAnchor)
-      .fs_bottomAnchor(equalTo: contentView.bottomAnchor)
+      .fs_leftAnchor(equalTo: leftAnchor)
+      .fs_topAnchor(equalTo: topAnchor)
+      .fs_rightAnchor(equalTo: rightAnchor)
+      .fs_bottomAnchor(equalTo: bottomAnchor)
       .fs_endSetup()
     
     orderLabel
@@ -50,9 +50,9 @@ class FacebookLivePhotoCell: LivePhotoCell {
       .fs_heightAnchor(
         equalToConstant: 30)
       .fs_rightAnchor(
-        equalTo: contentView.rightAnchor)
+        equalTo: rightAnchor)
       .fs_topAnchor(
-        equalTo: contentView.topAnchor)
+        equalTo: topAnchor)
       .fs_endSetup()
     
     livePhotoBadgeImageView
@@ -61,18 +61,18 @@ class FacebookLivePhotoCell: LivePhotoCell {
       .fs_heightAnchor(
         equalToConstant: 20)
       .fs_rightAnchor(
-        equalTo: contentView.rightAnchor,
+        equalTo: rightAnchor,
         constant: -10)
       .fs_bottomAnchor(
-        equalTo: contentView.bottomAnchor,
+        equalTo: bottomAnchor,
         constant: -10)
       .fs_endSetup()
     
     livePhotoView
-      .fs_leftAnchor(equalTo: contentView.leftAnchor)
-      .fs_topAnchor(equalTo: contentView.topAnchor)
-      .fs_rightAnchor(equalTo: contentView.rightAnchor)
-      .fs_bottomAnchor(equalTo: contentView.bottomAnchor)
+      .fs_leftAnchor(equalTo: leftAnchor)
+      .fs_topAnchor(equalTo: topAnchor)
+      .fs_rightAnchor(equalTo: rightAnchor)
+      .fs_bottomAnchor(equalTo: bottomAnchor)
       .fs_endSetup()
   }
   

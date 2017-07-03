@@ -46,8 +46,8 @@ open class LivePhotoCell: PhotoCell {
   override open func setupViews() {
     super.setupViews()
     selectedView.backgroundColor = Color.selectedViewBGC
-    contentView.insertSubview(livePhotoView, at: 1)
-    contentView.addSubview(livePhotoBadgeImageView)
+    insertSubview(livePhotoView, at: 1)
+    addSubview(livePhotoBadgeImageView)
   }
   
   override open func setupConstraints() {
@@ -58,18 +58,18 @@ open class LivePhotoCell: PhotoCell {
       .fs_heightAnchor(
         equalToConstant: Metric.livePhotoBadgeImageViewHeight)
       .fs_rightAnchor(
-        equalTo: contentView.rightAnchor,
+        equalTo: rightAnchor,
         constant: Metric.livePhotoBadgeImageViewRight)
       .fs_bottomAnchor(
-        equalTo: contentView.bottomAnchor,
+        equalTo: bottomAnchor,
         constant: Metric.livePhotoBadgeImageViewBottom)
       .fs_endSetup()
     
     livePhotoView
-      .fs_leftAnchor(equalTo: contentView.leftAnchor)
-      .fs_topAnchor(equalTo: contentView.topAnchor)
-      .fs_rightAnchor(equalTo: contentView.rightAnchor)
-      .fs_bottomAnchor(equalTo: contentView.bottomAnchor)
+      .fs_leftAnchor(equalTo: leftAnchor)
+      .fs_topAnchor(equalTo: topAnchor)
+      .fs_rightAnchor(equalTo: rightAnchor)
+      .fs_bottomAnchor(equalTo: bottomAnchor)
       .fs_endSetup()
   }
   

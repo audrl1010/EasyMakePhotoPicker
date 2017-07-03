@@ -52,18 +52,18 @@ class FacebookCollectionCell: PhotoCollectionCell {
       .fs_widthAnchor(equalToConstant: 30)
       .fs_heightAnchor(equalToConstant: 30)
       .fs_rightAnchor(
-        equalTo: contentView.rightAnchor,
+        equalTo: rightAnchor,
         constant: -15)
-      .fs_centerYAnchor(equalTo: contentView.centerYAnchor)
+      .fs_centerYAnchor(equalTo: centerYAnchor)
       .fs_endSetup()
     
     // PhotoCollectionsViewConfigure` photoThumbnailSize and
     // the size of the thumbnailImageView must be the same.
     thumbnailImageView
       .fs_leftAnchor(
-        equalTo: contentView.leftAnchor,
+        equalTo: leftAnchor,
         constant: 10)
-      .fs_centerYAnchor(equalTo: contentView.centerYAnchor)
+      .fs_centerYAnchor(equalTo: centerYAnchor)
       .fs_heightAnchor(equalToConstant: 54)
       .fs_widthAnchor(equalToConstant: 54)
       .fs_endSetup()
@@ -87,8 +87,8 @@ class FacebookCollectionCell: PhotoCollectionCell {
     
     lineView
       .fs_leftAnchor(equalTo: thumbnailImageView.leftAnchor)
-      .fs_rightAnchor(equalTo: contentView.rightAnchor)
-      .fs_bottomAnchor(equalTo: contentView.bottomAnchor)
+      .fs_rightAnchor(equalTo: rightAnchor)
+      .fs_bottomAnchor(equalTo: bottomAnchor)
       .fs_heightAnchor(equalToConstant: Metric.lineViewHeight)
       .fs_endSetup()
   }

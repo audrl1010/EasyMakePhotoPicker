@@ -88,27 +88,27 @@ open class PhotoCell: BaseCollectionViewCell {
   
   override open func setupViews() {
     super.setupViews()
-    contentView.addSubview(imageView)
-    contentView.addSubview(selectedView)
-    contentView.addSubview(orderLabel)
-    contentView.addSubview(checkView)
+    addSubview(imageView)
+    addSubview(selectedView)
+    addSubview(orderLabel)
+    addSubview(checkView)
   }
   
   override open func setupConstraints() {
     super.setupConstraints()
     
     imageView
-      .fs_leftAnchor(equalTo: contentView.leftAnchor)
-      .fs_topAnchor(equalTo: contentView.topAnchor)
-      .fs_rightAnchor(equalTo: contentView.rightAnchor)
-      .fs_bottomAnchor(equalTo: contentView.bottomAnchor)
+      .fs_leftAnchor(equalTo: leftAnchor)
+      .fs_topAnchor(equalTo: topAnchor)
+      .fs_rightAnchor(equalTo: rightAnchor)
+      .fs_bottomAnchor(equalTo: bottomAnchor)
       .fs_endSetup()
     
     selectedView
-      .fs_leftAnchor(equalTo: contentView.leftAnchor)
-      .fs_topAnchor(equalTo: contentView.topAnchor)
-      .fs_rightAnchor(equalTo: contentView.rightAnchor)
-      .fs_bottomAnchor(equalTo: contentView.bottomAnchor)
+      .fs_leftAnchor(equalTo: leftAnchor)
+      .fs_topAnchor(equalTo: topAnchor)
+      .fs_rightAnchor(equalTo: rightAnchor)
+      .fs_bottomAnchor(equalTo: bottomAnchor)
       .fs_endSetup()
     
     orderLabel
@@ -117,10 +117,10 @@ open class PhotoCell: BaseCollectionViewCell {
       .fs_heightAnchor(
         equalToConstant: Metric.orderLabelHeight)
       .fs_rightAnchor(
-        equalTo: contentView.rightAnchor,
+        equalTo: rightAnchor,
         constant: Metric.orderLabelRight)
       .fs_topAnchor(
-        equalTo: contentView.topAnchor,
+        equalTo: topAnchor,
         constant: Metric.orderLabelTop)
       .fs_endSetup()
     
@@ -130,10 +130,10 @@ open class PhotoCell: BaseCollectionViewCell {
       .fs_heightAnchor(
         equalToConstant: Metric.checkImageViewHeight)
       .fs_rightAnchor(
-        equalTo: contentView.rightAnchor,
+        equalTo: rightAnchor,
         constant: Metric.checkImageViewRight)
       .fs_topAnchor(
-        equalTo: contentView.topAnchor,
+        equalTo: topAnchor,
         constant: Metric.checkImageViewTop)
       .fs_endSetup()
   }

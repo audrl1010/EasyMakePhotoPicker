@@ -61,9 +61,7 @@ class FacebookPhotoPickerVC: UIViewController, FacebookPhotoPickerOutput {
     ]
     $0.layout = FacebookPhotoCollectionsLayout()
     $0.photoCollectionCellClass = FacebookCollectionCell.self
-    $0.photoCollectionThumbnailSize = CGSize(
-      width: 54 * UIScreen.main.scale,
-      height: 54 * UIScreen.main.scale)
+    $0.photoCollectionThumbnailSize = CGSize(width: 54, height: 54)
   }
 
   fileprivate var currentPhotoAssetCollection: PhotoAssetCollection?

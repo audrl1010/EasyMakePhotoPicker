@@ -67,17 +67,17 @@ class FacebookPhotoCell: PhotoCell {
   
   override func setupConstraints() {
     imageView
-      .fs_leftAnchor(equalTo: contentView.leftAnchor)
-      .fs_topAnchor(equalTo: contentView.topAnchor)
-      .fs_rightAnchor(equalTo: contentView.rightAnchor)
-      .fs_bottomAnchor(equalTo: contentView.bottomAnchor)
+      .fs_leftAnchor(equalTo: leftAnchor)
+      .fs_topAnchor(equalTo: topAnchor)
+      .fs_rightAnchor(equalTo: rightAnchor)
+      .fs_bottomAnchor(equalTo: bottomAnchor)
       .fs_endSetup()
     
     selectedView
-      .fs_leftAnchor(equalTo: contentView.leftAnchor)
-      .fs_topAnchor(equalTo: contentView.topAnchor)
-      .fs_rightAnchor(equalTo: contentView.rightAnchor)
-      .fs_bottomAnchor(equalTo: contentView.bottomAnchor)
+      .fs_leftAnchor(equalTo: leftAnchor)
+      .fs_topAnchor(equalTo: topAnchor)
+      .fs_rightAnchor(equalTo: rightAnchor)
+      .fs_bottomAnchor(equalTo: bottomAnchor)
       .fs_endSetup()
     
     orderLabel
@@ -86,9 +86,9 @@ class FacebookPhotoCell: PhotoCell {
       .fs_heightAnchor(
         equalToConstant: 30)
       .fs_rightAnchor(
-        equalTo: contentView.rightAnchor)
+        equalTo: rightAnchor)
       .fs_topAnchor(
-        equalTo: contentView.topAnchor)
+        equalTo: topAnchor)
       .fs_endSetup()
   }
 }

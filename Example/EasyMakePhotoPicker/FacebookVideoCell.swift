@@ -12,35 +12,84 @@ import RxSwift
 import EasyMakePhotoPicker
 
 class FacebookVideoCell: VideoCell {
+  
+  override var viewModel: PhotoCellViewModel? {
+    didSet {
+      guard let viewModel = viewModel else { return }
+      viewModel.isSelect
+        .subscribe(onNext: { [weak self] isSelect in
+          guard let `self` = self else { return }
+          if isSelect {
+            self.durationBackgroundView.backgroundColor = UIColor(
+              red: 104/255,
+              green: 156/255,
+              blue: 255/255,
+              alpha: 1.0)
+          }
+          else {
+            self.durationBackgroundView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
+          }
+        })
+        .disposed(by: disposeBag)
+    }
+  }
+  
+  var durationBackgroundView = UIView().then {
+    $0.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
+  }
+  
+  var videoIconImageView = UIImageView(image: #imageLiteral(resourceName: "video"))
+  
   override func setupViews() {
     self.orderLabel = FacebookNumberLabel()
     
     super.setupViews()
     
-    self.checkView.isHidden = true
-    self.selectedView.layer.borderWidth = 5
-    self.selectedView.layer.borderColor = UIColor(
+    durationBackgroundView.addSubview(videoIconImageView)
+    insertSubview(durationBackgroundView, belowSubview: durationLabel)
+
+    checkView.isHidden = true
+    selectedView.layer.borderWidth = 5
+    selectedView.layer.borderColor = UIColor(
       red: 104/255,
       green: 156/255,
       blue: 255/255,
       alpha: 1.0).cgColor
-    self.orderLabel.clipsToBounds = false
-    self.checkView.isHidden = true
+    orderLabel.clipsToBounds = false
+    durationLabel.textAlignment = .right
+    durationLabel.backgroundColor = .clear
+    checkView.isHidden = true
   }
   
   override func setupConstraints() {
     imageView
-      .fs_leftAnchor(equalTo: contentView.leftAnchor)
-      .fs_topAnchor(equalTo: contentView.topAnchor)
-      .fs_rightAnchor(equalTo: contentView.rightAnchor)
-      .fs_bottomAnchor(equalTo: contentView.bottomAnchor)
+      .fs_leftAnchor(equalTo: leftAnchor)
+      .fs_topAnchor(equalTo: topAnchor)
+      .fs_rightAnchor(equalTo: rightAnchor)
+      .fs_bottomAnchor(equalTo: bottomAnchor)
       .fs_endSetup()
     
     selectedView
-      .fs_leftAnchor(equalTo: contentView.leftAnchor)
-      .fs_topAnchor(equalTo: contentView.topAnchor)
-      .fs_rightAnchor(equalTo: contentView.rightAnchor)
-      .fs_bottomAnchor(equalTo: contentView.bottomAnchor)
+      .fs_leftAnchor(equalTo: leftAnchor)
+      .fs_topAnchor(equalTo: topAnchor)
+      .fs_rightAnchor(equalTo: rightAnchor)
+      .fs_bottomAnchor(equalTo: bottomAnchor)
+      .fs_endSetup()
+    
+    durationBackgroundView
+      .fs_heightAnchor(equalToConstant: 26)
+      .fs_leftAnchor(equalTo: leftAnchor)
+      .fs_rightAnchor(equalTo: rightAnchor)
+      .fs_bottomAnchor(equalTo: bottomAnchor)
+      .fs_endSetup()
+
+    videoIconImageView
+      .fs_leftAnchor(
+        equalTo: durationBackgroundView.leftAnchor,
+        constant: 5)
+      .fs_centerYAnchor(equalTo: durationBackgroundView.centerYAnchor)
+      .fs_widthAnchor(equalToConstant: 16)
+      .fs_heightAnchor(equalToConstant: 16)
       .fs_endSetup()
     
     orderLabel
@@ -49,25 +98,23 @@ class FacebookVideoCell: VideoCell {
       .fs_heightAnchor(
         equalToConstant: 30)
       .fs_rightAnchor(
-        equalTo: contentView.rightAnchor)
+        equalTo: rightAnchor)
       .fs_topAnchor(
-        equalTo: contentView.topAnchor)
+        equalTo: topAnchor)
       .fs_endSetup()
     
     durationLabel
-      .fs_leftAnchor(
-        equalTo: contentView.leftAnchor,
-        constant: 5)
-      .fs_topAnchor(
-        equalTo: contentView.topAnchor,
-        constant: 5)
+      .fs_rightAnchor(
+        equalTo: durationBackgroundView.rightAnchor,
+        constant: -5)
+      .fs_centerYAnchor(equalTo: durationBackgroundView.centerYAnchor)
       .fs_endSetup()
     
     playerView
-      .fs_leftAnchor(equalTo: contentView.leftAnchor)
-      .fs_topAnchor(equalTo: contentView.topAnchor)
-      .fs_rightAnchor(equalTo: contentView.rightAnchor)
-      .fs_bottomAnchor(equalTo: contentView.bottomAnchor)
+      .fs_leftAnchor(equalTo: leftAnchor)
+      .fs_topAnchor(equalTo: topAnchor)
+      .fs_rightAnchor(equalTo: rightAnchor)
+      .fs_bottomAnchor(equalTo: bottomAnchor)
       .fs_endSetup()
   }
   

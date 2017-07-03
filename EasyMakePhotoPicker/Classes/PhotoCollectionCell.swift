@@ -87,10 +87,10 @@ open class PhotoCollectionCell: BaseCollectionViewCell {
   
   override open func setupViews() {
     super.setupViews()
-    contentView.addSubview(thumbnailImageView)
-    contentView.addSubview(titleLabel)
-    contentView.addSubview(countLabel)
-    contentView.addSubview(lineView)
+    addSubview(thumbnailImageView)
+    addSubview(titleLabel)
+    addSubview(countLabel)
+    addSubview(lineView)
   }
   
   override open func setupConstraints() {
@@ -98,9 +98,9 @@ open class PhotoCollectionCell: BaseCollectionViewCell {
     
     thumbnailImageView
       .fs_leftAnchor(
-        equalTo: contentView.leftAnchor,
+        equalTo: leftAnchor,
         constant: Metric.thumbnailImageViewLeft)
-      .fs_centerYAnchor(equalTo: contentView.centerYAnchor)
+      .fs_centerYAnchor(equalTo: centerYAnchor)
       .fs_heightAnchor(equalToConstant: Metric.thumbnailImageViewHeight)
       .fs_widthAnchor(equalToConstant: Metric.thumbnailImageViewWidth)
       .fs_endSetup()
@@ -124,8 +124,8 @@ open class PhotoCollectionCell: BaseCollectionViewCell {
     
     lineView
       .fs_leftAnchor(equalTo: thumbnailImageView.leftAnchor)
-      .fs_rightAnchor(equalTo: contentView.rightAnchor)
-      .fs_bottomAnchor(equalTo: contentView.bottomAnchor)
+      .fs_rightAnchor(equalTo: rightAnchor)
+      .fs_bottomAnchor(equalTo: bottomAnchor)
       .fs_heightAnchor(equalToConstant: Metric.lineViewHeight)
       .fs_endSetup()
   }

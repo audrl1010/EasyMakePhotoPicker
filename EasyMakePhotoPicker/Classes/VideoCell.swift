@@ -65,8 +65,8 @@ open class VideoCell: PhotoCell {
   override open func setupViews() {
     super.setupViews()
     selectedView.backgroundColor = Color.selectedViewBGC
-    contentView.insertSubview(playerView, at: 1)
-    contentView.addSubview(durationLabel)
+    insertSubview(playerView, aboveSubview: imageView)
+    addSubview(durationLabel)
   }
   
   override open func prepareForReuse() {
@@ -81,18 +81,18 @@ open class VideoCell: PhotoCell {
 
     durationLabel
       .fs_leftAnchor(
-        equalTo: contentView.leftAnchor,
+        equalTo: leftAnchor,
         constant: Metric.durationLabelLeft)
       .fs_topAnchor(
-        equalTo: contentView.topAnchor,
+        equalTo: topAnchor,
         constant: Metric.durationLabelTop)
       .fs_endSetup()
     
     playerView
-      .fs_leftAnchor(equalTo: contentView.leftAnchor)
-      .fs_topAnchor(equalTo: contentView.topAnchor)
-      .fs_rightAnchor(equalTo: contentView.rightAnchor)
-      .fs_bottomAnchor(equalTo: contentView.bottomAnchor)
+      .fs_leftAnchor(equalTo: leftAnchor)
+      .fs_topAnchor(equalTo: topAnchor)
+      .fs_rightAnchor(equalTo: rightAnchor)
+      .fs_bottomAnchor(equalTo: bottomAnchor)
       .fs_endSetup()
   }
   
