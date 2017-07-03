@@ -35,10 +35,13 @@ init(configure: PhotosViewConfigure, photoAssetCollection: PhotoAssetCollection)
 init(configure: PhotosViewConfigure, collectionType: PHAssetCollectionSubtype)
 
 ## Inputs
+```
 // Note: 'selectedPhotosDidComplete' reacts when the signal come from selectionDidComplete.
 var selectionDidComplete: PublishSubject<Void>
+```
 
 ## Outputs
+```
 var photoDidSelected: PublishSubject<PhotoAsset>
 
 // Note: 'selectedPhotosDidComplete' reacts when the signal come from selectionDidComplete.
@@ -53,11 +56,12 @@ var photoDidDeselected: PublishSubject<PhotoAsset>
 
 // only support when PhotosViewConfigure`s 'allowsCameraSelection' property is true.
 var cameraDidClick: PublishSubject<Void>
-
+```
 
 ## Public Methods
+```
 func change(photoAssetCollection: PhotoAssetCollection)
-
+```
 
 # PhotoCollectionsView
 
