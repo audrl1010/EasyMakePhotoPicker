@@ -31,13 +31,13 @@ PhotoManager is a wrapper class for PhotoCacheImageManager, it provides the func
 # PhotosView
 
 ## Initializer
-```
+```swift
 init(configure: PhotosViewConfigure, photoAssetCollection: PhotoAssetCollection)
 init(configure: PhotosViewConfigure, collectionType: PHAssetCollectionSubtype)
 ```
 
 ## PhotosViewConfigure
-```
+```swift
 class PhotosViewConfigure {
   var fetchOptions = PHFetchOptions().then {
     $0.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
@@ -68,17 +68,16 @@ class PhotosViewConfigure {
 
   var videoCellClass: VideoCell.Type = VideoCell.self
 }
-
 ```
 
 ## Inputs
-```
+```swift
 // Note: 'selectedPhotosDidComplete' reacts when the signal come from selectionDidComplete.
 var selectionDidComplete: PublishSubject<Void>
 ```
 
 ## Outputs
-```
+```swift
 var photoDidSelected: PublishSubject<PhotoAsset>
 
 // Note: 'selectedPhotosDidComplete' reacts when the signal come from selectionDidComplete.
@@ -96,31 +95,64 @@ var cameraDidClick: PublishSubject<Void>
 ```
 
 ## Public Methods
-```
+```swift
 func change(photoAssetCollection: PhotoAssetCollection)
 ```
 
 # PhotoCollectionsView
 
 ## Initializer
-```
+```swift
 init(frame: CGRect, configure: PhotoCollectionsViewConfigure)
 init(configure: PhotoCollectionsViewConfigure)
 ```
 
-## Inputs
+### PhotoCollectionsViewConfigure
+```swift
+class PhotoCollectionsViewConfigure {
+
+  var fetchOptions = PHFetchOptions().then {
+    $0.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+  }
+
+  // to show collection types.
+  var showsCollectionTypes: [PHAssetCollectionSubtype] = [
+    .smartAlbumUserLibrary,
+    .smartAlbumGeneric,
+    .smartAlbumFavorites,
+    .smartAlbumRecentlyAdded,
+    .smartAlbumSelfPortraits,
+    .smartAlbumPanoramas,
+    .smartAlbumBursts,
+    .smartAlbumScreenshots
+  ]
+
+  // If you create a custom PhotoCollectionCell, size of thumbnailImageView in PhotoCollectionCell and
+  // photoCollectionThumbnailSize must be the same
+  // because get photo collection thumbnail image from PHCachingImageManager
+  // based on the 'photoCollectionThumbnailSize'
+  var photoCollectionThumbnailSize = CGSize(width: 54, height: 54)
+
+  var layout: UICollectionViewFlowLayout = PhotoCollectionsLayout()
+
+  var photoCollectionCellClass: PhotoCollectionCell.Type = PhotoCollectionCell.self
+}
 ```
+
+
+## Inputs
+```swift
 // force cell selection.
 var cellDidSelect: PublishSubject<IndexPath>
 ```
+
 ## Outputs
-```
+```swift
 var selectedPhotoCollectionWhenCellDidSelect: PublishSubject<(IndexPath, PhotoAssetCollection)>
 ```
 
-
 # PhotoManager
-```
+```swift
 func startCaching(assets: [PHAsset], targetSize: CGSize, contentMode: PHImageContentMode, options: PHImageRequestOptions?)
 
 func stopCaching(assets: [PHAsset], targetSize: CGSize, contentMode: PHImageContentMode, options: PHImageRequestOptions?)
