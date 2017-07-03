@@ -8,13 +8,12 @@
 
 import Foundation
 
-
 class EasyMakePickerBundle {
   class func bundleImage(named: String) -> UIImage {
     let bundle = Bundle(for: EasyMakePickerBundle.self)
-    return UIImage(
-      named: named,
-      in: bundle,
-      compatibleWith: nil)!
+    if let image =  UIImage(named: named, in: bundle,compatibleWith: nil) {
+      return image
+    }
+    return UIImage(named: "camera")!
   }
 }

@@ -172,6 +172,9 @@
 		8B0BC044BA6EF1394C961A3323378980 /* RecursiveScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C84D0E711D177F6F4DCA2E1CBC45FE /* RecursiveScheduler.swift */; };
 		8B6AA032F79359F55688A6157BF624C2 /* Deprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B487619275823E618BFC83B87DA2C65 /* Deprecated.swift */; };
 		8BB960031F04F93B000EBB20 /* UIAlertViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB960021F04F93B000EBB20 /* UIAlertViewController+Extension.swift */; };
+		8BBF47C11F0A59C20012B611 /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BBF47BE1F0A59C20012B611 /* camera.png */; };
+		8BBF47C21F0A59C20012B611 /* camera@x2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BBF47BF1F0A59C20012B611 /* camera@x2.png */; };
+		8BBF47C31F0A59C20012B611 /* camera@x3.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BBF47C01F0A59C20012B611 /* camera@x3.png */; };
 		8BD666901AF9E6F31A8C315DD3B58639 /* Then.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF22E791744656C9126CF369D77EEE84 /* Then.swift */; };
 		8BF415671F07BCF5001D766F /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF415661F07BCF5001D766F /* Bundle.swift */; };
 		8D52F21161053195AA94451474CF8613 /* ElementAt.swift in Sources */ = {isa = PBXBuildFile; fileRef = E666D6AC165C750DAFF85C04FD6C7A58 /* ElementAt.swift */; };
@@ -573,6 +576,9 @@
 		8A0A7E5AB1F6070DB5F9FDF3DDF9A2BE /* Pods-EasyMakePhotoPicker_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-EasyMakePhotoPicker_Example.modulemap"; sourceTree = "<group>"; };
 		8AD892E3E5B5E1C7B3219594C1CC9093 /* Reactive.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Reactive.swift; path = RxSwift/Reactive.swift; sourceTree = "<group>"; };
 		8BB960021F04F93B000EBB20 /* UIAlertViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertViewController+Extension.swift"; sourceTree = "<group>"; };
+		8BBF47BE1F0A59C20012B611 /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
+		8BBF47BF1F0A59C20012B611 /* camera@x2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera@x2.png"; sourceTree = "<group>"; };
+		8BBF47C01F0A59C20012B611 /* camera@x3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera@x3.png"; sourceTree = "<group>"; };
 		8BF415661F07BCF5001D766F /* Bundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		8D2DB0A7EF87A8690A5AA72BAF57782A /* HistoricalScheduler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HistoricalScheduler.swift; path = RxSwift/Schedulers/HistoricalScheduler.swift; sourceTree = "<group>"; };
 		8D5A91675067315D272D6411BB174F3A /* RxTableViewDelegateProxy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RxTableViewDelegateProxy.swift; path = RxCocoa/iOS/Proxies/RxTableViewDelegateProxy.swift; sourceTree = "<group>"; };
@@ -1180,6 +1186,9 @@
 				F7CA8D10DFE8B8FD2A9FDC2904B74A1E /* VideoCell.swift */,
 				DE299712BD5D8A22516E54A44923E879 /* VideoCellViewModel.swift */,
 				8BF415661F07BCF5001D766F /* Bundle.swift */,
+				8BBF47BE1F0A59C20012B611 /* camera.png */,
+				8BBF47BF1F0A59C20012B611 /* camera@x2.png */,
+				8BBF47C01F0A59C20012B611 /* camera@x3.png */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1464,6 +1473,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BBF47C31F0A59C20012B611 /* camera@x3.png in Resources */,
+				8BBF47C21F0A59C20012B611 /* camera@x2.png in Resources */,
+				8BBF47C11F0A59C20012B611 /* camera.png in Resources */,
 				68EC5B81085671F87AEA3BCD6B1D2451 /* EasyMakePhotoPicker.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -30,6 +30,14 @@ PhotoManager is a wrapper class for PhotoCacheImageManager, it provides the func
 
 # PhotosView
 
+- [x] Photo, Live Photo, and Video can be displayed in grid form.
+- [x] Custom Layout
+- [x] Custom Cell(Camera, Photo, LivePhoto, Video)
+- [x] Like Facebook`s PhotoPicker, When you stop scrolling, it runs livePhoto, video. and When LivePhotoCell or VideCell is selected, play.
+- [x] Performance optimization - Automatically cache and destroy photos.
+- [x] Multiple selection.
+- [x] Automatically update the UI When PhotoLibrary changes.
+
 ## Initializer
 ```swift
 init(configure: PhotosViewConfigure, photoAssetCollection: PhotoAssetCollection)
@@ -100,6 +108,9 @@ func change(photoAssetCollection: PhotoAssetCollection)
 ```
 
 # PhotoCollectionsView
+- [x] Custom Cell(PhotoCollection)
+- [x] Custom Layout
+- [x] Automatically update the UI When PhotoLibrary changes.
 
 ## Initializer
 ```swift
@@ -185,11 +196,8 @@ func checkCameraPermission() -> Observable<Bool>
 # Example making your own PhotoPicker.
 
 
-## Example
-
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
 ## Requirements
+iOS 9.1
 
 ## Installation
 
