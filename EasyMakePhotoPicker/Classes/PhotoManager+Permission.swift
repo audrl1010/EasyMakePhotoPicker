@@ -6,14 +6,16 @@
 //  Copyright © 2017년 grutech. All rights reserved.
 //
 
+import AVFoundation
 import Photos
 import RxSwift
+
 
 // MARK: - Permission
 
 extension PhotoManager {
   
-  open func checkPhotoPermission() -> Observable<Bool> {
+  open func checkPhotoLibraryPermission() -> Observable<Bool> {
     return Observable.create { observer in
       if PHPhotoLibrary.authorizationStatus() == .authorized {
         observer.onNext(true)
@@ -28,8 +30,40 @@ extension PhotoManager {
       }
       return Disposables.create()
     }
-    .subscribeOn(MainScheduler.instance)
+  }
+  
+  open func checkCameraPermission() -> Observable<Bool> {
+    return Observable.create { observer in
+      let authStatus =
+        AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
+      
+      if authStatus == .authorized {
+        observer.onNext(true)
+        observer.onCompleted()
+      }
+      else {
+        observer.onNext(false)
+        AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo) { granted in
+          observer.onNext(granted)
+          observer.onCompleted()
+        }
+      }
+      return Disposables.create()
+    }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
