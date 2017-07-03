@@ -63,9 +63,13 @@ open class PhotoCollectionsViewModel:
   }
   
   fileprivate func bindViewModel() {
+    let thumbnailSize = CGSize(
+      width: self.configure.photoCollectionThumbnailSize.width * UIScreen.main.scale,
+      height: self.configure.photoCollectionThumbnailSize.height * UIScreen.main.scale)
+    
     photoManager.fetchCollections(
       assetCollectionTypes: self.configure.showsCollectionTypes,
-      thumbnailImageSize: self.configure.photoCollectionThumbnailSize,
+      thumbnailImageSize: thumbnailSize,
       options: self.configure.fetchOptions)
       .observeOn(MainScheduler.instance)
       .subscribe(onNext: { [weak self] photoAssetCollections in
@@ -121,6 +125,8 @@ open class PhotoCollectionsViewModel:
                   
                   let removedIndexs = removed.map { Int($0) }
                   
+                  
+                  
                   // if latest photoAsset is changed,
                   // update changed latest photoAsset`s image
                   // photoAssetCollection thumbnail.
@@ -129,7 +135,7 @@ open class PhotoCollectionsViewModel:
                     if let latestAsset = self.photoAssetCollections[offset].assetsInFetchResult.first {
                       self.photoManager.image(
                         for: latestAsset,
-                        size: self.configure.photoCollectionThumbnailSize)
+                        size: thumbnailSize)
                         .observeOn(MainScheduler.instance)
                         .subscribe(onNext: { [weak self] image in
                           guard let `self` = self else { return }
@@ -147,7 +153,7 @@ open class PhotoCollectionsViewModel:
                   if let latestAsset = self.photoAssetCollections[offset].assetsInFetchResult.first {
                     self.photoManager.image(
                       for: latestAsset,
-                      size: self.configure.photoCollectionThumbnailSize)
+                      size: thumbnailSize)
                       .observeOn(MainScheduler.instance)
                       .subscribe(onNext: { [weak self] image in
                         guard let `self` = self else { return }
@@ -170,7 +176,7 @@ open class PhotoCollectionsViewModel:
                     if let latestAsset = self.photoAssetCollections[offset].assetsInFetchResult.first {
                       self.photoManager.image(
                         for: latestAsset,
-                        size: self.configure.photoCollectionThumbnailSize)
+                        size: thumbnailSize)
                         .observeOn(MainScheduler.instance)
                         .subscribe(onNext: { [weak self] image in
                           guard let `self` = self else { return }

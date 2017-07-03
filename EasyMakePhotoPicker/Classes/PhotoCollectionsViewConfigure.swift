@@ -31,12 +31,7 @@ open class PhotoCollectionsViewConfigure {
   // photoCollectionThumbnailSize must be the same
   // because get photo collection thumbnail image from PHCachingImageManager
   // based on the 'photoCollectionThumbnailSize'
-  
-  // * recommand: To provide image according to device resolution,
-  //              must multiply thumbnailSize to UIScreen.main.scale
-  open var photoCollectionThumbnailSize = CGSize(
-    width: 54 * UIScreen.main.scale,
-    height: 54 * UIScreen.main.scale)
+  open var photoCollectionThumbnailSize = CGSize(width: 54, height: 54)
   
   open var layout: UICollectionViewFlowLayout = PhotoCollectionsLayout()
   
