@@ -433,7 +433,6 @@ class PhotosViewModel:
             return
         }
 
-        // https://stackoverflow.com/questions/29337765/crash-attempt-to-delete-and-reload-the-same-index-path
         if let changes = changeInstance.changeDetails(for: currentPhotoAssetCollection.fetchResult) {
           
           // update fetchResult
@@ -446,14 +445,10 @@ class PhotosViewModel:
               self.currentPlayingCellViewModel = nil
             }
             
-            var removedPaths: [IndexPath]?
-            var insertedPaths: [IndexPath]?
-            var changedPaths: [IndexPath]?
-            
             if let removed = changes.removedIndexes {
-              removedPaths = removed.map { IndexPath(item: $0, section: 0) }
               let removedAssets = removed
                 .map { changes.fetchResultBeforeChanges.object(at: $0) }
+              
               // delete currentSelectedCellViewModelToUseSingleSelection
               if self.configure.allowsMultipleSelection,
                 let currentSelectedCellViewModelToUseSingleSelection =
@@ -475,7 +470,6 @@ class PhotosViewModel:
                 }
             }
             if let inserted = changes.insertedIndexes {
-              insertedPaths = inserted.map { IndexPath(item: $0, section: 0) }
               // create cellViewModels
               inserted
                 .map {
@@ -489,7 +483,6 @@ class PhotosViewModel:
                 }
             }
             if let changed = changes.changedIndexes {
-              changedPaths = changed.map { IndexPath(item: $0, section: 0) }
               // reload cellViewModels
               changed
                 .forEach { [weak self] index in
@@ -508,70 +501,9 @@ class PhotosViewModel:
                   }
                 }
             }
-            
-            var shouldReload = false
-            
-            if let removedPaths = removedPaths,
-              let changedPaths = changedPaths {
-              for changedPath in changedPaths {
-                if removedPaths.contains(changedPath) {
-                  shouldReload = true
-                  return
-                }
-              }
-            }
-            
-            if let lastItem = removedPaths?.last?.item {
-              if lastItem >= changes.fetchResultAfterChanges.count {
-                shouldReload = true
-              }
-            }
-            
-            if shouldReload {
-              self.cellDidChange.onNext(.reset)
-            }
-            else {
-              // *** colelctionView beginUpdate ***
-              self.cellDidChange.onNext(.begin)
-              if let theRemovedPaths = removedPaths {
-                let indexPathsToDelete = theRemovedPaths
-                  .map {
-                    IndexPath(
-                      item: $0.item + (self.configure.allowsCameraSelection ? 1 : 0),
-                      section: 0)
-                  }
-                self.cellDidChange.onNext(.delete(indexPathsToDelete))
-              }
-              if let theInsertedPaths = insertedPaths {
-                let indexPathsToInsert = theInsertedPaths
-                  .map {
-                    IndexPath(
-                      item: $0.item + (self.configure.allowsCameraSelection ? 1 : 0),
-                      section: 0)
-                  }
-                self.cellDidChange.onNext(.insert(indexPathsToInsert))
-              }
-              if let theChangedPaths = changedPaths {
-                let indexPathsToReload = theChangedPaths
-                  .map {
-                    IndexPath(item: $0.item + (self.configure.allowsCameraSelection ? 1 : 0), section: 0)
-                  }
-                self.cellDidChange.onNext(.update(indexPathsToReload))
-              }
-              changes.enumerateMoves { [weak self] from, to in
-                guard let `self` = self else { return }
-                self.cellDidChange.onNext(.move(
-                  from: IndexPath(item: from, section: 0),
-                  to: IndexPath(item: to, section: 0)))
-              }
-              // *** colelctionView endUpdate ***
-              self.cellDidChange.onNext(.end)
-            }
           }
-          else {
-            self.cellDidChange.onNext(.reset)
-          }
-          
+          self.cellDidChange.onNext(.reset)
+            
           // only allows multipleSelection
           if self.configure.allowsMultipleSelection {
             let selectedCellViewModels = self.cellViewModels
