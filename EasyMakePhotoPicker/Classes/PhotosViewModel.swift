@@ -157,6 +157,15 @@ class PhotosViewModel:
   }
   
   fileprivate func setupViewModel() {
+    
+    inputs.photoSizeDidInput
+      .observeOn(MainScheduler.instance)
+      .subscribe(onNext: { [weak self] photoSize in
+        guard let `self` = self else { return }
+        self.photoSize = photoSize
+      })
+      .disposed(by: disposeBag)
+    
     inputs.viewDidLoad
       .observeOn(MainScheduler.instance)
       .subscribe(onNext: { [weak self] in
@@ -182,14 +191,6 @@ class PhotosViewModel:
           // load currentPhotoAssetCollection
           self.outputs.cellDidChange.onNext(.reset)
         }
-      })
-      .disposed(by: disposeBag)
-    
-    inputs.photoSizeDidInput
-      .observeOn(MainScheduler.instance)
-      .subscribe(onNext: { [weak self] photoSize in
-        guard let `self` = self else { return }
-        self.photoSize = photoSize
       })
       .disposed(by: disposeBag)
     
@@ -222,9 +223,10 @@ class PhotosViewModel:
         if self.configure.allowsCameraSelection && indexPath.item == 0 {
           return
         }
-        
-        let asset = currentPhotoAssetCollection.fetchResult.object(
-          at: indexPath.item - (self.configure.allowsCameraSelection ? 1 : 0))
+
+        let asset = self.assetAtInvertedIndex(
+          with: indexPath.item - (self.configure.allowsCameraSelection ? 1 : 0),
+          in: currentPhotoAssetCollection.fetchResult)
         
         if let disappearedCellViewModel = self.cellViewModels[asset.localIdentifier],
           currentPlayingCellViewModel.photoAsset.localIdentifier ==
@@ -256,12 +258,15 @@ class PhotosViewModel:
             return indexPath
           }
           .map {
-            currentPhotoAssetCollection.fetchResult.object(at: $0.item)
+            return self.assetAtInvertedIndex(
+              with: $0.item,
+              in: currentPhotoAssetCollection.fetchResult)
           }
           .map { PhotoAsset(asset: $0) }
         
-        let visibleVideoPhotoAssets = visiblePhotoAssets.filter {
-          self.configure.allowsPlayTypes.contains($0.type)
+        let visibleVideoPhotoAssets = visiblePhotoAssets
+          .filter {
+            self.configure.allowsPlayTypes.contains($0.type)
           }
         
         let visibleVideoCellViewModels = visibleVideoPhotoAssets
@@ -316,9 +321,9 @@ class PhotosViewModel:
           self.cameraDidClick.onNext(())
         }
         else {
-          let selectedAsset =
-            currentPhotoAssetCollection.fetchResult.object(
-              at: indexPath.item - (self.configure.allowsCameraSelection ? 1 : 0))
+          let selectedAsset = self.assetAtInvertedIndex(
+            with: indexPath.item  - (self.configure.allowsCameraSelection ? 1 : 0),
+            in: currentPhotoAssetCollection.fetchResult)
           
           if let selectedCellViewModel = self.cellViewModels[selectedAsset.localIdentifier] {
             // allows multiple selection
@@ -336,6 +341,7 @@ class PhotosViewModel:
                   self.outputs.maxCountSelectedPhotosIsExceeded.onNext()
                   return
                 }
+                
                 selectedCellViewModel.selectedOrder.onNext(selectedCellViewModels.count + 1)
                 selectedCellViewModel.isSelect.onNext(true)
                 self.photoAssetDidSelected.onNext(selectedCellViewModel.photoAsset)
@@ -432,34 +438,26 @@ class PhotosViewModel:
           let currentPhotoAssetCollection = self.currentPhotoAssetCollection else {
             return
         }
-
+        
         if let changes = changeInstance.changeDetails(for: currentPhotoAssetCollection.fetchResult) {
           
           // update fetchResult
           self.currentPhotoAssetCollection?.fetchResult = changes.fetchResultAfterChanges
 
-          // if have playing cell, stop playing cell.
-          if let currentPlayingCellViewModel = self.currentPlayingCellViewModel {
-            self.stop(photoCellViewModel: currentPlayingCellViewModel)
-            self.currentPlayingCellViewModel = nil
-          }
-          
           if changes.hasIncrementalChanges {
+            
+            // if have playing cell, stop playing cell.
+            if let currentPlayingCellViewModel = self.currentPlayingCellViewModel {
+              self.stop(photoCellViewModel: currentPlayingCellViewModel)
+              self.currentPlayingCellViewModel = nil
+            }
+            
             if let removed = changes.removedIndexes {
               let removedAssets = removed
-                .map { changes.fetchResultBeforeChanges.object(at: $0) }
-              
-              // delete currentSelectedCellViewModelToUseSingleSelection
-              if self.configure.allowsMultipleSelection,
-                let currentSelectedCellViewModelToUseSingleSelection =
-                self.currentSelectedCellViewModelToUseSingleSelection {
-                
-                if removedAssets.contains(where: {
-                  currentSelectedCellViewModelToUseSingleSelection.photoAsset.localIdentifier
-                    == $0.localIdentifier}) {
-                  self.currentSelectedCellViewModelToUseSingleSelection = nil
+                .map {
+                  changes.fetchResultBeforeChanges.object(at: $0)
                 }
-              }
+
               // delete cellViewModels
               removedAssets
                 .map {
@@ -468,6 +466,17 @@ class PhotosViewModel:
                 .forEach {
                   self.cellViewModels.removeValue(forKey: $0)
                 }
+              
+              // delete currentSelectedCellViewModelToUseSingleSelection
+              if self.configure.allowsMultipleSelection,
+                let currentSelectedCellViewModelToUseSingleSelection =
+                self.currentSelectedCellViewModelToUseSingleSelection {
+                
+                if removedAssets.contains(where: {
+                  currentSelectedCellViewModelToUseSingleSelection.photoAsset.localIdentifier == $0.localIdentifier}) {
+                  self.currentSelectedCellViewModelToUseSingleSelection = nil
+                }
+              }
             }
             if let inserted = changes.insertedIndexes {
               // create cellViewModels
@@ -477,7 +486,6 @@ class PhotosViewModel:
                 }
                 .forEach { [weak self] photoAsset in
                   guard let `self` = self else { return }
-                  
                   let cellViewModel = self.createCellViewModel(with: photoAsset)
                   self.cellViewModels[photoAsset.localIdentifier] = cellViewModel
                 }
@@ -489,29 +497,29 @@ class PhotosViewModel:
                   guard let `self` = self else { return }
                   let oldAsset = changes.fetchResultBeforeChanges.object(at: index)
                   let newAsset = changes.fetchResultAfterChanges.object(at: index)
+
                   var newPhotoAsset = PhotoAsset(asset: newAsset)
                   
                   if let oldPhotoAsset = self.cellViewModels[oldAsset.localIdentifier]?.photoAsset {
                     newPhotoAsset.isSelected = oldPhotoAsset.isSelected
                     newPhotoAsset.selectedOrder = oldPhotoAsset.selectedOrder
                     self.cellViewModels.removeValue(forKey: oldPhotoAsset.localIdentifier)
-                    self.cellViewModels.updateValue(
-                      self.createCellViewModel(with: newPhotoAsset),
+                    self.cellViewModels.updateValue(self.createCellViewModel(with: newPhotoAsset),
                       forKey: newPhotoAsset.localIdentifier)
                   }
                 }
             }
           }
+          
           self.cellDidChange.onNext(.reset)
             
           // only allows multipleSelection
+          
           if self.configure.allowsMultipleSelection {
             let selectedCellViewModels = self.cellViewModels
               .map { $0.value }
               .filter { $0.photoAsset.isSelected }
-              .sorted {
-                $0.0.photoAsset.selectedOrder < $0.1.photoAsset.selectedOrder
-              }
+              .sorted { $0.0.photoAsset.selectedOrder < $0.1.photoAsset.selectedOrder }
             
             var offset = 0
             selectedCellViewModels
@@ -546,14 +554,16 @@ class PhotosViewModel:
         
         let addedAssets = addedIndexPaths
           .map {
-            currentPhotoAssetCollection.fetchResult.object(
-              at: $0.item - (self.configure.allowsCameraSelection ? 1 : 0))
+            self.assetAtInvertedIndex(
+              with: $0.item - (self.configure.allowsCameraSelection ? 1 : 0),
+              in: currentPhotoAssetCollection.fetchResult)
           }
         
         let removedAssets = removedIndexPaths
           .map {
-            currentPhotoAssetCollection.fetchResult.object(
-              at: $0.item - (self.configure.allowsCameraSelection ? 1 : 0))
+            self.assetAtInvertedIndex(
+              with: $0.item - (self.configure.allowsCameraSelection ? 1 : 0),
+              in: currentPhotoAssetCollection.fetchResult)
           }
         
         self.photoManager.startCaching(
@@ -595,23 +605,29 @@ class PhotosViewModel:
       return self.createCellViewModel(with: PhotoAsset(asset: PHAsset()))
     }
     else {
-      let currentPhotoAsset = PhotoAsset(
-        asset: currentPhotoAssetCollection.fetchResult.object(
-          at: indexPath.item - (self.configure.allowsCameraSelection ? 1 : 0)))
+      let currentAsset = assetAtInvertedIndex(
+        with: indexPath.item - (self.configure.allowsCameraSelection ? 1 : 0),
+        in: currentPhotoAssetCollection.fetchResult)
       
-      if let cellViewModel = cellViewModels[currentPhotoAsset.localIdentifier] {
+      let currentPhotoAsset = PhotoAsset(asset: currentAsset)
+
+      if let cellViewModel = cellViewModels[currentAsset.localIdentifier] {
         return cellViewModel
       }
       else {
         let cellViewModel = self.createCellViewModel(with: currentPhotoAsset)
-        
-        cellViewModels[currentPhotoAsset.localIdentifier] = cellViewModel
-        
+        cellViewModels[currentAsset.localIdentifier] = cellViewModel
         return cellViewModel
       }
     }
   }
   
+  // To sort photos in the latest order, calculates by inverting the index of the fetchResult.
+  fileprivate func assetAtInvertedIndex(
+    with originalIndex: Int,
+    in fetchResult: PHFetchResult<PHAsset>) -> PHAsset {
+    return fetchResult.object(at: (fetchResult.count - 1) - originalIndex)
+  }
 }
 
 // MARK: - Create CellViewModel

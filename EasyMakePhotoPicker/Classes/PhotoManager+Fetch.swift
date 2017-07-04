@@ -51,21 +51,9 @@ extension PhotoManager {
       }
       .map { collection -> PhotoAssetCollection in
         let fetchAssets = PHAsset.fetchAssets(in: collection, options: options)
-        
-        var reversedAssets: [PHAsset] = []
-        fetchAssets.enumerateObjects({ (asset, index, stop) in
-          reversedAssets.insert(asset, at: 0)
-        })
-        
-        let reversedCollection = PHAssetCollection.transientAssetCollection(
-          with: reversedAssets,
-          title: collection.localizedTitle)
-        
-        let reversedFetchAssets = PHAsset.fetchAssets(in: reversedCollection, options: nil)
-        
         return PhotoAssetCollection(
-          collection: reversedCollection,
-          fetchResult: reversedFetchAssets)
+          collection: collection,
+          fetchResult: fetchAssets)
       }
       .filter { $0.count > 0 }
       .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .userInitiated))
@@ -74,7 +62,7 @@ extension PhotoManager {
       assetCollectionsObservable
         .flatMap { [weak self] assetCollection -> Observable<UIImage> in
           guard let `self` = self,
-            let latestAsset = assetCollection.fetchResult.firstObject else {
+            let latestAsset = assetCollection.fetchResult.lastObject else {
               return .empty()
           }
           

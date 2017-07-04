@@ -39,14 +39,13 @@ open class LivePhotoCell: PhotoCell {
   override open func prepareForReuse() {
     super.prepareForReuse()
     livePhotoBadgeImageView.image = nil
-    
     livePhotoView.isHidden = true
   }
   
   override open func setupViews() {
     super.setupViews()
     selectedView.backgroundColor = Color.selectedViewBGC
-    insertSubview(livePhotoView, at: 1)
+    insertSubview(livePhotoView, aboveSubview: imageView)
     addSubview(livePhotoBadgeImageView)
   }
   

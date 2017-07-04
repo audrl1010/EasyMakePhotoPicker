@@ -22,7 +22,7 @@ open class PhotosViewConfigure {
   
   open var messageWhenMaxCountSelectedPhotosIsExceeded: String = "max count that can select photos is exceeded !!!!"
   
-  open var maxCountSelectedPhotos: Int = 30
+  open var maxCountSelectedPhotos: Int = 15
 
   // get item image from PHCachingImageManager
   // based on the UICollectionViewFlowLayout`s itemSize,

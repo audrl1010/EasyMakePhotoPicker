@@ -92,11 +92,8 @@ open class PhotoCollectionsViewModel:
               
               // have deleted photoAssetCollection?
               if changes.objectWasDeleted {
-                
                 self.photoAssetCollections.remove(at: offset)
-                
                 self.cellViewModels.removeValue(forKey: IndexPath(item: offset, section: 0))
-                
                 self.cellDidChange.onNext(.delete([IndexPath(item: offset, section: 0)]))
                 return
               }
@@ -125,14 +122,12 @@ open class PhotoCollectionsViewModel:
                   
                   let removedIndexs = removed.map { Int($0) }
                   
-                  
-                  
                   // if latest photoAsset is changed,
                   // update changed latest photoAsset`s image
                   // photoAssetCollection thumbnail.
-                  if removedIndexs.contains(0) {
-                    // first photoAsset in already updated photoAssetCollection is latest asset.
-                    if let latestAsset = self.photoAssetCollections[offset].assetsInFetchResult.first {
+                  if removedIndexs.contains(changes.fetchResultBeforeChanges.count - 1) {
+                    // last photoAsset in already updated photoAssetCollection is latest asset.
+                    if let latestAsset = self.photoAssetCollections[offset].assetsInFetchResult.last {
                       self.photoManager.image(
                         for: latestAsset,
                         size: thumbnailSize)
@@ -149,8 +144,7 @@ open class PhotoCollectionsViewModel:
                   }
                 }
                 if let inserted = changes.insertedIndexes, inserted.count > 0 {
-                  
-                  if let latestAsset = self.photoAssetCollections[offset].assetsInFetchResult.first {
+                  if let latestAsset = self.photoAssetCollections[offset].assetsInFetchResult.last {
                     self.photoManager.image(
                       for: latestAsset,
                       size: thumbnailSize)
@@ -172,8 +166,8 @@ open class PhotoCollectionsViewModel:
                   // if latest photoAsset is changed,
                   // update changed latest photoAsset`s image
                   // photoAssetCollection thumbnail.
-                  if changedIndexs.contains(0) {
-                    if let latestAsset = self.photoAssetCollections[offset].assetsInFetchResult.first {
+                  if changedIndexs.contains(changes.fetchResultAfterChanges.count - 1) {
+                    if let latestAsset = self.photoAssetCollections[offset].assetsInFetchResult.last {
                       self.photoManager.image(
                         for: latestAsset,
                         size: thumbnailSize)
@@ -228,6 +222,13 @@ open class PhotoCollectionsViewModel:
   
   open func numberOfItems() -> Int {
     return photoAssetCollections.count
+  }
+  
+  // To sort photos in the latest order, calculates by inverting the index of the fetchResult.
+  fileprivate func assetAtInvertedIndex(
+    with originalIndex: Int,
+    in fetchResult: PHFetchResult<PHAsset>) -> PHAsset {
+    return fetchResult[fetchResult.count - originalIndex - 1]
   }
   
   open func cellViewModel(at indexPath: IndexPath) -> PhotoCollectionCellViewModel {
