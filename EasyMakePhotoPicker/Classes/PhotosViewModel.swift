@@ -438,13 +438,13 @@ class PhotosViewModel:
           // update fetchResult
           self.currentPhotoAssetCollection?.fetchResult = changes.fetchResultAfterChanges
 
+          // if have playing cell, stop playing cell.
+          if let currentPlayingCellViewModel = self.currentPlayingCellViewModel {
+            self.stop(photoCellViewModel: currentPlayingCellViewModel)
+            self.currentPlayingCellViewModel = nil
+          }
+          
           if changes.hasIncrementalChanges {
-            // if have playing cell, stop playing cell.
-            if let currentPlayingCellViewModel = self.currentPlayingCellViewModel {
-              self.stop(photoCellViewModel: currentPlayingCellViewModel)
-              self.currentPlayingCellViewModel = nil
-            }
-            
             if let removed = changes.removedIndexes {
               let removedAssets = removed
                 .map { changes.fetchResultBeforeChanges.object(at: $0) }

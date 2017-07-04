@@ -133,6 +133,7 @@ class PhotoCollectionsViewConfigure {
     .smartAlbumFavorites,
     .smartAlbumRecentlyAdded,
     .smartAlbumSelfPortraits,
+    .smartAlbumVideos,
     .smartAlbumPanoramas,
     .smartAlbumBursts,
     .smartAlbumScreenshots

@@ -34,7 +34,7 @@ extension PhotoManager {
     assetCollectionTypes: [PHAssetCollectionSubtype],
     thumbnailImageSize: CGSize,
     options: PHFetchOptions? = nil) -> Observable<[PhotoAssetCollection]> {
-    
+
     let assetCollectionsObservable = Observable
       .from(assetCollectionTypes)
       .map { collectionType -> PHFetchResult<PHAssetCollection> in
@@ -50,9 +50,22 @@ extension PhotoManager {
         fetchCollectionsResult.firstObject!
       }
       .map { collection -> PhotoAssetCollection in
+        let fetchAssets = PHAsset.fetchAssets(in: collection, options: options)
+        
+        var reversedAssets: [PHAsset] = []
+        fetchAssets.enumerateObjects({ (asset, index, stop) in
+          reversedAssets.insert(asset, at: 0)
+        })
+        
+        let reversedCollection = PHAssetCollection.transientAssetCollection(
+          with: reversedAssets,
+          title: collection.localizedTitle)
+        
+        let reversedFetchAssets = PHAsset.fetchAssets(in: reversedCollection, options: nil)
+        
         return PhotoAssetCollection(
-          collection: collection,
-          fetchResult: PHAsset.fetchAssets(in: collection, options: options))
+          collection: reversedCollection,
+          fetchResult: reversedFetchAssets)
       }
       .filter { $0.count > 0 }
       .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .userInitiated))

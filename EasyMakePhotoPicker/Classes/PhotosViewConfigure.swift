@@ -10,10 +10,8 @@ import UIKit
 import Photos
 
 open class PhotosViewConfigure {
-  open var fetchOptions = PHFetchOptions().then {
-    $0.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-  }
-  
+  open var fetchOptions = PHFetchOptions()
+
   open var allowsMultipleSelection: Bool = true
   
   open var allowsCameraSelection: Bool = true

@@ -50,15 +50,6 @@ class FacebookPhotoPickerVC: UIViewController, FacebookPhotoPickerOutput {
   }
   
   fileprivate var photoCollectionsViewConfigure = PhotoCollectionsViewConfigure().then {
-    $0.showsCollectionTypes = [
-      .smartAlbumUserLibrary,
-      .smartAlbumGeneric,
-      .smartAlbumFavorites,
-      .smartAlbumRecentlyAdded,
-      .smartAlbumSelfPortraits,
-      .smartAlbumBursts,
-      .smartAlbumScreenshots
-    ]
     $0.layout = FacebookPhotoCollectionsLayout()
     $0.photoCollectionCellClass = FacebookCollectionCell.self
     $0.photoCollectionThumbnailSize = CGSize(width: 54, height: 54)

@@ -11,10 +11,8 @@ import Photos
 
 open class PhotoCollectionsViewConfigure {
   
-  open var fetchOptions = PHFetchOptions().then {
-    $0.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-  }
-  
+  open var fetchOptions = PHFetchOptions()
+
   // to show collection types.
   open var showsCollectionTypes: [PHAssetCollectionSubtype] = [
     .smartAlbumUserLibrary,
@@ -22,6 +20,7 @@ open class PhotoCollectionsViewConfigure {
     .smartAlbumFavorites,
     .smartAlbumRecentlyAdded,
     .smartAlbumSelfPortraits,
+    .smartAlbumVideos,
     .smartAlbumPanoramas,
     .smartAlbumBursts,
     .smartAlbumScreenshots
