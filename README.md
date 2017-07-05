@@ -36,7 +36,8 @@ PhotoManager is a wrapper class for PhotoCacheImageManager, it provides the func
 - [x] Like Facebook`s PhotoPicker, When you stop scrolling, it runs livePhoto, video. and When LivePhotoCell or VideCell is selected, play.
 - [x] Performance optimization - Automatically cache and destroy photos.
 - [x] Multiple selection.
-- [x] Automatically update the UI When PhotoLibrary changes.
+- [x] Camera selection.
+- [x] Automatically update the UI When PhotoLibrary changes(such as inserting, deleteing, updating, moving photos).
 
 ## Initializer
 ```swift
@@ -106,6 +107,136 @@ var cameraDidClick: PublishSubject<Void>
 ```swift
 func change(photoAssetCollection: PhotoAssetCollection)
 ```
+
+## Supported Cells(PhotoCell, LivePhotoCell, VideoCell, CameraCell)
+
+
+
+### PhotoCell
+```swift
+class PhotoCell: UICollectionViewCell {
+
+  var checkView: UIView
+
+  var selectedView: UIView
+
+  var orderLabel: UILabel
+
+  var imageView: UIImageView
+
+  ...
+}
+```
+
+### CameraCell
+```swift
+class CameraCell: PhotoCell {
+
+  var cameraIcon: UIImage
+
+  var bgColor: UIColor
+}
+
+```
+
+### LivePhotoCell
+```swift
+class LivePhotoCell: PhotoCell {
+
+  var livePhotoView: PHLivePhotoView
+
+  var livePhotoBadgeImageView: UIImageView
+
+  ...
+}
+```
+
+### VideoCell
+```swift
+class VideoCell: PhotoCell {
+
+  var playerView: PlayerView
+
+  var durationLabel: DurationLabel
+
+  ...
+}
+```
+
+## Usage
+```swift
+class ChatVC: UIViewController {
+
+  var photosViewConfigure: PhotosViewConfigure = {
+    let pvc = PhotosViewConfigure()
+    pvc.allowsCameraSelection = false
+    pvc.allowsMultipleSelection = true
+    pvc.allowsPlayTypes = [.livePhoto]
+    pvc.maxCountSelectedPhotos = 9
+    pvc.messageWhenMaxCountSelectedPhotosIsExceeded = "over!!!!!!"
+    pvc.layout = ...``can put your custom layout here.``
+    pvc.cameraCellClass = ...``can put your custom cameraCell here.``
+    pvc.photoCellClass = ...``can put your custom photoCellClass here.``
+    pvc.livePhotoCellClass = ...``can put your custom livePhotoCell here.``
+    pvc.videoCellClass = ...``can put your custom videoCellClass here.``
+    ...
+    return pvc
+  }()
+  
+  lazy var photosView: PhotosView = { [unowned] self
+    let pv = PhotosView(
+      configure: self.photosViewConfigure,
+      collectionType: .smartAlbumUserLibrary)
+    pv.autoresizingMask = .flexibleHeight
+    return pv
+  }()
+
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    ...
+    // MARK: - add view
+    inputBar.textView.inputView = photosView
+
+    // MARK: - bind
+    doneButton.rx.tap
+      .observeOn(MainScheduler.instance)
+      .subscribe(onNext: { _ in
+        self.photosView.selectionDidComplete.onNext()
+        self.dismiss(animated: true, completion: nil)
+      })
+      .disposed(by: disposeBag)
+
+    photosView.selectedPhotosDidComplete
+      .subscribe(onNext: { [weak self] photoAssets in
+        guard let `self` = self else { return }
+        self.selectedPhotoAssetsDidComplete.onNext(photoAssets)
+      })
+      .disposed(by: disposeBag)
+
+    photosView.outputs.cameraDidClick
+      .observeOn(MainScheduler.instance)
+      .subscribe(onNext: { [weak self] in
+        guard let `self` = self else { return }
+        self.showCamera()
+      })
+      .disposed(by: disposeBag)
+    ...
+  }
+
+  ....
+}
+
+##Tip
+
+### Custom Layout
+```swift
+
+```
+### Custom Cell
+```swift
+
+```
+### Custom Cell
 
 # PhotoCollectionsView
 - [x] Custom Cell(PhotoCollection)

@@ -16,9 +16,7 @@ open class PhotosViewConfigure {
   
   open var allowsCameraSelection: Bool = true
   
-  open var allowsPlayTypes: [AssetType] = [
-    .video, .livePhoto
-  ]
+  open var allowsPlayTypes: [AssetType] = [.video, .livePhoto]
   
   open var messageWhenMaxCountSelectedPhotosIsExceeded: String = "max count that can select photos is exceeded !!!!"
   
