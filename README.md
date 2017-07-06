@@ -34,10 +34,12 @@ PhotoManager is a wrapper class for PhotoCacheImageManager, it provides the func
 - [x] Custom Layout
 - [x] Custom Cell(Camera, Photo, LivePhoto, Video)
 - [x] Like Facebook`s PhotoPicker, When you stop scrolling, it runs livePhoto, video. and When LivePhotoCell or VideCell is selected, play.
-- [x] Performance optimization - Automatically cache and destroy photos.
+- [x] Scrolling performance optimization - Automatically cache and destroy photos.
+- [x] Selected Order index.
 - [x] Multiple selection.
 - [x] Camera selection.
 - [x] Automatically update the UI When PhotoLibrary changes(such as inserting, deleteing, updating, moving photos).
+
 
 ## Initializer
 ```swift
@@ -108,7 +110,7 @@ var cameraDidClick: PublishSubject<Void>
 func change(photoAssetCollection: PhotoAssetCollection)
 ```
 
-## Supported Cells(PhotoCell, LivePhotoCell, VideoCell, CameraCell)
+## Supported Cells in PhotosView(PhotoCell, LivePhotoCell, VideoCell, CameraCell)
 
 
 

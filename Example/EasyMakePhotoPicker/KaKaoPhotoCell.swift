@@ -1,102 +1,99 @@
 //
-//  PhotoCell.swift
-//  KaKaoChatInputView
+//  KaKaoPhotoCell.swift
+//  EasyMakePhotoPicker
 //
-//  Created by myung gi son on 2017. 5. 29..
-//  Copyright © 2017년 grutech. All rights reserved.
+//  Created by myung gi son on 2017. 7. 5..
+//  Copyright © 2017년 CocoaPods. All rights reserved.
 //
 
 import UIKit
+import EasyMakePhotoPicker
 import PhotosUI
 import RxSwift
 
-open class PhotoCell: BaseCollectionViewCell {
-  
+class KaKaoPhotoCell: BaseCollectionViewCell, PhotoCellable {
   // MARK: - Constant
-  public struct Constant {
-    public static var selectedViewBorderWidth = CGFloat(2)
+  
+  struct Constant {
+    static let selectedViewBorderWidth = CGFloat(2)
   }
   
-  public struct Color {
-    public static var selectedViewBorderColor = UIColor(
+  struct Color {
+    static let selectedViewBorderColor = UIColor(
       red: 255/255,
       green: 255/255,
       blue: 0/255,
       alpha: 1.0)
+    static let selectedViewBGColor = UIColor(
+      red: 0,
+      green: 0,
+      blue: 0,
+      alpha: 0.6)
   }
   
-  public struct Metric {
-    public static var orderLabelWidth = CGFloat(30)
-    public static var orderLabelHeight = CGFloat(30)
-    public static var orderLabelRight = CGFloat(-10)
-    public static var orderLabelTop = CGFloat(10)
+  struct Metric {
+    static let orderLabelWidth = CGFloat(30)
+    static let orderLabelHeight = CGFloat(30)
+    static let orderLabelRight = CGFloat(-10)
+    static let orderLabelTop = CGFloat(10)
     
-    public static var checkImageViewWidth = CGFloat(30)
-    public static var checkImageViewHeight = CGFloat(30)
-    public static var checkImageViewRight = CGFloat(-10)
-    public static var checkImageViewTop = CGFloat(10)
+    static let checkImageViewWidth = CGFloat(30)
+    static let checkImageViewHeight = CGFloat(30)
+    static let checkImageViewRight = CGFloat(-10)
+    static let checkImageViewTop = CGFloat(10)
   }
   
   // MARK: - Properties
   
-  open var disposeBag: DisposeBag = DisposeBag()
+  var checkView = CheckImageView().then {
+    $0.isHidden = true
+  }
   
-  open var viewModel: PhotoCellViewModel? {
+  var selectedView = UIView().then {
+    $0.layer.borderWidth = Constant.selectedViewBorderWidth
+    $0.layer.borderColor = Color.selectedViewBorderColor.cgColor
+    $0.backgroundColor = Color.selectedViewBGColor
+    $0.isHidden = true
+  }
+  
+  var orderLabel = NumberLabel().then {
+    $0.isHidden = true
+  }
+  
+  var imageView = UIImageView().then {
+    $0.contentMode = .scaleAspectFill
+    $0.clipsToBounds = true
+  }
+
+  var disposeBag: DisposeBag = DisposeBag()
+  
+  var viewModel: PhotoCellViewModel? {
     didSet {
       guard let viewModel = viewModel else { return }
       bind(viewModel: viewModel)
     }
   }
   
-  open var cellAnimationWhenSelectedCell: () -> () {
-    // implementation...
-    return { }
-  }
+  // MARK: - Life Cycle
   
-  // only support when PhotosViewConfigure`s 'allowsMultipleSelection' property is true
-  open var cellAnimationWhenDeselectedCell: () -> () {
-    // implementation...
-    return { }
-  }
-  
-  open var checkView: UIView = CheckImageView()
-  
-  open var selectedView = UIView().then {
-    $0.layer.borderWidth = Constant.selectedViewBorderWidth
-    $0.layer.borderColor = Color.selectedViewBorderColor.cgColor
-    $0.isHidden = true
-  }
-  
-  open var orderLabel: UILabel = NumberLabel().then {
-    $0.isHidden = true
-  }
-  
-  open var imageView = UIImageView().then {
-    $0.contentMode = .scaleAspectFill
-    $0.clipsToBounds = true
-  }
-  
-  override open func prepareForReuse() {
+  override func prepareForReuse() {
     super.prepareForReuse()
     disposeBag = DisposeBag()
     viewModel = nil
     imageView.image = nil
-    orderLabel.text = nil
+    orderLabel.label.text = nil
     orderLabel.isHidden = true
     selectedView.isHidden = true
   }
-  
-  override open func setupViews() {
-    super.setupViews()
+
+  override func addSubviews() {
     addSubview(imageView)
     addSubview(selectedView)
     addSubview(orderLabel)
     addSubview(checkView)
   }
   
-  override open func setupConstraints() {
-    super.setupConstraints()
-    
+  override func setupConstraints() {
     imageView
       .fs_leftAnchor(equalTo: leftAnchor)
       .fs_topAnchor(equalTo: topAnchor)
@@ -138,14 +135,16 @@ open class PhotoCell: BaseCollectionViewCell {
       .fs_endSetup()
   }
   
-  open func bind(viewModel: PhotoCellViewModel) {
+  // MARK: - Bind
+  
+  func bind(viewModel: PhotoCellViewModel) {
     viewModel.isSelect
       .observeOn(MainScheduler.instance)
       .subscribe(onNext: { [weak self, weak viewModel] isSelect in
         guard let `self` = self,
-        let `viewModel` = viewModel else { return }
+          let `viewModel` = viewModel else { return }
         self.selectedView.isHidden = !isSelect
-      
+        
         if viewModel.configure.allowsMultipleSelection {
           self.orderLabel.isHidden = !isSelect
           self.checkView.isHidden = isSelect
@@ -157,28 +156,10 @@ open class PhotoCell: BaseCollectionViewCell {
       })
       .disposed(by: disposeBag)
     
-    viewModel.isSelect
-      .skip(1)
-      .observeOn(MainScheduler.instance)
-      .subscribe(onNext: { [weak self, weak viewModel] isSelect in
-        guard let `self` = self,
-          let `viewModel` = viewModel else { return }
-        if isSelect {
-          self.cellAnimationWhenSelectedCell()
-        }
-        else {
-          if viewModel.configure.allowsMultipleSelection {
-            self.cellAnimationWhenDeselectedCell()
-          }
-        }
-      })
-      .disposed(by: disposeBag)
-    
-    
     viewModel.selectedOrder
       .subscribe(onNext: { [weak self] selectedOrder in
         guard let `self` = self else { return }
-        self.orderLabel.text = "\(selectedOrder)"
+        self.orderLabel.number = selectedOrder
       })
       .disposed(by: disposeBag)
     
@@ -191,6 +172,14 @@ open class PhotoCell: BaseCollectionViewCell {
       .disposed(by: disposeBag)
   }
 }
+
+
+
+
+
+
+
+
 
 
 

@@ -78,7 +78,6 @@ public class PhotosView: BaseView,
     return viewModel.outputs.cameraDidClick
   }
   
-  
   // MARK: - Properties
   
   fileprivate var configure: PhotosViewConfigure
@@ -95,25 +94,25 @@ public class PhotosView: BaseView,
     let cv = UICollectionView(
       frame: .zero,
       collectionViewLayout: self.configure.layout)
-    
-    cv.register(
-      self.configure.cameraCellClass,
-      forCellWithReuseIdentifier: self.configure.cameraCellClass.cellIdentifier)
-    
-    cv.register(
-      self.configure.photoCellClass,
-      forCellWithReuseIdentifier: self.configure.photoCellClass.cellIdentifier)
-    
-    cv.register(
-      self.configure.livePhotoCellClass,
-      forCellWithReuseIdentifier: self.configure.livePhotoCellClass.cellIdentifier)
-    
-    cv.register(
-      self.configure.videoCellClass,
-      forCellWithReuseIdentifier: self.configure.videoCellClass.cellIdentifier)
     cv.backgroundColor = .white
     cv.dataSource = self
     cv.delegate = self
+    
+    cv.register(
+      self.configure.photoCellTypeConverter.cellClass,
+      forCellWithReuseIdentifier: self.configure.photoCellTypeConverter.cellIdentifier)
+    
+    cv.register(
+      self.configure.cameraCellTypeConverter.cellClass,
+      forCellWithReuseIdentifier: self.configure.cameraCellTypeConverter.cellIdentifier)
+    
+    cv.register(
+      self.configure.livePhotoCellTypeConverter.cellClass,
+      forCellWithReuseIdentifier: self.configure.livePhotoCellTypeConverter.cellIdentifier)
+    
+    cv.register(
+      self.configure.videoCellTypeConverter.cellClass,
+      forCellWithReuseIdentifier: self.configure.videoCellTypeConverter.cellIdentifier)
     
     return cv
   }()
@@ -246,37 +245,36 @@ extension PhotosView: UICollectionViewDataSource {
     _ collectionView: UICollectionView,
     cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     
-    var cell: PhotoCell!
-    
     let cellViewModel = viewModel.cellViewModel(at: indexPath)
+    
+    let cell: UICollectionViewCell
     
     if cellViewModel is VideoCellViewModel {
       let videoCell = collectionView.dequeueReusableCell(
-        withReuseIdentifier: self.configure.videoCellClass.cellIdentifier,
-        for: indexPath) as! VideoCell
-      cell = videoCell
+        withReuseIdentifier: configure.videoCellTypeConverter.cellIdentifier,
+        for: indexPath) as! VideoCellable
+      videoCell.viewModel = cellViewModel
+      cell = videoCell as! UICollectionViewCell
     }
     else if cellViewModel is LivePhotoCellViewModel {
       let livePhotoCell = collectionView.dequeueReusableCell(
-        withReuseIdentifier: self.configure.livePhotoCellClass.cellIdentifier,
-        for: indexPath) as! LivePhotoCell
-      livePhotoCell.livePhotoView.delegate = self
-      cell = livePhotoCell
+        withReuseIdentifier: configure.livePhotoCellTypeConverter.cellIdentifier,
+        for: indexPath) as! LivePhotoCellable
+      livePhotoCell.viewModel = cellViewModel
+      cell = livePhotoCell as! UICollectionViewCell
     }
     else if cellViewModel is CameraCellViewModel {
-      let cameraCell = collectionView.dequeueReusableCell(
-        withReuseIdentifier: self.configure.cameraCellClass.cellIdentifier,
-        for: indexPath) as! CameraCell
-      cell = cameraCell
+      cell = collectionView.dequeueReusableCell(
+        withReuseIdentifier: configure.cameraCellTypeConverter.cellIdentifier,
+        for: indexPath)
     }
     else {
       let photoCell = collectionView.dequeueReusableCell(
-        withReuseIdentifier: self.configure.photoCellClass.cellIdentifier,
-        for: indexPath) as! PhotoCell
-      cell = photoCell
+        withReuseIdentifier: configure.photoCellTypeConverter.cellIdentifier,
+        for: indexPath) as! PhotoCellable
+      photoCell.viewModel = cellViewModel
+      cell = photoCell as! UICollectionViewCell
     }
-    
-    cell.viewModel = cellViewModel
     
     return cell
   }
@@ -316,20 +314,6 @@ extension PhotosView {
   public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
     viewModel.inputs.scrollingDidStop.onNext(
       collectionView.indexPathsForVisibleItems)
-  }
-}
-
-// MARK: - PHLivePhotoViewDelegate
-extension PhotosView: PHLivePhotoViewDelegate {
-  public func livePhotoView(
-    _ livePhotoView: PHLivePhotoView,
-    willBeginPlaybackWith playbackStyle: PHLivePhotoViewPlaybackStyle) {
-  }
-  
-  public func livePhotoView(
-    _ livePhotoView: PHLivePhotoView,
-    didEndPlaybackWith playbackStyle: PHLivePhotoViewPlaybackStyle) {
-    livePhotoView.startPlayback(with: .hint)
   }
 }
 

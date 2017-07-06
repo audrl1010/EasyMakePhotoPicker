@@ -64,7 +64,7 @@ public protocol PhotosViewModelType {
   func cellViewModel(at indexPath: IndexPath) -> PhotoCellViewModel
 }
 
-class PhotosViewModel:
+open class PhotosViewModel:
   PhotosViewModelType,
   PhotosViewModelInput,
   PhotosViewModelOutput {

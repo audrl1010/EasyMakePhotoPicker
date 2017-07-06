@@ -13,29 +13,26 @@
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		7842221DFE6510BF3BCACD09 /* Pods_EasyMakePhotoPicker_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0193BF6F991F2A13DA2FC676 /* Pods_EasyMakePhotoPicker_Tests.framework */; };
 		8939ACF591243926BAAECA64 /* Pods_EasyMakePhotoPicker_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 688A280E254D8000A7A13495 /* Pods_EasyMakePhotoPicker_Example.framework */; };
-		8B60A3691F0A09A200D1BDC6 /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B60A3681F0A09A200D1BDC6 /* PhotoPicker.swift */; };
-		8B60A36B1F0A09D600D1BDC6 /* PhotoPickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B60A36A1F0A09D600D1BDC6 /* PhotoPickerVC.swift */; };
-		8BB960781F04FB99000EBB20 /* FacebookPhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB9606A1F04FB99000EBB20 /* FacebookPhotoPicker.swift */; };
-		8BB960791F04FB99000EBB20 /* FacebookPhotoPickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB9606B1F04FB99000EBB20 /* FacebookPhotoPickerVC.swift */; };
-		8BB9607A1F04FB99000EBB20 /* FacebookPhotoCollectionsLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB9606C1F04FB99000EBB20 /* FacebookPhotoCollectionsLayout.swift */; };
-		8BB9607B1F04FB99000EBB20 /* FacebookPhotosLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB9606D1F04FB99000EBB20 /* FacebookPhotosLayout.swift */; };
-		8BB9607C1F04FB99000EBB20 /* FacebookVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB9606E1F04FB99000EBB20 /* FacebookVideoCell.swift */; };
-		8BB9607D1F04FB99000EBB20 /* FacebookLivePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB9606F1F04FB99000EBB20 /* FacebookLivePhotoCell.swift */; };
-		8BB9607E1F04FB99000EBB20 /* FacebookPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB960701F04FB99000EBB20 /* FacebookPhotoCell.swift */; };
-		8BB9607F1F04FB99000EBB20 /* FacebookCameraCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB960711F04FB99000EBB20 /* FacebookCameraCell.swift */; };
-		8BB960801F04FB99000EBB20 /* FacebookNumberLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB960721F04FB99000EBB20 /* FacebookNumberLabel.swift */; };
-		8BB960811F04FB99000EBB20 /* FacebookCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB960731F04FB99000EBB20 /* FacebookCollectionCell.swift */; };
+		8B1494711F0CDA1400548263 /* KaKaoPhotosViewConfigure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1494701F0CDA1400548263 /* KaKaoPhotosViewConfigure.swift */; };
+		8B1494731F0CE04400548263 /* KaKaoPhotoCollectionsViewConfigure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1494721F0CE04400548263 /* KaKaoPhotoCollectionsViewConfigure.swift */; };
+		8B1494781F0CE2E800548263 /* KaKaoPhotosLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1494771F0CE2E800548263 /* KaKaoPhotosLayout.swift */; };
+		8B14949C1F0CE3C300548263 /* Base+View+VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B14949B1F0CE3C300548263 /* Base+View+VC.swift */; };
+		8B14949E1F0E29D300548263 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B14949D1F0E29D300548263 /* PlayerView.swift */; };
+		8B1494A21F0E2AAB00548263 /* KaKaoPhotoCollectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1494A11F0E2AAB00548263 /* KaKaoPhotoCollectionLayout.swift */; };
+		8B1494A41F0E2C0700548263 /* KaKaoPhotoCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1494A31F0E2C0700548263 /* KaKaoPhotoCollectionCell.swift */; };
+		8B1494AA1F0E2D8500548263 /* Then.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1494A91F0E2D8500548263 /* Then.swift */; };
+		8B60A3691F0A09A200D1BDC6 /* KaKaoPhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B60A3681F0A09A200D1BDC6 /* KaKaoPhotoPicker.swift */; };
+		8B60A36B1F0A09D600D1BDC6 /* KaKaoPhotoPickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B60A36A1F0A09D600D1BDC6 /* KaKaoPhotoPickerVC.swift */; };
+		8BB284571F0C73440048C8D2 /* KaKaoPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB284561F0C73440048C8D2 /* KaKaoPhotoCell.swift */; };
+		8BB284591F0C79BD0048C8D2 /* KaKaoLivePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB284581F0C79BD0048C8D2 /* KaKaoLivePhotoCell.swift */; };
+		8BB2845B1F0C7DFB0048C8D2 /* KaKaoVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB2845A1F0C7DFB0048C8D2 /* KaKaoVideoCell.swift */; };
+		8BB284611F0C9C0B0048C8D2 /* CheckImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB2845E1F0C9C0B0048C8D2 /* CheckImageView.swift */; };
+		8BB284621F0C9C0B0048C8D2 /* NumberLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB2845F1F0C9C0B0048C8D2 /* NumberLabel.swift */; };
+		8BB284631F0C9C0B0048C8D2 /* DurationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB284601F0C9C0B0048C8D2 /* DurationLabel.swift */; };
+		8BB284651F0CA06E0048C8D2 /* KaKaoCameraCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB284641F0CA06E0048C8D2 /* KaKaoCameraCell.swift */; };
 		8BBF47A81F0A0AA20012B611 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBF47A71F0A0AA20012B611 /* MainVC.swift */; };
-		8BBF47AA1F0A0BA10012B611 /* PermissionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBF47A91F0A0BA10012B611 /* PermissionVC.swift */; };
-		8BBF47AD1F0A13650012B611 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBF47AC1F0A13650012B611 /* ChatVC.swift */; };
-		8BBF47B11F0A1A250012B611 /* InputBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBF47AE1F0A1A250012B611 /* InputBar.swift */; };
-		8BBF47B21F0A1A250012B611 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBF47AF1F0A1A250012B611 /* TextView.swift */; };
-		8BBF47B31F0A1A250012B611 /* PlusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBF47B01F0A1A250012B611 /* PlusButton.swift */; };
-		8BBF47B51F0A1A390012B611 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBF47B41F0A1A390012B611 /* ChatCell.swift */; };
-		8BBF47B71F0A1D020012B611 /* ChatLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBF47B61F0A1D020012B611 /* ChatLayout.swift */; };
-		8BF415881F07C851001D766F /* Base+View+VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF415871F07C851001D766F /* Base+View+VC.swift */; };
+		8BBF47AA1F0A0BA10012B611 /* kaKaoPermissionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBF47A91F0A0BA10012B611 /* kaKaoPermissionVC.swift */; };
 		8BF4158C1F07D49D001D766F /* UIView+FluidStyleAutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF4158B1F07D49D001D766F /* UIView+FluidStyleAutoLayout.swift */; };
-		8BF764941F09C8AB000F4822 /* FacebookPermissionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF764931F09C8AB000F4822 /* FacebookPermissionVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,29 +60,26 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		688A280E254D8000A7A13495 /* Pods_EasyMakePhotoPicker_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EasyMakePhotoPicker_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B60A3681F0A09A200D1BDC6 /* PhotoPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
-		8B60A36A1F0A09D600D1BDC6 /* PhotoPickerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPickerVC.swift; sourceTree = "<group>"; };
-		8BB9606A1F04FB99000EBB20 /* FacebookPhotoPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookPhotoPicker.swift; sourceTree = "<group>"; };
-		8BB9606B1F04FB99000EBB20 /* FacebookPhotoPickerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookPhotoPickerVC.swift; sourceTree = "<group>"; };
-		8BB9606C1F04FB99000EBB20 /* FacebookPhotoCollectionsLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookPhotoCollectionsLayout.swift; sourceTree = "<group>"; };
-		8BB9606D1F04FB99000EBB20 /* FacebookPhotosLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookPhotosLayout.swift; sourceTree = "<group>"; };
-		8BB9606E1F04FB99000EBB20 /* FacebookVideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookVideoCell.swift; sourceTree = "<group>"; };
-		8BB9606F1F04FB99000EBB20 /* FacebookLivePhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookLivePhotoCell.swift; sourceTree = "<group>"; };
-		8BB960701F04FB99000EBB20 /* FacebookPhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookPhotoCell.swift; sourceTree = "<group>"; };
-		8BB960711F04FB99000EBB20 /* FacebookCameraCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookCameraCell.swift; sourceTree = "<group>"; };
-		8BB960721F04FB99000EBB20 /* FacebookNumberLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookNumberLabel.swift; sourceTree = "<group>"; };
-		8BB960731F04FB99000EBB20 /* FacebookCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookCollectionCell.swift; sourceTree = "<group>"; };
+		8B1494701F0CDA1400548263 /* KaKaoPhotosViewConfigure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KaKaoPhotosViewConfigure.swift; sourceTree = "<group>"; };
+		8B1494721F0CE04400548263 /* KaKaoPhotoCollectionsViewConfigure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KaKaoPhotoCollectionsViewConfigure.swift; sourceTree = "<group>"; };
+		8B1494771F0CE2E800548263 /* KaKaoPhotosLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KaKaoPhotosLayout.swift; sourceTree = "<group>"; };
+		8B14949B1F0CE3C300548263 /* Base+View+VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Base+View+VC.swift"; sourceTree = "<group>"; };
+		8B14949D1F0E29D300548263 /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		8B1494A11F0E2AAB00548263 /* KaKaoPhotoCollectionLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KaKaoPhotoCollectionLayout.swift; sourceTree = "<group>"; };
+		8B1494A31F0E2C0700548263 /* KaKaoPhotoCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KaKaoPhotoCollectionCell.swift; sourceTree = "<group>"; };
+		8B1494A91F0E2D8500548263 /* Then.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Then.swift; sourceTree = "<group>"; };
+		8B60A3681F0A09A200D1BDC6 /* KaKaoPhotoPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KaKaoPhotoPicker.swift; sourceTree = "<group>"; };
+		8B60A36A1F0A09D600D1BDC6 /* KaKaoPhotoPickerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KaKaoPhotoPickerVC.swift; sourceTree = "<group>"; };
+		8BB284561F0C73440048C8D2 /* KaKaoPhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KaKaoPhotoCell.swift; sourceTree = "<group>"; };
+		8BB284581F0C79BD0048C8D2 /* KaKaoLivePhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KaKaoLivePhotoCell.swift; sourceTree = "<group>"; };
+		8BB2845A1F0C7DFB0048C8D2 /* KaKaoVideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KaKaoVideoCell.swift; sourceTree = "<group>"; };
+		8BB2845E1F0C9C0B0048C8D2 /* CheckImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckImageView.swift; sourceTree = "<group>"; };
+		8BB2845F1F0C9C0B0048C8D2 /* NumberLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberLabel.swift; sourceTree = "<group>"; };
+		8BB284601F0C9C0B0048C8D2 /* DurationLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DurationLabel.swift; sourceTree = "<group>"; };
+		8BB284641F0CA06E0048C8D2 /* KaKaoCameraCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KaKaoCameraCell.swift; sourceTree = "<group>"; };
 		8BBF47A71F0A0AA20012B611 /* MainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
-		8BBF47A91F0A0BA10012B611 /* PermissionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionVC.swift; sourceTree = "<group>"; };
-		8BBF47AC1F0A13650012B611 /* ChatVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
-		8BBF47AE1F0A1A250012B611 /* InputBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputBar.swift; sourceTree = "<group>"; };
-		8BBF47AF1F0A1A250012B611 /* TextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
-		8BBF47B01F0A1A250012B611 /* PlusButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlusButton.swift; sourceTree = "<group>"; };
-		8BBF47B41F0A1A390012B611 /* ChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
-		8BBF47B61F0A1D020012B611 /* ChatLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLayout.swift; sourceTree = "<group>"; };
-		8BF415871F07C851001D766F /* Base+View+VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Base+View+VC.swift"; sourceTree = "<group>"; };
+		8BBF47A91F0A0BA10012B611 /* kaKaoPermissionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kaKaoPermissionVC.swift; sourceTree = "<group>"; };
 		8BF4158B1F07D49D001D766F /* UIView+FluidStyleAutoLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+FluidStyleAutoLayout.swift"; sourceTree = "<group>"; };
-		8BF764931F09C8AB000F4822 /* FacebookPermissionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookPermissionVC.swift; sourceTree = "<group>"; };
 		8D7BE5173D23C484B5D1BED6 /* EasyMakePhotoPicker.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = EasyMakePhotoPicker.podspec; path = ../EasyMakePhotoPicker.podspec; sourceTree = "<group>"; };
 		A398EFE6B47E7FE3765BBFE4 /* Pods-EasyMakePhotoPicker_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyMakePhotoPicker_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EasyMakePhotoPicker_Tests/Pods-EasyMakePhotoPicker_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		B24D065F46CAAB8ECB5E5641 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
@@ -137,11 +131,10 @@
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				8BBF47A71F0A0AA20012B611 /* MainVC.swift */,
-				8BF415871F07C851001D766F /* Base+View+VC.swift */,
-				8BF4158B1F07D49D001D766F /* UIView+FluidStyleAutoLayout.swift */,
-				8B60A3671F0A098500D1BDC6 /* BasicPhotoPicker */,
+				8B60A3671F0A098500D1BDC6 /* KaKaoPhotoPicker */,
 				8BBF47AB1F0A12E50012B611 /* PhotoPickerInChat */,
 				8BB960861F04FBB1000EBB20 /* FacebookPhotoPicker */,
+				8BB284691F0CAB7F0048C8D2 /* Extension */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
@@ -185,23 +178,51 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
-		8B60A3671F0A098500D1BDC6 /* BasicPhotoPicker */ = {
+		8B60A3671F0A098500D1BDC6 /* KaKaoPhotoPicker */ = {
 			isa = PBXGroup;
 			children = (
-				8B60A3681F0A09A200D1BDC6 /* PhotoPicker.swift */,
-				8B60A36A1F0A09D600D1BDC6 /* PhotoPickerVC.swift */,
-				8BBF47A91F0A0BA10012B611 /* PermissionVC.swift */,
+				8B60A3681F0A09A200D1BDC6 /* KaKaoPhotoPicker.swift */,
+				8B60A36A1F0A09D600D1BDC6 /* KaKaoPhotoPickerVC.swift */,
+				8B1494701F0CDA1400548263 /* KaKaoPhotosViewConfigure.swift */,
+				8BB284641F0CA06E0048C8D2 /* KaKaoCameraCell.swift */,
+				8BB284561F0C73440048C8D2 /* KaKaoPhotoCell.swift */,
+				8BB284581F0C79BD0048C8D2 /* KaKaoLivePhotoCell.swift */,
+				8BB2845A1F0C7DFB0048C8D2 /* KaKaoVideoCell.swift */,
+				8BBF47A91F0A0BA10012B611 /* kaKaoPermissionVC.swift */,
+				8B1494721F0CE04400548263 /* KaKaoPhotoCollectionsViewConfigure.swift */,
+				8B1494A31F0E2C0700548263 /* KaKaoPhotoCollectionCell.swift */,
+				8B1494771F0CE2E800548263 /* KaKaoPhotosLayout.swift */,
+				8B1494A11F0E2AAB00548263 /* KaKaoPhotoCollectionLayout.swift */,
+				8BB284681F0CAB580048C8D2 /* ResourceView */,
 			);
-			name = BasicPhotoPicker;
+			name = KaKaoPhotoPicker;
+			sourceTree = "<group>";
+		};
+		8BB284681F0CAB580048C8D2 /* ResourceView */ = {
+			isa = PBXGroup;
+			children = (
+				8BB2845E1F0C9C0B0048C8D2 /* CheckImageView.swift */,
+				8BB2845F1F0C9C0B0048C8D2 /* NumberLabel.swift */,
+				8BB284601F0C9C0B0048C8D2 /* DurationLabel.swift */,
+				8B14949D1F0E29D300548263 /* PlayerView.swift */,
+			);
+			name = ResourceView;
+			sourceTree = "<group>";
+		};
+		8BB284691F0CAB7F0048C8D2 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				8B1494A91F0E2D8500548263 /* Then.swift */,
+				8B14949B1F0CE3C300548263 /* Base+View+VC.swift */,
+				8BF4158B1F07D49D001D766F /* UIView+FluidStyleAutoLayout.swift */,
+			);
+			name = Extension;
 			sourceTree = "<group>";
 		};
 		8BB960861F04FBB1000EBB20 /* FacebookPhotoPicker */ = {
 			isa = PBXGroup;
 			children = (
 				8BB9608B1F04FBE6000EBB20 /* ResourceView */,
-				8BB9606A1F04FB99000EBB20 /* FacebookPhotoPicker.swift */,
-				8BB9606B1F04FB99000EBB20 /* FacebookPhotoPickerVC.swift */,
-				8BF764931F09C8AB000F4822 /* FacebookPermissionVC.swift */,
 				8BB9608A1F04FBC3000EBB20 /* Layout */,
 				8BB960891F04FBBE000EBB20 /* Cell */,
 			);
@@ -211,11 +232,6 @@
 		8BB960891F04FBBE000EBB20 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				8BB9606E1F04FB99000EBB20 /* FacebookVideoCell.swift */,
-				8BB9606F1F04FB99000EBB20 /* FacebookLivePhotoCell.swift */,
-				8BB960701F04FB99000EBB20 /* FacebookPhotoCell.swift */,
-				8BB960711F04FB99000EBB20 /* FacebookCameraCell.swift */,
-				8BB960731F04FB99000EBB20 /* FacebookCollectionCell.swift */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -223,8 +239,6 @@
 		8BB9608A1F04FBC3000EBB20 /* Layout */ = {
 			isa = PBXGroup;
 			children = (
-				8BB9606C1F04FB99000EBB20 /* FacebookPhotoCollectionsLayout.swift */,
-				8BB9606D1F04FB99000EBB20 /* FacebookPhotosLayout.swift */,
 			);
 			name = Layout;
 			sourceTree = "<group>";
@@ -232,7 +246,6 @@
 		8BB9608B1F04FBE6000EBB20 /* ResourceView */ = {
 			isa = PBXGroup;
 			children = (
-				8BB960721F04FB99000EBB20 /* FacebookNumberLabel.swift */,
 			);
 			name = ResourceView;
 			sourceTree = "<group>";
@@ -240,12 +253,6 @@
 		8BBF47AB1F0A12E50012B611 /* PhotoPickerInChat */ = {
 			isa = PBXGroup;
 			children = (
-				8BBF47AC1F0A13650012B611 /* ChatVC.swift */,
-				8BBF47AE1F0A1A250012B611 /* InputBar.swift */,
-				8BBF47AF1F0A1A250012B611 /* TextView.swift */,
-				8BBF47B01F0A1A250012B611 /* PlusButton.swift */,
-				8BBF47B41F0A1A390012B611 /* ChatCell.swift */,
-				8BBF47B61F0A1D020012B611 /* ChatLayout.swift */,
 			);
 			name = PhotoPickerInChat;
 			sourceTree = "<group>";
@@ -473,30 +480,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8BB9607A1F04FB99000EBB20 /* FacebookPhotoCollectionsLayout.swift in Sources */,
-				8BB9607F1F04FB99000EBB20 /* FacebookCameraCell.swift in Sources */,
-				8BB9607E1F04FB99000EBB20 /* FacebookPhotoCell.swift in Sources */,
 				8BF4158C1F07D49D001D766F /* UIView+FluidStyleAutoLayout.swift in Sources */,
-				8BF415881F07C851001D766F /* Base+View+VC.swift in Sources */,
-				8BBF47AA1F0A0BA10012B611 /* PermissionVC.swift in Sources */,
-				8BF764941F09C8AB000F4822 /* FacebookPermissionVC.swift in Sources */,
-				8BBF47AD1F0A13650012B611 /* ChatVC.swift in Sources */,
-				8BB9607D1F04FB99000EBB20 /* FacebookLivePhotoCell.swift in Sources */,
-				8BBF47B71F0A1D020012B611 /* ChatLayout.swift in Sources */,
-				8B60A36B1F0A09D600D1BDC6 /* PhotoPickerVC.swift in Sources */,
-				8BBF47B21F0A1A250012B611 /* TextView.swift in Sources */,
-				8BB960811F04FB99000EBB20 /* FacebookCollectionCell.swift in Sources */,
+				8BB284571F0C73440048C8D2 /* KaKaoPhotoCell.swift in Sources */,
+				8BB2845B1F0C7DFB0048C8D2 /* KaKaoVideoCell.swift in Sources */,
+				8B14949C1F0CE3C300548263 /* Base+View+VC.swift in Sources */,
+				8BBF47AA1F0A0BA10012B611 /* kaKaoPermissionVC.swift in Sources */,
+				8B1494731F0CE04400548263 /* KaKaoPhotoCollectionsViewConfigure.swift in Sources */,
+				8BB284611F0C9C0B0048C8D2 /* CheckImageView.swift in Sources */,
+				8B1494A21F0E2AAB00548263 /* KaKaoPhotoCollectionLayout.swift in Sources */,
+				8B60A36B1F0A09D600D1BDC6 /* KaKaoPhotoPickerVC.swift in Sources */,
+				8BB284631F0C9C0B0048C8D2 /* DurationLabel.swift in Sources */,
+				8B1494A41F0E2C0700548263 /* KaKaoPhotoCollectionCell.swift in Sources */,
+				8B1494781F0CE2E800548263 /* KaKaoPhotosLayout.swift in Sources */,
 				8BBF47A81F0A0AA20012B611 /* MainVC.swift in Sources */,
-				8BB960791F04FB99000EBB20 /* FacebookPhotoPickerVC.swift in Sources */,
-				8B60A3691F0A09A200D1BDC6 /* PhotoPicker.swift in Sources */,
-				8BB960781F04FB99000EBB20 /* FacebookPhotoPicker.swift in Sources */,
-				8BB9607C1F04FB99000EBB20 /* FacebookVideoCell.swift in Sources */,
-				8BB9607B1F04FB99000EBB20 /* FacebookPhotosLayout.swift in Sources */,
+				8B1494AA1F0E2D8500548263 /* Then.swift in Sources */,
+				8B60A3691F0A09A200D1BDC6 /* KaKaoPhotoPicker.swift in Sources */,
+				8BB284621F0C9C0B0048C8D2 /* NumberLabel.swift in Sources */,
+				8BB284591F0C79BD0048C8D2 /* KaKaoLivePhotoCell.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
-				8BBF47B11F0A1A250012B611 /* InputBar.swift in Sources */,
-				8BB960801F04FB99000EBB20 /* FacebookNumberLabel.swift in Sources */,
-				8BBF47B31F0A1A250012B611 /* PlusButton.swift in Sources */,
-				8BBF47B51F0A1A390012B611 /* ChatCell.swift in Sources */,
+				8B1494711F0CDA1400548263 /* KaKaoPhotosViewConfigure.swift in Sources */,
+				8B14949E1F0E29D300548263 /* PlayerView.swift in Sources */,
+				8BB284651F0CA06E0048C8D2 /* KaKaoCameraCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

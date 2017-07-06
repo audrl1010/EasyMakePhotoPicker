@@ -9,48 +9,48 @@
 import UIKit
 
 
-open class DurationLabel: UILabel {
+class DurationLabel: UILabel {
   
-  public struct Constant {
-    public static let padding = UIEdgeInsets(top: 5, left: 3, bottom: 5, right: 3)
+  struct Constant {
+    static let padding = UIEdgeInsets(top: 5, left: 3, bottom: 5, right: 3)
   }
   
-  public struct Color {
-    public static let bgColor = UIColor(
+  struct Color {
+    static let bgColor = UIColor(
       red: 0/255,
       green: 0/255,
       blue: 0/255,
       alpha: 0.35)
     
-    public static let durationLabelTextColor = UIColor.white
+    static let durationLabelTextColor = UIColor.white
   }
   
-  public struct Font {
-    public static let durationLabelFont = UIFont.systemFont(ofSize: 14)
+  struct Font {
+    static let durationLabelFont = UIFont.systemFont(ofSize: 14)
   }
   
-  override public init(frame: CGRect) {
+  override init(frame: CGRect) {
     super.init(frame: frame)
     commonInit()
   }
   
-  required public init?(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     commonInit()
   }
   
-  open func commonInit() {
+  func commonInit() {
     backgroundColor = Color.bgColor
     textColor = Color.durationLabelTextColor
     font = Font.durationLabelFont
     text = "00:00"
   }
   
-  override open func drawText(in rect: CGRect) {
+  override func drawText(in rect: CGRect) {
     super.drawText(in: UIEdgeInsetsInsetRect(rect, Constant.padding))
   }
   
-  override open var intrinsicContentSize: CGSize {
+  override var intrinsicContentSize: CGSize {
     let size = super.intrinsicContentSize
     return CGSize(
       width: size.width + Constant.padding.left + Constant.padding.right,

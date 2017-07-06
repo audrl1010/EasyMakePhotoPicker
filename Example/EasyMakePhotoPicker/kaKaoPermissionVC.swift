@@ -1,5 +1,5 @@
 //
-//  PermissionVC.swift
+//  kaKaoPermissionVC.swift
 //  EasyMakePhotoPicker
 //
 //  Created by myung gi son on 2017. 7. 3..
@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class PermissionVC: BaseVC {
+class kaKaoPermissionVC: BaseVC {
   
   struct Constant {
     static let titleLabelText = "Please Allow Photo Access"

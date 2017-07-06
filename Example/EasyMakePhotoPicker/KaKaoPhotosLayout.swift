@@ -1,18 +1,17 @@
 //
-//  FacebookPhotosLayout.swift
-//  PhotoPicker
+//  KaKaoPhotosLayout.swift
+//  EasyMakePhotoPicker
 //
-//  Created by myung gi son on 2017. 6. 27..
-//  Copyright © 2017년 grutech. All rights reserved.
+//  Created by myung gi son on 2017. 7. 5..
+//  Copyright © 2017년 CocoaPods. All rights reserved.
 //
 
 import UIKit
 
-
-class FacebookPhotosLayout: UICollectionViewFlowLayout {
+class KaKaoPhotosLayout: UICollectionViewFlowLayout {
   
   fileprivate struct Constant {
-    static let padding = CGFloat(5)
+    static let padding = CGFloat(1)
     static let numberOfColumns = CGFloat(3)
   }
   
@@ -29,17 +28,17 @@ class FacebookPhotosLayout: UICollectionViewFlowLayout {
     }
   }
   
-  override public init() {
+  override init() {
     super.init()
     setupLayout()
   }
   
-  required public init?(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     super.init()
     setupLayout()
   }
   
-  open func setupLayout() {
+  func setupLayout() {
     minimumLineSpacing = Constant.padding
     minimumInteritemSpacing = Constant.padding
   }

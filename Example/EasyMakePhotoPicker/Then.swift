@@ -65,10 +65,8 @@ extension Then where Self: AnyObject {
     block(self)
     return self
   }
-
 }
-extension PhotoCollectionsViewConfigure: Then { }
-extension PhotosViewConfigure: Then { }
+
 extension NSObject: Then {}
 extension CGPoint: Then {}
 extension CGRect: Then {}

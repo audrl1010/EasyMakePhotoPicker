@@ -1,40 +1,42 @@
 //
-//  VideoCell.swift
-//  KaKaoChatInputView
+//  KaKaoVideoCell.swift
+//  EasyMakePhotoPicker
 //
-//  Created by myung gi son on 2017. 5. 29..
-//  Copyright © 2017년 grutech. All rights reserved.
+//  Created by myung gi son on 2017. 7. 5..
+//  Copyright © 2017년 CocoaPods. All rights reserved.
 //
 
 import UIKit
 import PhotosUI
+import RxSwift
+import EasyMakePhotoPicker
 
-open class VideoCell: PhotoCell {
+class KaKaoVideoCell: KaKaoPhotoCell, VideoCellable {
+  // MARK: - Constant
   
-  public struct Color {
+  struct Color {
     static let selectedViewBGC = UIColor(white: 1.0, alpha: 0.0)
   }
   
-  public struct Metric {
+  struct Metric {
     static let durationLabelLeft = CGFloat(5)
     static let durationLabelTop = CGFloat(5)
   }
-
-  override open var viewModel: PhotoCellViewModel? {
-    didSet {
-      guard let viewModel = viewModel as? VideoCellViewModel else { return }
-      bind(viewModel: viewModel)
-    }
-  }
   
-  open var durationLabel = DurationLabel()
+  var durationLabel: UILabel = DurationLabel()
   
-  open var playerView = PlayerView().then {
+  var playerView = PlayerView().then {
     $0.playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
     $0.isHidden = true
   }
   
-  open var player: AVPlayer? {
+  var duration: TimeInterval = 0.0 {
+    didSet {
+      durationLabel.text = timeFormatted(timeInterval: duration)
+    }
+  }
+  
+  fileprivate var player: AVPlayer? {
     didSet {
       if let player = player {
         playerView.playerLayer.player = player
@@ -55,30 +57,28 @@ open class VideoCell: PhotoCell {
       }
     }
   }
-
-  open var duration: TimeInterval = 0.0 {
-    didSet {
-      durationLabel.text = timeFormatted(timeInterval: duration)
-    }
-  }
   
-  override open func setupViews() {
+  // MARK: - Life Cycle
+  
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    player = nil
+    playerView.isHidden = true
+  }
+
+  override func setupViews() {
     super.setupViews()
     selectedView.backgroundColor = Color.selectedViewBGC
+  }
+  
+  override func addSubviews() {
+    super.addSubviews()
     insertSubview(playerView, aboveSubview: imageView)
     addSubview(durationLabel)
   }
   
-  override open func prepareForReuse() {
-    super.prepareForReuse()
-    
-    player = nil
-    playerView.isHidden = true
-  }
-  
-  override open func setupConstraints() {
+  override func setupConstraints() {
     super.setupConstraints()
-
     durationLabel
       .fs_leftAnchor(
         equalTo: leftAnchor,
@@ -96,21 +96,26 @@ open class VideoCell: PhotoCell {
       .fs_endSetup()
   }
   
-  open func bind(viewModel: VideoCellViewModel) {
-    duration = viewModel.duration
-    
-    viewModel.playEvent.asObserver()
-      .subscribe(onNext: { [weak self] playEvent in
-        guard let `self` = self else { return }
-        switch playEvent {
-        case .play: self.play()
-        case .stop: self.stop()
-        }
-      })
-      .disposed(by: disposeBag)
-  }
+  // MARK: - Bind
   
-  open func play() {
+  override func bind(viewModel: PhotoCellViewModel) {
+    super.bind(viewModel: viewModel)
+    if let viewModel = viewModel as? VideoCellViewModel {
+      duration = viewModel.duration
+      
+      viewModel.playEvent.asObserver()
+        .subscribe(onNext: { [weak self] playEvent in
+          guard let `self` = self else { return }
+          switch playEvent {
+          case .play: self.play()
+          case .stop: self.stop()
+          }
+        })
+        .disposed(by: disposeBag)
+    }
+  }
+
+  fileprivate func play() {
     guard let viewModel = viewModel as? VideoCellViewModel,
       let playerItem = viewModel.playerItem else { return }
     
@@ -122,7 +127,7 @@ open class VideoCell: PhotoCell {
     }
   }
   
-  open func stop() {
+  fileprivate func stop() {
     if let player = player {
       player.pause();
       self.player = nil
@@ -145,25 +150,6 @@ open class VideoCell: PhotoCell {
     }
   }
 }
-
-
-public class PlayerView: UIView {
-  
-  public var player: AVPlayer? {
-    get { return playerLayer.player }
-    set { playerLayer.player = newValue }
-  }
-  
-  public var playerLayer: AVPlayerLayer {
-    return layer as! AVPlayerLayer
-  }
-  
-  override public static var layerClass: AnyClass {
-    return AVPlayerLayer.self
-  }
-}
-
-
 
 
 

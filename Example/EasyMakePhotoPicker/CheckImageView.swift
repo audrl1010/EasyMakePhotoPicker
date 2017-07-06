@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class CheckImageView: BaseView {
+class CheckImageView: BaseView {
   
   struct Color {
     static let bgColor = UIColor(
@@ -24,36 +24,36 @@ open class CheckImageView: BaseView {
     static let lineWidth = CGFloat(2.5)
   }
   
-  open var bgColor: UIColor = Color.bgColor {
+  var bgColor: UIColor = Color.bgColor {
     didSet {
       setNeedsLayout()
     }
   }
   
-  open var lineWidth: CGFloat = Constant.lineWidth {
+  var lineWidth: CGFloat = Constant.lineWidth {
     didSet {
       setNeedsLayout()
     }
   }
   
-  open var checkColor: UIColor =  Color.checkColor {
+  var checkColor: UIColor =  Color.checkColor {
     didSet {
       setNeedsLayout()
     }
   }
   
-  override open func setupViews() {
+  override func setupViews() {
     super.setupViews()
     backgroundColor = Color.bgColor
     clipsToBounds = true
   }
   
-  override open func layoutSubviews() {
+  override func layoutSubviews() {
     super.layoutSubviews()
     layer.cornerRadius = bounds.height / 2
   }
   
-  open override func draw(_ rect: CGRect) {
+  override func draw(_ rect: CGRect) {
     super.draw(rect)
     
     let path = UIBezierPath()

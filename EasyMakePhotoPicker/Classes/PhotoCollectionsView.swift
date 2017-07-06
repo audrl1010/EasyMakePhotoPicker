@@ -56,8 +56,8 @@ open class PhotoCollectionsView:
       frame: .zero,
       collectionViewLayout: self.configure.layout)
     
-    cv.register(self.configure.photoCollectionCellClass,
-      forCellWithReuseIdentifier: self.configure.photoCollectionCellClass.cellIdentifier)
+    cv.register(self.configure.photoCollectionCellTypeConverter.cellClass,
+      forCellWithReuseIdentifier: self.configure.photoCollectionCellTypeConverter.cellIdentifier)
     
     cv.backgroundColor = .white
     cv.dataSource = self
@@ -145,11 +145,11 @@ extension PhotoCollectionsView: UICollectionViewDataSource {
   open func collectionView(
     _ collectionView: UICollectionView,
     cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(
-      withReuseIdentifier: self.configure.photoCollectionCellClass.cellIdentifier,
-      for: indexPath) as! PhotoCollectionCell
+    var cell = collectionView.dequeueReusableCell(
+      withReuseIdentifier: self.configure.photoCollectionCellTypeConverter.cellIdentifier,
+      for: indexPath) as! PhotoCollectionCellable
     cell.viewModel = viewModel.cellViewModel(at: indexPath)
-    return cell
+    return cell as! UICollectionViewCell
   }
 }
 

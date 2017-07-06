@@ -10,6 +10,7 @@ import UIKit
 import PhotosUI
 import RxSwift
 
+
 open class LivePhotoCellViewModel: PhotoCellViewModel {
   
   // MARK: - Output

@@ -1,101 +1,99 @@
 //
-//  PhotoCollectionCell.swift
-//  PhotoPicker
+//  KaKaoPhotoCollectionCell.swift
+//  EasyMakePhotoPicker
 //
-//  Created by myung gi son on 2017. 6. 27..
-//  Copyright © 2017년 grutech. All rights reserved.
+//  Created by myung gi son on 2017. 7. 6..
+//  Copyright © 2017년 CocoaPods. All rights reserved.
 //
 
 import UIKit
 import RxSwift
+import RxCocoa
+import EasyMakePhotoPicker
 
-open class PhotoCollectionCell: BaseCollectionViewCell {
+class KaKaoPhotoCollectionCell: BaseCollectionViewCell, PhotoCollectionCellable {
   // MARK: - Constant
   
-  public struct Color {
-    public static var countLabelTextColor = UIColor(
+  struct Color {
+    static var countLabelTextColor = UIColor(
       red: 155/255,
       green: 155/255,
       blue: 155/255,
       alpha: 1.0)
     
-    public static var titleLabelTextColor = UIColor.black
+    static var titleLabelTextColor = UIColor.black
     
-    public static var lineViewBGColor = UIColor(
+    static var lineViewBGColor = UIColor(
       red: 216/255,
       green: 217/255,
       blue: 216/255,
       alpha: 1.0)
   }
   
-  public struct Font {
-    public static var titleLabelFont = UIFont.systemFont(ofSize: 16)
-    public static var countLabelFont = UIFont.systemFont(ofSize: 12)
+  struct Font {
+    static var titleLabelFont = UIFont.systemFont(ofSize: 16)
+    static var countLabelFont = UIFont.systemFont(ofSize: 12)
   }
   
-  public struct Metric {
-    public static var thumbnailImageViewLeft = CGFloat(10)
-    public static var thumbnailImageViewHeight = CGFloat(54)
-    public static var thumbnailImageViewWidth = CGFloat(54)
+  struct Metric {
+    static var thumbnailImageViewLeft = CGFloat(10)
+    static var thumbnailImageViewHeight = CGFloat(54)
+    static var thumbnailImageViewWidth = CGFloat(54)
     
-    public static var titleLabelLeft = CGFloat(10)
-    public static var titleLabelTop = CGFloat(5)
+    static var titleLabelLeft = CGFloat(10)
+    static var titleLabelTop = CGFloat(5)
     
-    public static var countLabelTop = CGFloat(5)
+    static var countLabelTop = CGFloat(5)
     
-    public static var lineViewHeight = CGFloat(1)
+    static var lineViewHeight = CGFloat(1)
   }
   
   // MARK: - Properties
+  var thumbnailImageView = UIImageView().then {
+    $0.contentMode = .scaleAspectFill
+    $0.clipsToBounds = true
+  }
   
-  open var disposeBag = DisposeBag()
+  var titleLabel = UILabel().then() {
+    $0.textColor = Color.titleLabelTextColor
+    $0.font = Font.titleLabelFont
+  }
   
-  open var viewModel: PhotoCollectionCellViewModel? {
+  var countLabel = UILabel().then() {
+    $0.textColor = Color.countLabelTextColor
+    $0.font = Font.countLabelFont
+  }
+  
+  var lineView = UIView().then {
+    $0.backgroundColor = Color.lineViewBGColor
+  }
+  
+  var disposeBag = DisposeBag()
+  
+  var viewModel: PhotoCollectionCellViewModel? {
     didSet {
       guard let viewModel = viewModel else { return }
       bind(viewModel: viewModel)
     }
   }
   
-  open var thumbnailImageView = UIImageView().then {
-    $0.contentMode = .scaleAspectFill
-    $0.clipsToBounds = true
-  }
-  
-  open var titleLabel = UILabel().then() {
-    $0.textColor = Color.titleLabelTextColor
-    $0.font = Font.titleLabelFont
-  }
-  
-  open var countLabel = UILabel().then() {
-    $0.textColor = Color.countLabelTextColor
-    $0.font = Font.countLabelFont
-  }
-  
-  open var lineView = UIView().then {
-    $0.backgroundColor = Color.lineViewBGColor
-  }
-  
   // MARK: - Life Cycle
   
-  override open func prepareForReuse() {
+  override func prepareForReuse() {
     super.prepareForReuse()
     viewModel = nil
     thumbnailImageView.image = nil
     disposeBag = DisposeBag()
   }
   
-  override open func setupViews() {
-    super.setupViews()
+  override func addSubviews() {
     addSubview(thumbnailImageView)
     addSubview(titleLabel)
     addSubview(countLabel)
     addSubview(lineView)
   }
   
-  override open func setupConstraints() {
-    super.setupConstraints()
-    
+  override func setupConstraints() {
     thumbnailImageView
       .fs_leftAnchor(
         equalTo: leftAnchor,
@@ -130,7 +128,7 @@ open class PhotoCollectionCell: BaseCollectionViewCell {
       .fs_endSetup()
   }
   
-  open func bind(viewModel: PhotoCollectionCellViewModel) {
+  func bind(viewModel: PhotoCollectionCellViewModel) {
     viewModel.count
       .subscribe(onNext: { [weak self] count in
         guard let `self` = self else { return }

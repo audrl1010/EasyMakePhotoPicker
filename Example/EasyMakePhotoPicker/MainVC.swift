@@ -17,8 +17,8 @@ class MainVC: UIViewController {
     $0.setTitle("Show PhotosView in ChatInputBar", for: .normal)
   }
   
-  var basicPhotoPickerButton = UIButton(type: .system).then {
-    $0.setTitle("Show Basic PhotoPicker", for: .normal)
+  var kakaoPhotoPickerButton = UIButton(type: .system).then {
+    $0.setTitle("Show KaKaoPhotoPicker", for: .normal)
   }
   
   var facebookPhotoPickerButton = UIButton(type: .system).then {
@@ -31,7 +31,7 @@ class MainVC: UIViewController {
     super.viewDidLoad()
     
     view.backgroundColor = .white
-    
+    /*
     photosViewInChatInputBarButton.rx.controlEvent(.touchUpInside)
       .subscribe(onNext: { [weak self] in
         guard let `self` = self else { return }
@@ -43,12 +43,12 @@ class MainVC: UIViewController {
           completion: nil)
       })
       .disposed(by: disposeBag)
+    */
     
-    
-    basicPhotoPickerButton.rx.controlEvent(.touchUpInside)
+    kakaoPhotoPickerButton.rx.controlEvent(.touchUpInside)
       .subscribe(onNext: { [weak self] in
         guard let `self` = self else { return }
-        let photoPicker = PhotoPicker()
+        let photoPicker = KaKaoPhotoPicker()
         
         photoPicker.output.cancel
           .subscribe(onNext: { print("cancel") })
@@ -75,7 +75,7 @@ class MainVC: UIViewController {
           completion: nil)
       })
       .disposed(by: disposeBag)
-    
+    /*
     facebookPhotoPickerButton.rx.controlEvent(.touchUpInside)
       .subscribe(onNext: { [weak self] in
         guard let `self` = self else { return }
@@ -106,11 +106,11 @@ class MainVC: UIViewController {
           completion: nil)
       })
       .disposed(by: disposeBag)
-    
+    */
     view.addSubview(photosViewInChatInputBarButton)
-    view.addSubview(basicPhotoPickerButton)
+    view.addSubview(kakaoPhotoPickerButton)
     view.addSubview(facebookPhotoPickerButton)
-    
+ 
     photosViewInChatInputBarButton
       .fs_leftAnchor(
         equalTo: view.leftAnchor,
@@ -122,8 +122,9 @@ class MainVC: UIViewController {
       .fs_centerXAnchor(equalTo: view.centerXAnchor)
       .fs_centerYAnchor(equalTo: view.centerYAnchor)
       .fs_endSetup()
+ 
     
-    basicPhotoPickerButton
+    kakaoPhotoPickerButton
       .fs_topAnchor(
         equalTo: photosViewInChatInputBarButton.bottomAnchor,
         constant: 20)
@@ -138,7 +139,7 @@ class MainVC: UIViewController {
     
     facebookPhotoPickerButton
       .fs_topAnchor(
-        equalTo: basicPhotoPickerButton.bottomAnchor,
+        equalTo: kakaoPhotoPickerButton.bottomAnchor,
         constant: 20)
       .fs_leftAnchor(
         equalTo: view.leftAnchor,

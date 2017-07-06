@@ -1,9 +1,9 @@
 //
-//  FacebookPhotoPickerVC.swift
-//  PhotoPicker
+//  KaKaPhotoPickerVC.swift
+//  EasyMakePhotoPicker
 //
-//  Created by myung gi son on 2017. 6. 28..
-//  Copyright © 2017년 grutech. All rights reserved.
+//  Created by myung gi son on 2017. 7. 3..
+//  Copyright © 2017년 CocoaPods. All rights reserved.
 //
 
 import UIKit
@@ -12,20 +12,20 @@ import RxSwift
 import RxCocoa
 import EasyMakePhotoPicker
 
-protocol FacebookPhotoPickerOutput {
-  var output: FacebookPhotoPickerOutput { get }
+protocol KaKaoPhotoPickerOutput {
+  var output: KaKaoPhotoPickerOutput { get }
   var cancel: Observable<Void> { get }
   var selectionDidComplete: Observable<[PhotoAsset]> { get }
   var photoDidTake: Observable<PhotoAsset> { get }
 }
 
-class FacebookPhotoPickerVC: UIViewController, FacebookPhotoPickerOutput {
-  var output: FacebookPhotoPickerOutput { return self }
+class KaKaoPhotoPickerVC: UIViewController, KaKaoPhotoPickerOutput {
+  var output: KaKaoPhotoPickerOutput { return self }
   
   var cancel: Observable<Void> {
     return cancelButton.rx.tap.asObservable()
   }
-
+  
   var selectionDidComplete: Observable<[PhotoAsset]> {
     return selectedPhotoAssetsDidComplete.asObservable()
   }
@@ -40,21 +40,10 @@ class FacebookPhotoPickerVC: UIViewController, FacebookPhotoPickerOutput {
   
   fileprivate var disposeBag = DisposeBag()
   
-  fileprivate var photosViewConfigure = PhotosViewConfigure().then {
-    $0.allowsPlayTypes = [.video, .livePhoto]
-    $0.layout = FacebookPhotosLayout()
-    $0.cameraCellClass = FacebookCameraCell.self
-    $0.photoCellClass = FacebookPhotoCell.self
-    $0.livePhotoCellClass = FacebookLivePhotoCell.self
-    $0.videoCellClass = FacebookVideoCell.self
-  }
+  fileprivate var photosViewConfigure = KaKaoPhotosViewConfigure()
   
-  fileprivate var photoCollectionsViewConfigure = PhotoCollectionsViewConfigure().then {
-    $0.layout = FacebookPhotoCollectionsLayout()
-    $0.photoCollectionCellClass = FacebookCollectionCell.self
-    $0.photoCollectionThumbnailSize = CGSize(width: 54, height: 54)
-  }
-
+  fileprivate var photoCollectionsViewConfigure = KaKaoPhotoCollectionsViewConfigure()
+  
   fileprivate var currentPhotoAssetCollection: PhotoAssetCollection?
   
   fileprivate var hasCollectionCellBeenForcedToBeSelected = false
@@ -80,14 +69,7 @@ class FacebookPhotoPickerVC: UIViewController, FacebookPhotoPickerOutput {
     $0.numberOfLines = 0;
   }
   
-  var coverView = UIView().then {
-    $0.backgroundColor = UIColor(
-      red: 0,
-      green: 0,
-      blue: 0,
-      alpha: 0.6)
-    $0.alpha = 0
-  }
+  fileprivate var photoCollectionsViewTopConstraint: NSLayoutConstraint?
   
   // MARK: - Orientation
   override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -98,7 +80,7 @@ class FacebookPhotoPickerVC: UIViewController, FacebookPhotoPickerOutput {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     navigationItem.leftBarButtonItem = cancelButton
     navigationItem.rightBarButtonItem = doneButton
     navigationItem.titleView = titleView
@@ -129,7 +111,7 @@ class FacebookPhotoPickerVC: UIViewController, FacebookPhotoPickerOutput {
 
 // MARK: - Bind
 
-extension FacebookPhotoPickerVC {
+extension KaKaoPhotoPickerVC {
   fileprivate func setup(with photoAssetCollection: PhotoAssetCollection) {
     titleView.text = photoAssetCollection.title + "▾"
     
@@ -139,13 +121,10 @@ extension FacebookPhotoPickerVC {
     
     photoCollectionsView = PhotoCollectionsView(
       configure: photoCollectionsViewConfigure).then {
-        $0.alpha = 0
-        $0.layer.cornerRadius = 5
-        $0.clipsToBounds = true
+        $0.isHidden = true
     }
     
     view.addSubview(photosView)
-    view.addSubview(coverView)
     view.addSubview(photoCollectionsView)
     
     photosView
@@ -155,19 +134,13 @@ extension FacebookPhotoPickerVC {
       .fs_bottomAnchor(equalTo: view.bottomAnchor)
       .fs_endSetup()
     
-    coverView
-      .fs_leftAnchor(equalTo: view.leftAnchor)
-      .fs_topAnchor(equalTo: view.topAnchor)
-      .fs_rightAnchor(equalTo: view.rightAnchor)
-      .fs_bottomAnchor(equalTo: view.bottomAnchor)
-      .fs_endSetup()
-    
     photoCollectionsView
+      .fs_widthAnchor(equalTo: self.view.widthAnchor)
+      .fs_heightAnchor(equalTo: self.view.heightAnchor)
       .fs_topAnchor(
-        equalTo: topLayoutGuide.bottomAnchor,
-        constant: 10)
-      .fs_widthAnchor(equalToConstant: view.frame.width)
-      .fs_heightAnchor(equalToConstant: view.frame.height * 0.45)
+        equalTo: self.topLayoutGuide.bottomAnchor,
+        constant: -self.view.frame.height,
+        constraint: &self.photoCollectionsViewTopConstraint)
       .fs_endSetup()
     
     bind()
@@ -214,7 +187,7 @@ extension FacebookPhotoPickerVC {
       .filter { [weak self] (_, photoAssetCollection) in
         guard let `self` = self,
           let currentPhotoAssetCollection = self.currentPhotoAssetCollection else {
-          return true
+            return true
         }
         return currentPhotoAssetCollection.localIdentifier != photoAssetCollection.localIdentifier
       }
@@ -253,36 +226,37 @@ extension FacebookPhotoPickerVC {
 }
 
 // MARK: - Animation
-extension FacebookPhotoPickerVC {
+extension KaKaoPhotoPickerVC {
   fileprivate func animatePhotoCollectionsView() {
     photoCollectionsView.layer.removeAllAnimations()
-    if coverView.alpha == 0 {
-      UIView.SpringAnimator(duration: 0.4)
+    
+    if photoCollectionsView.isHidden {
+      UIView.Animator(duration: 0.25)
         .options(.curveEaseOut)
-        .velocity(0.0)
-        .damping(0.6)
         .beforeAnimations { [weak self] in
           guard let `self` = self else { return }
-          self.photoCollectionsView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+          self.photoCollectionsViewTopConstraint?.constant = 0
+          self.photoCollectionsView.isHidden = false
         }
         .animations { [weak self] in
           guard let `self` = self else { return }
-          self.photoCollectionsView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-          self.coverView.alpha = 1
-          self.photoCollectionsView.alpha = 1
+          self.view.layoutIfNeeded()
         }
         .animate()
     }
     else {
       UIView.Animator(duration: 0.25)
+        .beforeAnimations { [weak self] in
+          guard let `self` = self else { return }
+          self.photoCollectionsViewTopConstraint?.constant = -self.view.frame.height
+        }
         .animations { [weak self] in
           guard let `self` = self else { return }
-          self.photoCollectionsView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
-          self.coverView.alpha = 0
+          self.view.layoutIfNeeded()
         }
         .completion { [weak self] _ in
           guard let `self` = self else { return }
-          self.photoCollectionsView.alpha = 0
+          self.photoCollectionsView.isHidden = true
         }
         .animate()
     }
@@ -291,9 +265,9 @@ extension FacebookPhotoPickerVC {
 
 // MARK: - UIImagePickerControllerDelegate
 
-extension FacebookPhotoPickerVC:
+extension KaKaoPhotoPickerVC:
   UIImagePickerControllerDelegate,
-  UINavigationControllerDelegate {
+UINavigationControllerDelegate {
   
   fileprivate func showCamera() {
     let picker = UIImagePickerController()
@@ -338,8 +312,3 @@ extension FacebookPhotoPickerVC:
     picker.dismiss(animated: true, completion: nil)
   }
 }
-
-
-
-
-

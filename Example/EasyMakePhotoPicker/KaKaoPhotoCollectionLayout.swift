@@ -1,16 +1,16 @@
 //
-//  PhotoCollectionsLayout.swift
-//  PhotoPicker
+//  KaKaoPhotoCollectionLayout.swift
+//  EasyMakePhotoPicker
 //
-//  Created by myung gi son on 2017. 6. 27..
-//  Copyright © 2017년 grutech. All rights reserved.
+//  Created by myung gi son on 2017. 7. 6..
+//  Copyright © 2017년 CocoaPods. All rights reserved.
 //
 
 import UIKit
 
-open class PhotoCollectionsLayout: UICollectionViewFlowLayout {
-
-  open override var itemSize: CGSize {
+class KaKaoPhotoCollectionsLayout: UICollectionViewFlowLayout {
+  
+  override var itemSize: CGSize {
     set { }
     
     get {
@@ -19,17 +19,17 @@ open class PhotoCollectionsLayout: UICollectionViewFlowLayout {
     }
   }
   
-  override public init() {
+  override init() {
     super.init()
     setupLayout()
   }
   
-  required public init?(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     super.init()
     setupLayout()
   }
   
-  open func setupLayout() {
+  func setupLayout() {
     minimumInteritemSpacing = 0
     minimumLineSpacing = 0
     scrollDirection = .vertical

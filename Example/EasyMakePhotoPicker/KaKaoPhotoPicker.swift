@@ -1,9 +1,9 @@
 //
-//  FacebookPhotoPicker.swift
-//  PhotoPicker
+//  KaKaoPhotoPicker.swift
+//  EasyMakePhotoPicker
 //
-//  Created by myung gi son on 2017. 6. 26..
-//  Copyright © 2017년 grutech. All rights reserved.
+//  Created by myung gi son on 2017. 7. 3..
+//  Copyright © 2017년 CocoaPods. All rights reserved.
 //
 
 import UIKit
@@ -11,9 +11,9 @@ import RxSwift
 import RxCocoa
 import EasyMakePhotoPicker
 
-class FacebookPhotoPicker: UINavigationController, FacebookPhotoPickerOutput {
+class KaKaoPhotoPicker: UINavigationController, KaKaoPhotoPickerOutput {
   
-  var output: FacebookPhotoPickerOutput { return self }
+  var output: KaKaoPhotoPickerOutput { return self }
   
   var cancel: Observable<Void> {
     return pickerVC.output.cancel
@@ -27,11 +27,11 @@ class FacebookPhotoPicker: UINavigationController, FacebookPhotoPickerOutput {
     return pickerVC.output.photoDidTake
   }
   
-  fileprivate var pickerVC = FacebookPhotoPickerVC()
+  fileprivate var pickerVC = KaKaoPhotoPickerVC()
   
-  fileprivate var permissionVC = FacebookPermissionVC()
-
-  fileprivate var disposeBag = DisposeBag()
+  fileprivate var permissionVC = kaKaoPermissionVC()
+  
+  var disposeBag = DisposeBag()
   
   override func loadView() {
     super.loadView()
@@ -72,19 +72,4 @@ class FacebookPhotoPicker: UINavigationController, FacebookPhotoPickerOutput {
       .disposed(by: disposeBag)
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

@@ -15,18 +15,21 @@ open class BaseView: UIView {
   override public init(frame: CGRect) {
     super.init(frame: frame)
     setupViews()
+    addSubviews()
     setupConstraints()
   }
   
   required public init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     setupViews()
+    addSubviews()
     setupConstraints()
   }
   
   // MARK: - Public Methods
   
   open func setupViews() { }
+  open func addSubviews() { }
   open func setupConstraints() { }
 }
 
@@ -43,18 +46,21 @@ open class BaseCollectionViewCell: UICollectionViewCell {
   override public init(frame: CGRect) {
     super.init(frame: frame)
     setupViews()
+    addSubviews()
     setupConstraints()
   }
   
   required public init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     setupViews()
+    addSubviews()
     setupConstraints()
   }
   
   // MARK: - Public Methods
   
   open func setupViews() { }
+  open func addSubviews() { }
   open func setupConstraints() { }
 }
 
@@ -73,18 +79,21 @@ open class BaseTableViewCell: UITableViewCell {
     
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     setupViews()
+    addSubviews()
     setupConstraints()
   }
   
   required public init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     setupViews()
+    addSubviews()
     setupConstraints()
   }
   
   // MARK: - Public Methods
   
   open func setupViews() { }
+  open func addSubviews() { }
   open func setupConstraints() { }
 }
 
@@ -94,12 +103,13 @@ open class BaseVC: UIViewController {
   override open func viewDidLoad() {
     super.viewDidLoad()
     setupViews()
+    addSubviews()
     setupConstraints()
   }
   
   // MARK: - Public Methods
-  
   open func setupViews() { }
+  open func addSubviews() { }
   open func setupConstraints() { }
 }
 

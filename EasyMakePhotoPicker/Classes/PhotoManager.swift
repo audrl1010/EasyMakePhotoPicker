@@ -9,7 +9,6 @@
 import Photos
 import RxSwift
 
-// MARK: - PhotoManager
 
 open class PhotoManager: NSObject {
   // MARK: - Properties

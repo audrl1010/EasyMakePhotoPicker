@@ -8,35 +8,103 @@
 
 import UIKit
 import Photos
+import PhotosUI
+import UIKit
 
-open class PhotosViewConfigure {
-  open var fetchOptions = PHFetchOptions()
+public protocol PhotosViewConfigure {
 
-  open var allowsMultipleSelection: Bool = true
+  var fetchOptions: PHFetchOptions { get }
   
-  open var allowsCameraSelection: Bool = true
+  var allowsMultipleSelection: Bool { get }
   
-  open var allowsPlayTypes: [AssetType] = [.video, .livePhoto]
+  var allowsCameraSelection: Bool { get }
   
-  open var messageWhenMaxCountSelectedPhotosIsExceeded: String = "max count that can select photos is exceeded !!!!"
+  // .video, .livePhoto
+  var allowsPlayTypes: [AssetType] { get }
   
-  open var maxCountSelectedPhotos: Int = 15
-
+  var messageWhenMaxCountSelectedPhotosIsExceeded: String { get }
+  
+  var maxCountSelectedPhotos: Int { get }
+  
   // get item image from PHCachingImageManager
   // based on the UICollectionViewFlowLayout`s itemSize,
   // therefore must set well itemSize in UICollectionViewFlowLayout.
-  open var layout: UICollectionViewFlowLayout = PhotosLayout()
+  var layout: UICollectionViewFlowLayout { get }
   
-  open var cameraCellClass: CameraCell.Type = CameraCell.self
+  var photoCellTypeConverter: PhotoCellTypeConverter { get }
   
-  open var photoCellClass: PhotoCell.Type = PhotoCell.self
+  var livePhotoCellTypeConverter: LivePhotoCellTypeConverter { get }
   
-  open var livePhotoCellClass: LivePhotoCell.Type = LivePhotoCell.self
+  var videoCellTypeConverter: VideoCellTypeConverter { get }
   
-  open var videoCellClass: VideoCell.Type = VideoCell.self
-  
-  public init() {}
+  var cameraCellTypeConverter: CameraCellTypeConverter { get }
 }
+
+public protocol CellTypeConverter {
+  associatedtype Cellable
+  
+  var cellIdentifier: String { get }
+  var cellClass: AnyClass { get }
+}
+
+public struct PhotoCellTypeConverter: CellTypeConverter {
+  public typealias Cellable = PhotoCellable
+  public var cellIdentifier: String
+  public var cellClass: AnyClass
+  
+  public init<C: UICollectionViewCell>(type: C.Type) where C: Cellable {
+    cellIdentifier = NSStringFromClass(type)
+    cellClass = type
+  }
+}
+
+public struct LivePhotoCellTypeConverter: CellTypeConverter {
+  public typealias Cellable = LivePhotoCellable
+  public var cellIdentifier: String
+  public var cellClass: AnyClass
+  
+  public init<C: UICollectionViewCell>(type: C.Type) where C: Cellable {
+    cellIdentifier = NSStringFromClass(type)
+    cellClass = type
+  }
+}
+
+public struct VideoCellTypeConverter: CellTypeConverter {
+  public typealias Cellable = VideoCellable
+  public var cellIdentifier: String
+  public var cellClass: AnyClass
+  
+  public init<C: UICollectionViewCell>(type: C.Type) where C: Cellable {
+    cellIdentifier = NSStringFromClass(type)
+    cellClass = type
+  }
+}
+
+public struct CameraCellTypeConverter: CellTypeConverter {
+  public typealias Cellable = CameraCellable
+  public var cellIdentifier: String
+  public var cellClass: AnyClass
+  
+  public init<C: UICollectionViewCell>(type: C.Type) where C: Cellable {
+    cellIdentifier = NSStringFromClass(type)
+    cellClass = type
+  }
+}
+
+public protocol CameraCellable: class { }
+
+public protocol PhotoCellable: class {
+  var viewModel: PhotoCellViewModel? { get set }
+}
+
+public protocol LivePhotoCellable: PhotoCellable { }
+
+public protocol VideoCellable: PhotoCellable { }
+
+
+
+
+
 
 
 
