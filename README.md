@@ -11,21 +11,13 @@ EasyMakePhotoPicker는 PhotoPicker의 추상 레이어 이다.
 이미지를 선택할 수 있는 기능이 필요한 앱들은 앱의 특성에 맞게 PhotoPicker를 만들어 사용합니다. 그러나, PhotoPicker를 구현하기 위해 상당한 많은 기능(UI, 비즈니스 로직)을 본인이 구현해야 합니다. EasyMakePhotoPicker는 PhotoPicker에 필요한 모든 비즈니스 로직을 구현하여 제공하므로써, 여러분이 UI에만 집중할 수 있도록 도와줍니다.
 
 ![alt text](https://github.com/audrl1010/KaKaoChatInputView/blob/dev/KaKaoChatInputView/preview.gif)
-![alt text](https://github.com/audrl1010/KaKaoChatInputView/blob/dev/KaKaoChatInputView/preview.gif)
-![alt text](https://github.com/audrl1010/KaKaoChatInputView/blob/dev/KaKaoChatInputView/preview.gif)
 
 ## Providing three components(PhotosView, PhotoCollectionsView, PhotoManager)
 
 EasyMakePhotoPicker provides three components (PhotosView, PhotoCollectionsView, PhotoManager).
 
-PhotosView is a grid-like view of photos from photoLibrary.
-
-PhotoCollectionsView is a view that show a list of albums taken form photoLibrary.
-
-PhotoManager is a wrapper class for PhotoCacheImageManager, it provides the functions of `PhotoCacheImageManager`(fetch photos, fetch albums, cache...etc) as Observable.
-
-
 # PhotosView
+`PhotosView` is a grid-like view of photos from photoLibrary.
 - [x] Custom Layout
 - [x] Custom Cell(Camera, Photo, LivePhoto, Video)
 - [x] Like Facebook`s PhotoPicker, When you stop scrolling, it runs livePhoto, video. and When LivePhotoCell or VideCell is selected, play.
@@ -289,7 +281,9 @@ class FacebookPhotoCell: UICollectionViewCell, PhotoCellable {
       .disposed(by: disposeBag)
   }
 }
+```
 
+```swift
 class FacebookVideoCell: FacebookPhotoCell, VideoCellable {
 
   var durationLabel: UILabel = DurationLabel()
@@ -500,6 +494,9 @@ class FacebookPhotoPickerVC: UIViewController {
 
 
 # PhotoCollectionsView
+
+`PhotoCollectionsView` is a view that show a list of albums taken form photoLibrary.
+
 - [x] Custom Cell(PhotoCollection)
 - [x] Custom Layout
 - [x] Automatically update the UI When PhotoLibrary changes.
@@ -570,18 +567,24 @@ struct FacebookPhotoCollectionsViewConfigure: PhotoCollectionsViewConfigure {
 }
 ```
 
+## Layout 제공
+PhotoCollectionsViewConfigure의 layout(UICollectionViewFlowLayout)을 제공으로, PhotoCollectionsView는 제공되는 layout을 가지고 cell들을 보여줍니다.
+
+```swift
+// example
+```
+
 ##Usage
 ```swift
 class FacebookPhotoPickerVC: UIViewController {
 
   ...
 
-  var photosViewConfigure = FacebookPhotosViewConfigure()
-
-  lazy var photosView: PhotosView = { [unowned] self
-    let pv = PhotosView(
-    configure: self.photosViewConfigure,
-    collectionType: .smartAlbumUserLibrary)
+  var photoCollectionsViewConfigure = FacebookPhotoCollectionsViewConfigure()
+  
+  lazy var photoCollectionsView: PhotoCollectionsView = { [unowned] self
+    let pv = PhotoCollectionsView(
+    configure: self.photoCollectionsViewConfigure)
     return pv
   }()
 
@@ -590,7 +593,15 @@ class FacebookPhotoPickerVC: UIViewController {
   
     // MARK: - add view
       ...
-    
+    photoCollectionsView
+      .fs_topAnchor(
+        equalTo: topLayoutGuide.bottomAnchor,
+        constant: 10)
+      .fs_widthAnchor(equalToConstant: view.frame.width)
+      .fs_heightAnchor(equalToConstant: view.frame.height * 0.45)
+    .fs_endSetup()
+      ...
+
     // MARK: - bind
       ...
     photoCollectionsView.selectedPhotoCollectionWhenCellDidSelect
@@ -605,6 +616,9 @@ class FacebookPhotoPickerVC: UIViewController {
 ```
 
 # PhotoManager
+
+`PhotoManager` is a wrapper class for PhotoCacheImageManager, it provides the functions of `PhotoCacheImageManager`(fetch photos, fetch albums, cache...etc) as Observable.
+
 ```swift
 func startCaching(assets: [PHAsset], targetSize: CGSize, contentMode: PHImageContentMode, options: PHImageRequestOptions?)
 
@@ -634,9 +648,6 @@ func checkPhotoLibraryPermission() -> Observable<Bool>
 
 func checkCameraPermission() -> Observable<Bool>
 ```
-
-# Example making your own PhotoPicker.
-
 
 ## Requirements
 iOS 9.1
