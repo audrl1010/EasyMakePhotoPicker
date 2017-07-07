@@ -8,10 +8,12 @@
 If you need to create your own PhotoPicker, it is not easy to create because you need to implement many of the features (UI, business logic) needed to implement PhotoPicker. So EasyMakePhotoPicker provides an abstraction layer of PhotoPicker. EasyMakePhotoPicker implements all the business logic required for PhotoPicker so you can focus on the UI.
 
 # Demo
+
 EasyMakePhotoPicker makes it easy to implement things like FacebookPhotoPicker.
 
+![alt text](https://github.com/audrl1010/EasyMakePhotoPicker/blob/master/EasyMakePhotoPicker/Assets/FacebookPhotoPicker.gif)
 
-# Providing three components(PhotosView, PhotoCollectionsView, PhotoManager)
+# Three components(PhotosView, PhotoCollectionsView, PhotoManager)
 
 EasyMakePhotoPicker provides three components (PhotosView, PhotoCollectionsView, PhotoManager).
 
@@ -61,7 +63,7 @@ func change(photoAssetCollection: PhotoAssetCollection)
 ```
 
 ## PhotosViewConfigure
-PhotosView는 PhotosViewConfigure를 통해 구성되어집니다.
+PhotosView is configured through PhotosViewConfigure.
 
 ```swift
 protocol PhotosViewConfigure {
@@ -122,19 +124,24 @@ class FacebookPhotosViewConfigure: PhotosViewConfigure {
 }
 ```
 
-### Cell 제공
-PhotosViewConfigure에 여러분이 보여주고 싶은 Cell(PhotoCell, VideoCell, LivePhotoCell, CameraCell)을 제공하여, PhotosView가 여러분이 보여주고 싶은 Cell을 보여줍니다.
+### Cell
+PhotosViewConfigure provides Cells (PhotoCell, VideoCell, LivePhotoCell, and CameraCell) to be displayed in PhotosView.
 
-PhotoCell을 제공하기 위해서는 PhotoCellable protocol을 상속받아야 합니다.
-LivePhotoCell을 제공하기 위해서는 LivePhotoCellable protocol을 상속받아야 합니다.
-VideoCell을 제공하기 위해서는 VideoCellable protocol을 상속받아야 합니다.
-CameraCell을 제공하기 위해서는 CameraCellable protocol을 상속받아야 합니다.
+To provide PhotoCell, UICollectionViewCell must inherit PhotoCellable protocol.
 
-Cell을 제공하기 위해, Cell에 따라 PhotoCellable, LivePhotoCellable, VideoCellable중 하나를 상속받아야 합니다. 이유는 PhotosView는 MVVM 아키텍처로 구현되어 있기 때문에 Protocol에 따라 CellViewModel의 종류가 결정되기 때문입니다. PhotoCellable을 준수하는 Cell일 경우 PhotosCellViewModel, LivePhotoCellable을 준수하는 Cell일 경우 LivePhotoCellViewModel, VideoCellable을 준수하는 경우 VideoCellViewModel을 받습니다. MVVM의 아키텍처 덕분에 여러분은 손쉽게 ViewModel의 상태값들을 가지고 원하는 Cell의 UI를 만들 수 있습니다.
+To provide LivePhotoCell, the UICollectionViewCell must inherit the LivePhotoCellable protocol.
 
-### Protocols
+To provide VideoCell, UICollectionViewCell must inherit VideoCellable protocol.
+
+To provide CameraCell, the UICollectionViewCell must inherit the CameraCellable protocol.
+
+```
+Note: one of the cells must conform `PhotoCellable`, `LivePhotoCellable`, or `VideoCellable`. This is because `PhotosView` is implemented in the `MVVM architecture` and the Protocol determines what kind of `CellViewModel` it is. If cell conform the `PhotoCellable` protocol, cell are provided with `PhotoViewModel`. if the cell conform the `LivePhotoCellable` protocol, cell are provided with `LivePhotoCellViewModel`. if the cell conform the `VideoCellable` protocol, cell are provided with `VideoCellViewModel`. Thanks to the MVVM architecture, you can easily create a UI for the desired cell using the state values of the CellViewModel.
+```
+
+
+#### Protocols
 ```swift
-protocol CameraCellable: class { }
 
 protocol PhotoCellable: class {
   var viewModel: PhotoCellViewModel? { get set }
@@ -143,9 +150,11 @@ protocol PhotoCellable: class {
 protocol LivePhotoCellable: PhotoCellable { }
 
 protocol VideoCellable: PhotoCellable { }
+
+protocol CameraCellable: class { }
 ```
 
-### ViewModels
+#### CellViewModels
 ```swift
 class PhotosCellViewModel {
   var image: Variable<UIImage?>
@@ -364,8 +373,8 @@ class FacebookVideoCell: FacebookPhotoCell, VideoCellable {
 
 ```
 
-## Layout 제공
-PhotosViewConfigure의 layout(UICollectionViewFlowLayout)을 제공으로, PhotosView는 제공되는 layout을 가지고 cell들을 보여줍니다.
+### Layout
+By providing PhotosViewConfigure's layout (UICollectionViewFlowLayout), PhotosView shows the cells with the layout provided.
 
 ```swift
   // example
@@ -408,7 +417,7 @@ PhotosViewConfigure의 layout(UICollectionViewFlowLayout)을 제공으로, Photo
 }
 ```
 
-## Usage
+### Usage
 ```swift
 class FacebookPhotoPickerVC: UIViewController {
   
@@ -536,10 +545,15 @@ struct FacebookPhotoCollectionsViewConfigure: PhotoCollectionsViewConfigure {
 ```
 
 
-### Cell 제공
-PhotoCollectionsViewConfigure에 여러분이 보여주고 싶은 Cell(PhotoCollectionCell)을 제공하여, PhotoCollectionsView가 여러분이 보여주고 싶은 Cell을 보여줍니다.
+### Cell
 
-PhotoCollectionCell을 제공하기 위해서는 PhotoCollectionCellable protocol을 상속받아야 합니다. PhotoCollectionsView는 MVVM 아키텍처로 구현되어 있기 때문에, PhotoCollectionCellable을 준수하는 Cell일 경우 PhotoCollectionCellViewModel을 받습니다. 여러분은 ViewModel의 상태값들을 가지고 원하는 Cell의 UI를 만드시면 됩니다.
+PhotoCollectionsViewConfigure provides Cell(PhotoCollectionCell) to be displayed in PhotoCollectionsView.
+
+To provide PhotoCollectionCell, UICollectionViewCell must inherit PhotoCollectionCellable protocol.
+
+```
+Note: cell must conform `PhotoCollectionCellable`. This is because `PhotoCollectionsView` is implemented in the `MVVM architecture` and the Protocol determines what kind of `CellViewModel` it is. Thanks to the MVVM architecture, you can easily create a UI for the desired cell using the state values of the CellViewModel.
+```
 
 ### Protocol
 ```swift
@@ -628,8 +642,8 @@ class FacebookPhotoCollectionCell: BaseCollectionViewCell, PhotoCollectionCellab
 }
 ```
 
-## Layout 제공
-PhotoCollectionsViewConfigure의 layout(UICollectionViewFlowLayout)을 제공으로, PhotoCollectionsView는 제공되는 layout을 가지고 cell들을 보여줍니다.
+## Layout
+By providing PhotoCollectionsViewConfigure's layout (UICollectionViewFlowLayout), PhotoCollectionsView shows the cells with the layout provided.
 
 ```swift
 // example
