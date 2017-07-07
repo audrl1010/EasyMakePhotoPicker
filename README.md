@@ -5,15 +5,10 @@
 [![License](https://img.shields.io/cocoapods/l/EasyMakePhotoPicker.svg?style=flat)](http://cocoapods.org/pods/EasyMakePhotoPicker)
 [![Platform](https://img.shields.io/cocoapods/p/EasyMakePhotoPicker.svg?style=flat)](http://cocoapods.org/pods/EasyMakePhotoPicker)
 
-EasyMakePhotoPicker는 PhotoPicker의 추상 레이어 이다.
+If you need to create your own PhotoPicker, it is not easy to create because you need to implement many of the features (UI, business logic) needed to implement PhotoPicker. So EasyMakePhotoPicker provides an abstraction layer of PhotoPicker. EasyMakePhotoPicker implements all the business logic required for PhotoPicker so you can focus on the UI.
 
-
-이미지를 선택할 수 있는 기능이 필요한 앱들은 앱의 특성에 맞게 PhotoPicker를 만들어 사용합니다. 그러나, PhotoPicker를 구현하기 위해 상당한 많은 기능(UI, 비즈니스 로직)을 본인이 구현해야 합니다. EasyMakePhotoPicker는 PhotoPicker에 필요한 모든 비즈니스 로직을 구현하여 제공하므로써, 여러분이 UI에만 집중할 수 있도록 도와줍니다.
-
-
-![alt text](https://github.com/audrl1010/EasyMakePhotoPicker/blob/master/EasyMakePhotoPicker/Assets/FacebookPhotoPicker.gif)
-
-![alt text](https://github.com/audrl1010/EasyMakePhotoPicker/blob/master/EasyMakePhotoPicker/Assets/KaKaoChatPhotoPicker.gif)
+# Demo
+EasyMakePhotoPicker makes it easy to implement things like FacebookPhotoPicker.
 
 
 # Providing three components(PhotosView, PhotoCollectionsView, PhotoManager)
@@ -203,36 +198,11 @@ class FacebookPhotoCell: UICollectionViewCell, PhotoCellable {
   ...
 
   func addSubviews() {
-    addSubview(imageView)
-    addSubview(selectedView)
-    addSubview(orderLabel)
+    ...
   }
 
   func setupConstraints() {
-    imageView
-    .fs_leftAnchor(equalTo: leftAnchor)
-    .fs_topAnchor(equalTo: topAnchor)
-    .fs_rightAnchor(equalTo: rightAnchor)
-    .fs_bottomAnchor(equalTo: bottomAnchor)
-    .fs_endSetup()
-
-    selectedView
-    .fs_leftAnchor(equalTo: leftAnchor)
-    .fs_topAnchor(equalTo: topAnchor)
-    .fs_rightAnchor(equalTo: rightAnchor)
-    .fs_bottomAnchor(equalTo: bottomAnchor)
-    .fs_endSetup()
-
-    orderLabel
-      .fs_widthAnchor(
-        equalToConstant: Metric.orderLabelWidth)
-      .fs_heightAnchor(
-        equalToConstant: Metric.orderLabelHeight)
-      .fs_rightAnchor(
-        equalTo: rightAnchor)
-      .fs_topAnchor(
-        equalTo: topAnchor)
-      .fs_endSetup()
+    ...
   }
 
   // MARK: - Bind
@@ -326,12 +296,6 @@ class FacebookVideoCell: FacebookPhotoCell, VideoCellable {
   }
 
   // MARK: - Life Cycle
-
-  override func prepareForReuse() {
-    super.prepareForReuse()
-    player = nil
-    playerView.isHidden = true
-  }
 
   override func addSubviews() {
     super.addSubviews()
@@ -571,17 +535,136 @@ struct FacebookPhotoCollectionsViewConfigure: PhotoCollectionsViewConfigure {
 }
 ```
 
+
+### Cell 제공
+PhotoCollectionsViewConfigure에 여러분이 보여주고 싶은 Cell(PhotoCollectionCell)을 제공하여, PhotoCollectionsView가 여러분이 보여주고 싶은 Cell을 보여줍니다.
+
+PhotoCollectionCell을 제공하기 위해서는 PhotoCollectionCellable protocol을 상속받아야 합니다. PhotoCollectionsView는 MVVM 아키텍처로 구현되어 있기 때문에, PhotoCollectionCellable을 준수하는 Cell일 경우 PhotoCollectionCellViewModel을 받습니다. 여러분은 ViewModel의 상태값들을 가지고 원하는 Cell의 UI를 만드시면 됩니다.
+
+### Protocol
+```swift
+protocol PhotoCollectionCellable {
+  var viewModel: PhotoCollectionCellViewModel? { get set }
+}
+```
+
+### ViewModel
+```swift
+class PhotoCollectionCellViewModel {
+  var count: BehaviorSubject<Int>
+  var thumbnail = BehaviorSubject<UIImage?>
+  var title: BehaviorSubject<String>
+  var isSelect: Variable<Bool>
+}
+```
+
+```swift
+// example
+class FacebookPhotoCollectionCell: BaseCollectionViewCell, PhotoCollectionCellable {
+
+  var checkView: UIView = CheckImageView()
+  var thumbnailImageView = UIImageView()
+
+  var titleLabel = UILabel()
+
+  var countLabel = UILabel()
+
+  var lineView = UIView()
+
+  var disposeBag = DisposeBag()
+
+  var viewModel: PhotoCollectionCellViewModel? {
+    didSet {
+      guard let viewModel = viewModel else { return }
+      bind(viewModel: viewModel)
+    }
+  }
+
+  // MARK: - Life Cycle
+
+  override func setupViews() {
+    ...
+  }
+
+  override func setupConstraints() {
+    ...
+  }
+
+  // MARK: - Bind
+  func bind(viewModel: PhotoCollectionCellViewModel) {
+      viewModel.isSelect.asObservable()
+        .subscribe(onNext: { [weak self] isSelect in
+          guard let`self` = self else { return }
+          if isSelect {
+            self.checkView.isHidden = false
+          }
+          else {
+            self.checkView.isHidden = true
+          }
+        })
+        .disposed(by: disposeBag)
+      
+      viewModel.count
+        .subscribe(onNext: { [weak self] count in
+          guard let `self` = self else { return }
+          self.countLabel.text = "\(count)"
+        })
+        .disposed(by: disposeBag)
+
+      viewModel.thumbnail
+        .subscribe(onNext: { [weak self] thumbnail in
+          guard let `self` = self else { return }
+          self.thumbnailImageView.image = thumbnail
+        })
+        .disposed(by: disposeBag)
+
+      viewModel.title
+        .subscribe(onNext: { [weak self] title in
+          guard let `self` = self else { return }
+          self.titleLabel.text = title
+        })
+        .disposed(by: disposeBag)
+  }
+}
+```
+
 ## Layout 제공
 PhotoCollectionsViewConfigure의 layout(UICollectionViewFlowLayout)을 제공으로, PhotoCollectionsView는 제공되는 layout을 가지고 cell들을 보여줍니다.
 
 ```swift
 // example
+class FacebookPhotoCollectionsLayout: UICollectionViewFlowLayout {
+  override var itemSize: CGSize {
+    set { }
+
+    get {
+      guard let collectionView = collectionView else { return .zero }
+      return CGSize(width: collectionView.frame.width, height: 80)
+    }
+  }
+
+  override init() {
+    super.init()
+    setupLayout()
+  }
+
+  required init?(coder aDecoder: NSCoder) {
+    super.init()
+    setupLayout()
+  }
+
+  func setupLayout() {
+    minimumInteritemSpacing = 0
+    minimumLineSpacing = 0
+    scrollDirection = .vertical
+  }
+}
+
 ```
 
 ##Usage
 ```swift
 class FacebookPhotoPickerVC: UIViewController {
-
   ...
 
   var photoCollectionsViewConfigure = FacebookPhotoCollectionsViewConfigure()
