@@ -10,13 +10,17 @@ EasyMakePhotoPicker는 PhotoPicker의 추상 레이어 이다.
 
 이미지를 선택할 수 있는 기능이 필요한 앱들은 앱의 특성에 맞게 PhotoPicker를 만들어 사용합니다. 그러나, PhotoPicker를 구현하기 위해 상당한 많은 기능(UI, 비즈니스 로직)을 본인이 구현해야 합니다. EasyMakePhotoPicker는 PhotoPicker에 필요한 모든 비즈니스 로직을 구현하여 제공하므로써, 여러분이 UI에만 집중할 수 있도록 도와줍니다.
 
-![alt text](https://github.com/audrl1010/KaKaoChatInputView/blob/dev/KaKaoChatInputView/preview.gif)
 
-## Providing three components(PhotosView, PhotoCollectionsView, PhotoManager)
+![alt text](https://github.com/audrl1010/EasyMakePhotoPicker/blob/master/EasyMakePhotoPicker/Assets/FacebookPhotoPicker.gif)
+
+![alt text](https://github.com/audrl1010/EasyMakePhotoPicker/blob/master/EasyMakePhotoPicker/Assets/KaKaoChatPhotoPicker.gif)
+
+
+# Providing three components(PhotosView, PhotoCollectionsView, PhotoManager)
 
 EasyMakePhotoPicker provides three components (PhotosView, PhotoCollectionsView, PhotoManager).
 
-# PhotosView
+## PhotosView
 `PhotosView` is a grid-like view of photos from photoLibrary.
 - [x] Custom Layout
 - [x] Custom Cell(Camera, Photo, LivePhoto, Video)
