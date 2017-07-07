@@ -5,13 +5,15 @@
 [![License](https://img.shields.io/cocoapods/l/EasyMakePhotoPicker.svg?style=flat)](http://cocoapods.org/pods/EasyMakePhotoPicker)
 [![Platform](https://img.shields.io/cocoapods/p/EasyMakePhotoPicker.svg?style=flat)](http://cocoapods.org/pods/EasyMakePhotoPicker)
 
-If you need to create your own PhotoPicker, it is not easy to create because you need to implement many of the features (UI, business logic) needed to implement PhotoPicker. So EasyMakePhotoPicker provides an abstraction layer of PhotoPicker. EasyMakePhotoPicker implements all the business logic required for PhotoPicker so you can focus on the UI.
+If you need to create your own PhotoPicker, it is not easy to create because you need to implement many of the features (UI, business logic) needed to implement PhotoPicker. So EasyMakePhotoPicker provides an abstract layer of PhotoPicker. EasyMakePhotoPicker implements all the business logic required for PhotoPicker so you can focus on the UI.
 
 # Demo
 
 EasyMakePhotoPicker makes it easy to implement things like FacebookPhotoPicker.
 
 ![alt text](https://github.com/audrl1010/EasyMakePhotoPicker/blob/master/EasyMakePhotoPicker/Assets/FacebookPhotoPicker.gif)
+![alt text](https://github.com/audrl1010/EasyMakePhotoPicker/blob/master/EasyMakePhotoPicker/Assets/KaKaoPhotoPicker.gif)
+![alt text](https://github.com/audrl1010/EasyMakePhotoPicker/blob/master/EasyMakePhotoPicker/Assets/KaKaoChatPhotoPicker.gif)
 
 # Three components(PhotosView, PhotoCollectionsView, PhotoManager)
 
@@ -62,7 +64,7 @@ var cameraDidClick: PublishSubject<Void>
 func change(photoAssetCollection: PhotoAssetCollection)
 ```
 
-## PhotosViewConfigure
+### PhotosViewConfigure
 PhotosView is configured through PhotosViewConfigure.
 
 ```swift
@@ -124,20 +126,20 @@ class FacebookPhotosViewConfigure: PhotosViewConfigure {
 }
 ```
 
-### Cell
+#### Cell
 PhotosViewConfigure provides Cells (PhotoCell, VideoCell, LivePhotoCell, and CameraCell) to be displayed in PhotosView.
 
-To provide PhotoCell, UICollectionViewCell must inherit PhotoCellable protocol.
+To provide PhotoCell, `UICollectionViewCell` must inherit `PhotoCellable` protocol.
 
-To provide LivePhotoCell, the UICollectionViewCell must inherit the LivePhotoCellable protocol.
+To provide LivePhotoCell, the `UICollectionViewCell` must inherit the `LivePhotoCellable` protocol.
 
-To provide VideoCell, UICollectionViewCell must inherit VideoCellable protocol.
+To provide VideoCell, `UICollectionViewCell` must inherit `VideoCellable` protocol.
 
-To provide CameraCell, the UICollectionViewCell must inherit the CameraCellable protocol.
+To provide CameraCell, the `UICollectionViewCell` must inherit the `CameraCellable` protocol.
 
-```
+`
 Note: one of the cells must conform `PhotoCellable`, `LivePhotoCellable`, or `VideoCellable`. This is because `PhotosView` is implemented in the `MVVM architecture` and the Protocol determines what kind of `CellViewModel` it is. If cell conform the `PhotoCellable` protocol, cell are provided with `PhotoViewModel`. if the cell conform the `LivePhotoCellable` protocol, cell are provided with `LivePhotoCellViewModel`. if the cell conform the `VideoCellable` protocol, cell are provided with `VideoCellViewModel`. Thanks to the MVVM architecture, you can easily create a UI for the desired cell using the state values of the CellViewModel.
-```
+`
 
 
 #### Protocols
@@ -373,7 +375,7 @@ class FacebookVideoCell: FacebookPhotoCell, VideoCellable {
 
 ```
 
-### Layout
+#### Layout
 By providing PhotosViewConfigure's layout (UICollectionViewFlowLayout), PhotosView shows the cells with the layout provided.
 
 ```swift
@@ -417,7 +419,7 @@ By providing PhotosViewConfigure's layout (UICollectionViewFlowLayout), PhotosVi
 }
 ```
 
-### Usage
+#### Usage
 ```swift
 class FacebookPhotoPickerVC: UIViewController {
   
@@ -470,7 +472,7 @@ class FacebookPhotoPickerVC: UIViewController {
 ```
 
 
-# PhotoCollectionsView
+## PhotoCollectionsView
 
 `PhotoCollectionsView` is a view that show a list of albums taken form photoLibrary.
 
@@ -478,25 +480,25 @@ class FacebookPhotoPickerVC: UIViewController {
 - [x] Custom Layout
 - [x] Automatically update the UI When PhotoLibrary changes.
 
-## Initializer
+### Initializer
 ```swift
 init(frame: CGRect, configure: PhotoCollectionsViewConfigure)
 init(configure: PhotoCollectionsViewConfigure)
 ```
 
-## Inputs
+### Inputs
 ```swift
 // force cell selection.
 var cellDidSelect: PublishSubject<IndexPath>
 ```
 
-## Outputs
+### Outputs
 ```swift
 var selectedPhotoCollectionWhenCellDidSelect: PublishSubject<(IndexPath, PhotoAssetCollection)>
 ```
 
-## PhotoCollectionsViewConfigure
-PhotoCollectionsView는 PhotoCollectionsViewConfigure를 통해 구성되어집니다.
+### PhotoCollectionsViewConfigure
+PhotoCollectionsView is configured through PhotoCollectionsViewConfigure.
 
 ```swift
 protocol PhotoCollectionsViewConfigure {
@@ -545,7 +547,7 @@ struct FacebookPhotoCollectionsViewConfigure: PhotoCollectionsViewConfigure {
 ```
 
 
-### Cell
+#### Cell
 
 PhotoCollectionsViewConfigure provides Cell(PhotoCollectionCell) to be displayed in PhotoCollectionsView.
 
@@ -555,14 +557,14 @@ To provide PhotoCollectionCell, UICollectionViewCell must inherit PhotoCollectio
 Note: cell must conform `PhotoCollectionCellable`. This is because `PhotoCollectionsView` is implemented in the `MVVM architecture` and the Protocol determines what kind of `CellViewModel` it is. Thanks to the MVVM architecture, you can easily create a UI for the desired cell using the state values of the CellViewModel.
 ```
 
-### Protocol
+#### Protocol
 ```swift
 protocol PhotoCollectionCellable {
   var viewModel: PhotoCollectionCellViewModel? { get set }
 }
 ```
 
-### ViewModel
+#### ViewModel
 ```swift
 class PhotoCollectionCellViewModel {
   var count: BehaviorSubject<Int>
@@ -642,7 +644,7 @@ class FacebookPhotoCollectionCell: BaseCollectionViewCell, PhotoCollectionCellab
 }
 ```
 
-## Layout
+#### Layout
 By providing PhotoCollectionsViewConfigure's layout (UICollectionViewFlowLayout), PhotoCollectionsView shows the cells with the layout provided.
 
 ```swift
@@ -673,10 +675,9 @@ class FacebookPhotoCollectionsLayout: UICollectionViewFlowLayout {
     scrollDirection = .vertical
   }
 }
-
 ```
 
-##Usage
+####Usage
 ```swift
 class FacebookPhotoPickerVC: UIViewController {
   ...
