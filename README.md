@@ -12,8 +12,8 @@ If you need to create your own PhotoPicker, it is not easy to create because you
 EasyMakePhotoPicker makes it easy to implement things like FacebookPhotoPicker.
 
 ![alt text](https://github.com/audrl1010/EasyMakePhotoPicker/blob/master/EasyMakePhotoPicker/Assets/FacebookPhotoPicker.gif)
-![alt text](https://github.com/audrl1010/EasyMakePhotoPicker/blob/master/EasyMakePhotoPicker/Assets/KaKaoPhotoPicker.gif)
-![alt text](https://github.com/audrl1010/EasyMakePhotoPicker/blob/master/EasyMakePhotoPicker/Assets/KaKaoChatPhotoPicker.gif)
+![alt text](https://github.com/audrl1010/EasyMakePhotoPicker/blob/master/EasyMakePhotoPicker/Assets/KakaoPhotoPicker.gif)
+![alt text](https://github.com/audrl1010/EasyMakePhotoPicker/blob/master/EasyMakePhotoPicker/Assets/KakaoChatPhotoPicker.gif)
 
 # Three components(PhotosView, PhotoCollectionsView, PhotoManager)
 
