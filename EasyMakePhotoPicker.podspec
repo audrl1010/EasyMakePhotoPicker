@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'EasyMakePhotoPicker'
-  s.version          = '1.0.0'
+  s.version          = '0.1.0'
   s.summary          = 'EasyPhotoPicker makes it easy to create your own PhotoPicker.'
 
 # This description is used to generate tags and improve search results.
