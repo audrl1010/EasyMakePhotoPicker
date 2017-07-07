@@ -1,33 +1,23 @@
 //
-//  KaKaoLivePhotoCell.swift
+//  FacebookLivePhotoCell.swift
 //  EasyMakePhotoPicker
 //
-//  Created by myung gi son on 2017. 7. 5..
+//  Created by myung gi son on 2017. 7. 6..
 //  Copyright © 2017년 CocoaPods. All rights reserved.
 //
 
 import UIKit
+import Photos
 import PhotosUI
 import RxSwift
 import EasyMakePhotoPicker
 
-class KaKaoLivePhotoCell: KaKaoPhotoCell, LivePhotoCellable {
-  
-  // MARK: - Constant
-  
-  struct Constant {
-    static let selectedViewBorderWidth = CGFloat(2)
-  }
-  
+class FacebookLivePhotoCell: FacebookPhotoCell, LivePhotoCellable {
   struct Metric {
     static let livePhotoBadgeImageViewWidth = CGFloat(20)
     static let livePhotoBadgeImageViewHeight = CGFloat(20)
     static let livePhotoBadgeImageViewRight = CGFloat(-10)
     static let livePhotoBadgeImageViewBottom = CGFloat(-10)
-  }
-  
-  struct Color {
-    static var selectedViewBGC = UIColor(white: 1.0, alpha: 0.0)
   }
   
   lazy var livePhotoView: PHLivePhotoView = { [unowned self] in
@@ -49,17 +39,12 @@ class KaKaoLivePhotoCell: KaKaoPhotoCell, LivePhotoCellable {
     livePhotoView.isHidden = true
   }
   
-  override func setupViews() {
-    super.setupViews()
-    selectedView.backgroundColor = Color.selectedViewBGC
-  }
-  
   override func addSubviews() {
     super.addSubviews()
     insertSubview(livePhotoView, aboveSubview: imageView)
     addSubview(livePhotoBadgeImageView)
   }
-
+  
   override func setupConstraints() {
     super.setupConstraints()
     livePhotoBadgeImageView
@@ -118,7 +103,7 @@ class KaKaoLivePhotoCell: KaKaoPhotoCell, LivePhotoCellable {
 }
 
 // MARK: - PHLivePhotoViewDelegate
-extension KaKaoLivePhotoCell: PHLivePhotoViewDelegate {
+extension FacebookLivePhotoCell: PHLivePhotoViewDelegate {
   public func livePhotoView(
     _ livePhotoView: PHLivePhotoView,
     willBeginPlaybackWith playbackStyle: PHLivePhotoViewPlaybackStyle) {
@@ -130,6 +115,12 @@ extension KaKaoLivePhotoCell: PHLivePhotoViewDelegate {
     livePhotoView.startPlayback(with: .hint)
   }
 }
+
+
+
+
+
+
 
 
 

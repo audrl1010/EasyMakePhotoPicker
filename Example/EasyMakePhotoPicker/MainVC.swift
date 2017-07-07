@@ -31,19 +31,18 @@ class MainVC: UIViewController {
     super.viewDidLoad()
     
     view.backgroundColor = .white
-    /*
+    
     photosViewInChatInputBarButton.rx.controlEvent(.touchUpInside)
       .subscribe(onNext: { [weak self] in
         guard let `self` = self else { return }
         let chatNavController = UINavigationController(
-          rootViewController: ChatVC())
+          rootViewController: KaKaoChatVC())
         self.present(
           chatNavController,
           animated: true,
           completion: nil)
       })
       .disposed(by: disposeBag)
-    */
     
     kakaoPhotoPickerButton.rx.controlEvent(.touchUpInside)
       .subscribe(onNext: { [weak self] in
@@ -75,7 +74,7 @@ class MainVC: UIViewController {
           completion: nil)
       })
       .disposed(by: disposeBag)
-    /*
+    
     facebookPhotoPickerButton.rx.controlEvent(.touchUpInside)
       .subscribe(onNext: { [weak self] in
         guard let `self` = self else { return }
@@ -106,7 +105,7 @@ class MainVC: UIViewController {
           completion: nil)
       })
       .disposed(by: disposeBag)
-    */
+    
     view.addSubview(photosViewInChatInputBarButton)
     view.addSubview(kakaoPhotoPickerButton)
     view.addSubview(facebookPhotoPickerButton)
