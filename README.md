@@ -645,6 +645,7 @@ class FacebookPhotoCollectionCell: BaseCollectionViewCell, PhotoCollectionCellab
 ```
 
 #### Layout
+
 By providing PhotoCollectionsViewConfigure's layout (UICollectionViewFlowLayout), PhotoCollectionsView shows the cells with the layout provided.
 
 ```swift
@@ -677,7 +678,8 @@ class FacebookPhotoCollectionsLayout: UICollectionViewFlowLayout {
 }
 ```
 
-####Usage
+#### Usage
+
 ```swift
 class FacebookPhotoPickerVC: UIViewController {
   ...
