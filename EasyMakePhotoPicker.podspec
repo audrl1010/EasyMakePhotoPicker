@@ -28,6 +28,7 @@ If you need to create your own PhotoPicker, it is not easy to create because you
   s.source           = { :git => 'https://github.com/audrl1010/EasyMakePhotoPicker.git', ::tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
+  s.platform = ios, '9.1'
   s.ios.deployment_target = '9.1'
 
   s.source_files = 'EasyMakePhotoPicker/Classes/**/*'
