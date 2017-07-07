@@ -553,9 +553,9 @@ struct FacebookPhotoCollectionsViewConfigure: PhotoCollectionsViewConfigure {
 
 To provide PhotoCollectionCell, `UICollectionViewCell` must inherit `PhotoCollectionCellable` protocol.
 
-``
+
 Note: cell must conform `PhotoCollectionCellable`. This is because `PhotoCollectionsView` is implemented in the `MVVM architecture` and the Protocol determines what kind of `CellViewModel` it is. Thanks to the MVVM architecture, you can easily create a UI for the desired cell using the state values of the CellViewModel.
-``
+
 
 #### Protocol
 ```swift
