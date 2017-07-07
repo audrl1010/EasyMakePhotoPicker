@@ -9,36 +9,38 @@
 import Foundation
 import Photos
 
-open class PhotoCollectionsViewConfigure {
+public protocol PhotoCollectionsViewConfigure {
   
-  open var fetchOptions = PHFetchOptions()
+  var fetchOptions: PHFetchOptions { get }
 
   // to show collection types.
-  open var showsCollectionTypes: [PHAssetCollectionSubtype] = [
-    .smartAlbumUserLibrary,
-    .smartAlbumGeneric,
-    .smartAlbumFavorites,
-    .smartAlbumRecentlyAdded,
-    .smartAlbumSelfPortraits,
-    .smartAlbumVideos,
-    .smartAlbumPanoramas,
-    .smartAlbumBursts,
-    .smartAlbumScreenshots
-  ]
+  var showsCollectionTypes: [PHAssetCollectionSubtype] { get }
   
   // If you create a custom PhotoCollectionCell, size of thumbnailImageView in PhotoCollectionCell and
   // photoCollectionThumbnailSize must be the same
   // because get photo collection thumbnail image from PHCachingImageManager
   // based on the 'photoCollectionThumbnailSize'
-  open var photoCollectionThumbnailSize = CGSize(width: 54, height: 54)
+  var photoCollectionThumbnailSize: CGSize { get }
   
-  open var layout: UICollectionViewFlowLayout = PhotoCollectionsLayout()
+  var layout: UICollectionViewFlowLayout { get }
   
-  open var photoCollectionCellClass: PhotoCollectionCell.Type = PhotoCollectionCell.self
-  
-  public init() { }
+  var photoCollectionCellTypeConverter: PhotoCollectionCellTypeConverter { get }
 }
 
+public struct PhotoCollectionCellTypeConverter: CellTypeConverter {
+  public typealias Cellable = PhotoCollectionCellable
+  public var cellIdentifier: String
+  public var cellClass: AnyClass
+  
+  public init<C: UICollectionViewCell>(type: C.Type) where C: Cellable {
+    cellIdentifier = NSStringFromClass(type)
+    cellClass = type
+  }
+}
+
+public protocol PhotoCollectionCellable {
+  var viewModel: PhotoCollectionCellViewModel? { get set }
+}
 
 
 
