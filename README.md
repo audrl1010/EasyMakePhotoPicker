@@ -137,9 +137,9 @@ To provide VideoCell, `UICollectionViewCell` must inherit `VideoCellable` protoc
 
 To provide CameraCell, the `UICollectionViewCell` must inherit the `CameraCellable` protocol.
 
-`
+``
 Note: one of the cells must conform `PhotoCellable`, `LivePhotoCellable`, or `VideoCellable`. This is because `PhotosView` is implemented in the `MVVM architecture` and the Protocol determines what kind of `CellViewModel` it is. If cell conform the `PhotoCellable` protocol, cell are provided with `PhotoViewModel`. if the cell conform the `LivePhotoCellable` protocol, cell are provided with `LivePhotoCellViewModel`. if the cell conform the `VideoCellable` protocol, cell are provided with `VideoCellViewModel`. Thanks to the MVVM architecture, you can easily create a UI for the desired cell using the state values of the CellViewModel.
-`
+``
 
 
 #### Protocols
@@ -549,13 +549,13 @@ struct FacebookPhotoCollectionsViewConfigure: PhotoCollectionsViewConfigure {
 
 #### Cell
 
-PhotoCollectionsViewConfigure provides Cell(PhotoCollectionCell) to be displayed in PhotoCollectionsView.
+`PhotoCollectionsViewConfigure` provides Cell(PhotoCollectionCell) to be displayed in `PhotoCollectionsView`.
 
-To provide PhotoCollectionCell, UICollectionViewCell must inherit PhotoCollectionCellable protocol.
+To provide PhotoCollectionCell, `UICollectionViewCell` must inherit `PhotoCollectionCellable` protocol.
 
-```
+``
 Note: cell must conform `PhotoCollectionCellable`. This is because `PhotoCollectionsView` is implemented in the `MVVM architecture` and the Protocol determines what kind of `CellViewModel` it is. Thanks to the MVVM architecture, you can easily create a UI for the desired cell using the state values of the CellViewModel.
-```
+``
 
 #### Protocol
 ```swift
