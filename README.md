@@ -26,8 +26,6 @@ PhotoManager is a wrapper class for PhotoCacheImageManager, it provides the func
 
 
 # PhotosView
-
-- [x] Photo, Live Photo, and Video can be displayed in grid form.
 - [x] Custom Layout
 - [x] Custom Cell(Camera, Photo, LivePhoto, Video)
 - [x] Like Facebook`s PhotoPicker, When you stop scrolling, it runs livePhoto, video. and When LivePhotoCell or VideCell is selected, play.
@@ -75,7 +73,7 @@ func change(photoAssetCollection: PhotoAssetCollection)
 PhotosView는 PhotosViewConfigure를 통해 구성되어집니다.
 
 ```swift
-public protocol PhotosViewConfigure {
+protocol PhotosViewConfigure {
 
   var fetchOptions: PHFetchOptions { get }
 
@@ -103,7 +101,9 @@ public protocol PhotosViewConfigure {
 
   var cameraCellTypeConverter: CameraCellTypeConverter { get }
 }
+```
 
+```swift
 // example
 class FacebookPhotosViewConfigure: PhotosViewConfigure {
   var fetchOptions: PHFetchOptions = PHFetchOptions()
@@ -403,7 +403,7 @@ class FacebookVideoCell: FacebookPhotoCell, VideoCellable {
 ```
 
 ## Layout 제공
-PhotosViewConfigure의 layout을 제공으로, PhotosView는 제공되는 layout을 가지고 cell들을 보여줍니다.
+PhotosViewConfigure의 layout(UICollectionViewFlowLayout)을 제공으로, PhotosView는 제공되는 layout을 가지고 cell들을 보여줍니다.
 
 ```swift
   // example
@@ -444,10 +444,13 @@ PhotosViewConfigure의 layout을 제공으로, PhotosView는 제공되는 layout
     minimumInteritemSpacing = Constant.padding
   }
 }
+```
 
 ## Usage
 ```swift
 class FacebookPhotoPickerVC: UIViewController {
+  
+  ...
 
   var photosViewConfigure = FacebookPhotosViewConfigure()
   
@@ -464,6 +467,8 @@ class FacebookPhotoPickerVC: UIViewController {
     ...
 
     // MARK: - bind
+    ...
+
     doneButton.rx.tap
       .observeOn(MainScheduler.instance)
       .subscribe(onNext: { _ in
@@ -491,7 +496,7 @@ class FacebookPhotoPickerVC: UIViewController {
 
   ....
 }
-
+```
 
 
 # PhotoCollectionsView
@@ -505,40 +510,6 @@ init(frame: CGRect, configure: PhotoCollectionsViewConfigure)
 init(configure: PhotoCollectionsViewConfigure)
 ```
 
-### PhotoCollectionsViewConfigure
-```swift
-class PhotoCollectionsViewConfigure {
-
-  var fetchOptions = PHFetchOptions().then {
-    $0.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-  }
-
-  // to show collection types.
-  var showsCollectionTypes: [PHAssetCollectionSubtype] = [
-    .smartAlbumUserLibrary,
-    .smartAlbumGeneric,
-    .smartAlbumFavorites,
-    .smartAlbumRecentlyAdded,
-    .smartAlbumSelfPortraits,
-    .smartAlbumVideos,
-    .smartAlbumPanoramas,
-    .smartAlbumBursts,
-    .smartAlbumScreenshots
-  ]
-
-  // If you create a custom PhotoCollectionCell, size of thumbnailImageView in PhotoCollectionCell and
-  // photoCollectionThumbnailSize must be the same
-  // because get photo collection thumbnail image from PHCachingImageManager
-  // based on the 'photoCollectionThumbnailSize'
-  var photoCollectionThumbnailSize = CGSize(width: 54, height: 54)
-
-  var layout: UICollectionViewFlowLayout = PhotoCollectionsLayout()
-
-  var photoCollectionCellClass: PhotoCollectionCell.Type = PhotoCollectionCell.self
-}
-```
-
-
 ## Inputs
 ```swift
 // force cell selection.
@@ -548,6 +519,89 @@ var cellDidSelect: PublishSubject<IndexPath>
 ## Outputs
 ```swift
 var selectedPhotoCollectionWhenCellDidSelect: PublishSubject<(IndexPath, PhotoAssetCollection)>
+```
+
+## PhotoCollectionsViewConfigure
+PhotoCollectionsView는 PhotoCollectionsViewConfigure를 통해 구성되어집니다.
+
+```swift
+protocol PhotoCollectionsViewConfigure {
+
+  var fetchOptions: PHFetchOptions { get }
+
+  // to show collection types.
+  var showsCollectionTypes: [PHAssetCollectionSubtype] { get }
+
+  // If you create a custom PhotoCollectionCell, size of thumbnailImageView in PhotoCollectionCell and
+  // photoCollectionThumbnailSize must be the same
+  // because get photo collection thumbnail image from PHCachingImageManager
+  // based on the 'photoCollectionThumbnailSize'
+  var photoCollectionThumbnailSize: CGSize { get }
+
+  var layout: UICollectionViewFlowLayout { get }
+
+  var photoCollectionCellTypeConverter: PhotoCollectionCellTypeConverter { get }
+}
+```
+
+```swift
+// example
+struct FacebookPhotoCollectionsViewConfigure: PhotoCollectionsViewConfigure {
+  var fetchOptions = PHFetchOptions()
+
+  // to show collection types.
+  var showsCollectionTypes: [PHAssetCollectionSubtype] = [
+    .smartAlbumUserLibrary,
+    .smartAlbumGeneric,
+    .smartAlbumFavorites,
+    .smartAlbumRecentlyAdded,
+    .smartAlbumVideos,
+    .smartAlbumPanoramas,
+    .smartAlbumBursts,
+    .smartAlbumScreenshots
+  ]
+
+  var photoCollectionThumbnailSize = CGSize(width: 54, height: 54)
+
+  var layout: UICollectionViewFlowLayout = FacebookPhotoCollectionsLayout()
+
+  var photoCollectionCellTypeConverter =
+    PhotoCollectionCellTypeConverter(type: FacebookPhotoCollectionCell.self)
+}
+```
+
+##Usage
+```swift
+class FacebookPhotoPickerVC: UIViewController {
+
+  ...
+
+  var photosViewConfigure = FacebookPhotosViewConfigure()
+
+  lazy var photosView: PhotosView = { [unowned] self
+    let pv = PhotosView(
+    configure: self.photosViewConfigure,
+    collectionType: .smartAlbumUserLibrary)
+    return pv
+  }()
+
+  override func viewDidLoad() {
+    super.viewDidLoad()
+  
+    // MARK: - add view
+      ...
+    
+    // MARK: - bind
+      ...
+    photoCollectionsView.selectedPhotoCollectionWhenCellDidSelect
+      .subscribe(onNext: { [weak self] (selectedIndexPath, selectedPhotoAssetCollection) in
+        guard let `self` = self else { return }
+          ...
+        self.photosView.change(photoAssetCollection: selectedPhotoAssetCollection)
+      })
+      .disposed(by: disposeBag)
+  ....
+}
 ```
 
 # PhotoManager
