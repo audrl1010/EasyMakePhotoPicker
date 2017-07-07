@@ -749,6 +749,7 @@ EasyMakePhotoPicker is available through [CocoaPods](http://cocoapods.org). To i
 it, simply add the following line to your Podfile:
 
 ```ruby
+platform :ios, '9.1'
 pod "EasyMakePhotoPicker"
 ```
 

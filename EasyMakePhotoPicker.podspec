@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-EasyMakePhotoPicker allows you to easily create your own PhotoPicker by providing the photoListView and albumListView into separate independent components.
+If you need to create your own PhotoPicker, it is not easy to create because you need to implement many of the features (UI, business logic) needed to implement PhotoPicker. So EasyMakePhotoPicker provides an abstraction layer of PhotoPicker. EasyMakePhotoPicker implements all the business logic required for PhotoPicker so you can focus on the UI.
     DESC
 
   s.homepage         = 'https://github.com/audrl1010/EasyMakePhotoPicker'
@@ -32,9 +32,9 @@ EasyMakePhotoPicker allows you to easily create your own PhotoPicker by providin
 
   s.source_files = 'EasyMakePhotoPicker/Classes/**/*'
   
-  s.resource_bundles = {
-    'EasyMakePhotoPicker' => ['EasyMakePhotoPicker/Assets/*.png']
-  }
+  # s.resource_bundles = {
+  #  'EasyMakePhotoPicker' => ['EasyMakePhotoPicker/Assets/*.png']
+  # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'Photos', 'PhotosUI'
