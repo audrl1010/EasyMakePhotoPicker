@@ -16,7 +16,7 @@ public protocol PhotoCollectionsViewConfigure {
   // to show collection types.
   var showsCollectionTypes: [PHAssetCollectionSubtype] { get }
   
-  // If you create a custom PhotoCollectionCell, size of thumbnailImageView in PhotoCollectionCell and
+  // size of view to show thumbnailImage in your cell and
   // photoCollectionThumbnailSize must be the same
   // because get photo collection thumbnail image from PHCachingImageManager
   // based on the 'photoCollectionThumbnailSize'
