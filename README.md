@@ -740,6 +740,9 @@ func checkPhotoLibraryPermission() -> Observable<Bool>
 func checkCameraPermission() -> Observable<Bool>
 ```
 
+## Inspiration
+<a href="https://github.com/tilltue/TLPhotoPicker">TLPhotoPicker</a>
+
 ## Requirements
 iOS 9.1
 
