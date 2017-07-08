@@ -153,7 +153,7 @@ protocol CameraCellable: class { }
 
 #### CellViewModels
 ```swift
-class PhotosCellViewModel {
+class PhotoCellViewModel {
   var image: Variable<UIImage?>
   var isSelect: BehaviorSubject<Bool>
   var selectedOrder: BehaviorSubject<Int>
