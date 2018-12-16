@@ -99,7 +99,7 @@ open class PhotoCollectionsViewModel:
               }
               
               // have changed photoAssetCollection?
-              if let objectAfterChange = changes.objectAfterChanges as? PHAssetCollection {
+              if let objectAfterChange = changes.objectAfterChanges {
                 
                 // To update collection`s title commonly
                 self.photoAssetCollections[offset].assetCollection = objectAfterChange
