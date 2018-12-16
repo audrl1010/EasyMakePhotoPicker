@@ -3,7 +3,7 @@
 [![Version](https://img.shields.io/cocoapods/v/EasyMakePhotoPicker.svg?style=flat)](http://cocoapods.org/pods/EasyMakePhotoPicker)
 [![License](https://img.shields.io/cocoapods/l/EasyMakePhotoPicker.svg?style=flat)](http://cocoapods.org/pods/EasyMakePhotoPicker)
 [![Platform](https://img.shields.io/cocoapods/p/EasyMakePhotoPicker.svg?style=flat)](http://cocoapods.org/pods/EasyMakePhotoPicker)
-![Swift](https://img.shields.io/badge/%20in-swift%204.2-orange.svg)
+![Swift](https://img.shields.io/badge/%20in-swift%204.0-orange.svg)
 
 If you need to create your own PhotoPicker, it is not easy to create because you need to implement many of the features (UI, business logic) needed to implement PhotoPicker. So EasyMakePhotoPicker provides an abstraction layer of PhotoPicker. EasyMakePhotoPicker implements all the business logic required for PhotoPicker so you can focus on the UI.
 
