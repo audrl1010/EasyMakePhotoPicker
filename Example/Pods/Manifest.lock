@@ -1,25 +1,34 @@
 PODS:
-  - EasyMakePhotoPicker (1.0.0):
-    - RxCocoa (~> 3.0)
-    - RxSwift (~> 3.0)
-  - RxCocoa (3.5.0):
-    - RxSwift (~> 3.4)
-  - RxSwift (3.5.0)
+  - EasyMakePhotoPicker (0.1.1):
+    - RxCocoa (>= 3.0)
+    - RxSwift (>= 3.0)
+  - RxAtomic (4.4.0)
+  - RxCocoa (4.4.0):
+    - RxSwift (~> 4.0)
+  - RxSwift (4.4.0):
+    - RxAtomic (~> 4.4)
 
 DEPENDENCIES:
   - EasyMakePhotoPicker (from `../`)
-  - RxCocoa (~> 3.0)
-  - RxSwift (~> 3.0)
+  - RxCocoa
+  - RxSwift
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - RxAtomic
+    - RxCocoa
+    - RxSwift
 
 EXTERNAL SOURCES:
   EasyMakePhotoPicker:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
-  EasyMakePhotoPicker: be21101665b7ae9b5661b97085adab18cd76ac78
-  RxCocoa: a0a09f45d0e5b48ecb6a4a7b4b4c89c88d3f633f
-  RxSwift: 18ee9d78b45edb3b0b7e79916b47a116e6dbc842
+  EasyMakePhotoPicker: d7c6cf3acc9f30900b4d25643a8db68c393484f5
+  RxAtomic: eacf60db868c96bfd63320e28619fe29c179656f
+  RxCocoa: df63ebf7b9a70d6b4eeea407ed5dd4efc8979749
+  RxSwift: 5976ecd04fc2fefd648827c23de5e11157faa973
 
-PODFILE CHECKSUM: 1397c84cda3209e0795ef1dd391e3bc218a0c991
+PODFILE CHECKSUM: fd1e973444ff2b42299291a5a4eb7db0d5bc78b7
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.5.3

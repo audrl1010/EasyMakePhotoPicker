@@ -249,9 +249,9 @@ open class PhotosViewModel:
         let visibleIndexPaths: [IndexPath] =
           self.configure.allowsCameraSelection ?
             currentVisibleIndexPaths.filter { $0.item != 0 } : currentVisibleIndexPaths
-        
+      
         let visiblePhotoAssets: [PhotoAsset] = visibleIndexPaths
-          .sorted { $0.0.item < $0.1.item }
+          .sorted { $0.item < $1.item }
           .map { indexPath -> IndexPath in
             var indexPath = indexPath
             indexPath.item = indexPath.item - (self.configure.allowsCameraSelection ? 1 : 0)
@@ -270,7 +270,7 @@ open class PhotosViewModel:
           }
         
         let visibleVideoCellViewModels = visibleVideoPhotoAssets
-          .flatMap {
+          .compactMap {
             self.cellViewModels[$0.localIdentifier]
           }
         
@@ -279,7 +279,7 @@ open class PhotosViewModel:
             $0.photoAsset.isSelected
           }
           .sorted {
-            $0.0.photoAsset.selectedOrder < $0.1.photoAsset.selectedOrder
+            $0.photoAsset.selectedOrder < $1.photoAsset.selectedOrder
           }
         
         if let lastSelectedVideoCellViewModel = visibleSelectedVideoCellViewModels.last {
@@ -302,7 +302,7 @@ open class PhotosViewModel:
           let selectedPhotoAssets = self.cellViewModels
             .filter { $0.value.photoAsset.isSelected }
             .map { $0.value.photoAsset }
-            .sorted { $0.0.selectedOrder < $0.1.selectedOrder }
+            .sorted { $0.selectedOrder < $1.selectedOrder }
           
           self.outputs.selectedPhotoAssetsDidComplete.onNext(selectedPhotoAssets)
         }
@@ -334,11 +334,11 @@ open class PhotosViewModel:
                   .map { $0.value }
                   .filter { $0.photoAsset.isSelected }
                   .sorted {
-                    $0.0.photoAsset.selectedOrder < $0.1.photoAsset.selectedOrder
+                    $0.photoAsset.selectedOrder < $1.photoAsset.selectedOrder
                   }
                 
                 guard selectedCellViewModels.count < self.configure.maxCountSelectedPhotos else {
-                  self.outputs.maxCountSelectedPhotosIsExceeded.onNext()
+                  self.outputs.maxCountSelectedPhotosIsExceeded.onNext(())
                   return
                 }
                 
@@ -372,7 +372,7 @@ open class PhotosViewModel:
                     $0.photoAsset.isSelected
                   }
                   .sorted {
-                    $0.0.photoAsset.selectedOrder < $0.1.photoAsset.selectedOrder
+                    $0.photoAsset.selectedOrder < $1.photoAsset.selectedOrder
                   }
                 
                 var offset = 0
@@ -519,7 +519,7 @@ open class PhotosViewModel:
             let selectedCellViewModels = self.cellViewModels
               .map { $0.value }
               .filter { $0.photoAsset.isSelected }
-              .sorted { $0.0.photoAsset.selectedOrder < $0.1.photoAsset.selectedOrder }
+              .sorted { $0.photoAsset.selectedOrder < $1.photoAsset.selectedOrder }
             
             var offset = 0
             selectedCellViewModels

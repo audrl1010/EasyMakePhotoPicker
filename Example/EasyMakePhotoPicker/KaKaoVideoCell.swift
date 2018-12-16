@@ -26,7 +26,7 @@ class KaKaoVideoCell: KaKaoPhotoCell, VideoCellable {
   var durationLabel: UILabel = DurationLabel()
   
   var playerView = PlayerView().then {
-    $0.playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
+    $0.playerLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
     $0.isHidden = true
   }
   
@@ -46,7 +46,7 @@ class KaKaoVideoCell: KaKaoPhotoCell, VideoCellable {
           object: player.currentItem,
           queue: nil) { _ in
             DispatchQueue.main.async {
-              player.seek(to: kCMTimeZero)
+              player.seek(to: CMTime.zero)
               player.play()
             }
         }

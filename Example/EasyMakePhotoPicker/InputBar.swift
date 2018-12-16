@@ -23,7 +23,7 @@ class InputBar: BaseView {
       UIEdgeInsets(top: 6, left: 8, bottom: 6, right: 8)
     
     static let intrinsicContentSize =
-      CGSize(width: UIViewNoIntrinsicMetric, height: Metric.height)
+      CGSize(width: UIView.noIntrinsicMetric, height: Metric.height)
     
     static let textViewBorderWidth = CGFloat(0.1)
     
@@ -120,7 +120,7 @@ class InputBar: BaseView {
       
       for constraint in self.constraints {
         if constraint.firstAttribute ==
-          NSLayoutAttribute.height &&
+          NSLayoutConstraint.Attribute.height &&
           constraint.firstItem as! NSObject == self {
           constraint.constant =
             height < Metric.height ? Metric.height : height
@@ -188,7 +188,7 @@ class InputBar: BaseView {
 
 // MARK: Events
 extension InputBar {
-  func didTapTextView() {
+  @objc func didTapTextView() {
     guard let textViewDidTap = textViewDidTap else { return }
     textViewDidTap()
   }

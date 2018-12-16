@@ -85,12 +85,12 @@ class KaKaoPhotoPickerVC: UIViewController, KaKaoPhotoPickerOutput {
     navigationItem.rightBarButtonItem = doneButton
     navigationItem.titleView = titleView
     
-    if let navigationBar = navigationController?.navigationBar {
-      titleView
-        .fs_centerXAnchor(equalTo: navigationBar.centerXAnchor)
-        .fs_centerYAnchor(equalTo: navigationBar.centerYAnchor)
-        .fs_endSetup()
-    }
+//    if let navigationBar = navigationController?.navigationBar {
+//      titleView
+//        .fs_centerXAnchor(equalTo: navigationBar.centerXAnchor)
+//        .fs_centerYAnchor(equalTo: navigationBar.centerYAnchor)
+//        .fs_endSetup()
+//    }
     
     // load photoCollection to show initially.
     PhotoManager.shared
@@ -157,7 +157,7 @@ extension KaKaoPhotoPickerVC {
     doneButton.rx.tap
       .observeOn(MainScheduler.instance)
       .subscribe(onNext: { _ in
-        self.photosView.selectionDidComplete.onNext()
+        self.photosView.selectionDidComplete.onNext(())
         self.dismiss(animated: true, completion: nil)
       })
       .disposed(by: disposeBag)
@@ -282,8 +282,11 @@ UINavigationControllerDelegate {
   
   func imagePickerController(
     _ picker: UIImagePickerController,
-    didFinishPickingMediaWithInfo info: [String : Any]) {
-    if let image = (info[UIImagePickerControllerOriginalImage] as? UIImage) {
+    didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
+    if let image = (info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage) {
       var placeholderAsset: PHObjectPlaceholder? = nil
       PhotoManager.shared
         .performChanges(changeBlock: {
@@ -311,4 +314,14 @@ UINavigationControllerDelegate {
     }
     picker.dismiss(animated: true, completion: nil)
   }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
 }

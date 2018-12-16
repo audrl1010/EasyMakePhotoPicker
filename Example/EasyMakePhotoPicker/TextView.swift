@@ -80,7 +80,7 @@ class TextView: UITextView, HasPlaceholder {
     
     if !isHiddenPlaceholder {
       placeholderLabel.frame = placeholderRectThatFits(bounds)
-      sendSubview(toBack: placeholderLabel)
+      sendSubviewToBack(placeholderLabel)
     }
   }
   
@@ -102,7 +102,7 @@ class TextView: UITextView, HasPlaceholder {
     placeholderRect.size = placeholderLabel.sizeThatFits(rect.size)
     
     placeholderRect.origin =
-      UIEdgeInsetsInsetRect(rect, textContainerInset).origin
+      rect.inset(by: textContainerInset).origin
     
     let padding = textContainer.lineFragmentPadding
     placeholderRect.origin.x += padding
@@ -147,7 +147,7 @@ class TextView: UITextView, HasPlaceholder {
   fileprivate var roundHeight: CGFloat {
     var newHeight = CGFloat(0)
     if let font = font {
-      let attributes = [NSFontAttributeName: font]
+      let attributes = [NSAttributedString.Key.font: font]
       let boundingSize =
         CGSize(width: frame.size.width, height: CGFloat.infinity)
       

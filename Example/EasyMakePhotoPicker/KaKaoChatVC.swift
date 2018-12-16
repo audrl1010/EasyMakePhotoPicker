@@ -63,7 +63,7 @@ class KaKaoChatVC: BaseVC {
     tv.dataSource = self
     tv.separatorStyle = .none
     tv.estimatedRowHeight = Constant.tableViewEstimatedRowHeight
-    tv.rowHeight = UITableViewAutomaticDimension
+    tv.rowHeight = UITableView.automaticDimension
     tv.backgroundColor = Color.tableViewColor
     tv.scrollIndicatorInsets.bottom = Constant.inputBarHeight
     tv.contentInset.bottom += Constant.inputBarHeight
@@ -159,7 +159,7 @@ class KaKaoChatVC: BaseVC {
 // MARK: - Events
 extension KaKaoChatVC {
   
-  func didTapPlusButton() {
+  @objc func didTapPlusButton() {
     canShowMenuViewOverKeyboard = !canShowMenuViewOverKeyboard
     
     // photoListView를 보여줘라
@@ -222,13 +222,13 @@ extension KaKaoChatVC: KeyboardObservable {
     NotificationCenter.default.addObserver(
       self,
       selector: #selector(keyboardWillHide(_:)),
-      name: .UIKeyboardWillHide,
+      name: UIResponder.keyboardWillHideNotification,
       object: nil)
     
     NotificationCenter.default.addObserver(
       self,
       selector: #selector(keyboardWillShow(_:)),
-      name: .UIKeyboardWillShow,
+      name: UIResponder.keyboardWillShowNotification,
       object: nil)
   }
   
@@ -236,12 +236,12 @@ extension KaKaoChatVC: KeyboardObservable {
     NotificationCenter.default.removeObserver(self)
   }
   
-  func keyboardWillShow(_ notification: Notification) {
+  @objc func keyboardWillShow(_ notification: Notification) {
     adjustKeyboardDismissTapGesture(isKeyboardVisible: true)
     adjustInsetForKeyboard(true, notification: notification)
   }
   
-  func keyboardWillHide(_ notification: Notification) {
+  @objc func keyboardWillHide(_ notification: Notification) {
     adjustKeyboardDismissTapGesture(isKeyboardVisible: false)
     adjustInsetForKeyboard(false, notification: notification)
   }
@@ -250,10 +250,10 @@ extension KaKaoChatVC: KeyboardObservable {
     let userInfo = notification.userInfo ?? [:]
     
     let keyboardFrame =
-      (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+      (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
     
     let keyboardDuration =
-      userInfo[UIKeyboardAnimationDurationUserInfoKey] as! Double
+      userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
     
     UIView.Animator(duration: keyboardDuration)
       .beforeAnimations { [weak self] in
@@ -296,7 +296,7 @@ extension KaKaoChatVC: keyboardDismissableByViewTouch {
     }
   }
   
-  func dismissKeyboard() {
+  @objc func dismissKeyboard() {
     canShowMenuViewOverKeyboard = false
     inputBar.textView.resignFirstResponder()
     inputBar.textView.inputView = nil

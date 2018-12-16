@@ -11,14 +11,14 @@ import UIKit
 extension UIView
 {
     public func fs_contentHuggingPriority(priority: UILayoutPriority,
-                                   layoutConstraintAxis: UILayoutConstraintAxis) -> Self
+                                   layoutConstraintAxis: NSLayoutConstraint.Axis) -> Self
     {
         setContentHuggingPriority(priority, for: layoutConstraintAxis)
         return self
     }
     
     public func fs_contentCompressionResistancePriority(priority: UILayoutPriority,
-                                                 layoutConstraintAxis: UILayoutConstraintAxis) -> Self
+                                                 layoutConstraintAxis: NSLayoutConstraint.Axis) -> Self
     {
         setContentCompressionResistancePriority(priority, for: layoutConstraintAxis)
         return self

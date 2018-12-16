@@ -1,40 +1,30 @@
 {
   "name": "EasyMakePhotoPicker",
-  "version": "1.0.0",
+  "version": "0.1.1",
   "summary": "EasyPhotoPicker makes it easy to create your own PhotoPicker.",
-  "description": "EasyMakePhotoPicker allows you to easily create your own PhotoPicker by providing the photoListView and albumListView into separate independent components.",
+  "description": "If you need to create your own PhotoPicker, it is not easy to create because you need to implement many of the features (UI, business logic) needed to implement PhotoPicker. So EasyMakePhotoPicker provides an abstraction layer of PhotoPicker. EasyMakePhotoPicker implements all the business logic required for PhotoPicker so you can focus on the UI.",
   "homepage": "https://github.com/audrl1010/EasyMakePhotoPicker",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
   },
   "authors": {
-    "audrl1010": "audrl1010@naver.com"
+    "Myung gi son": "audrl1010@naver.com"
   },
   "source": {
     "git": "https://github.com/audrl1010/EasyMakePhotoPicker.git",
-    "tag": "1.0.0"
+    "tag": "0.1.1"
   },
   "platforms": {
     "ios": "9.1"
   },
   "source_files": "EasyMakePhotoPicker/Classes/**/*",
-  "resource_bundles": {
-    "EasyMakePhotoPicker": [
-      "EasyMakePhotoPicker/Assets/*.png"
-    ]
-  },
-  "frameworks": [
-    "UIKit",
-    "Photos",
-    "PhotosUI"
-  ],
   "dependencies": {
     "RxSwift": [
-      "~> 3.0"
+      ">= 3.0"
     ],
     "RxCocoa": [
-      "~> 3.0"
+      ">= 3.0"
     ]
   }
 }

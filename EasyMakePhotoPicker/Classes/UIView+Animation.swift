@@ -22,12 +22,12 @@ extension UIView {
     fileprivate var _completion: CompletionBlock?
     fileprivate var _duration: TimeInterval
     fileprivate var _delay: TimeInterval
-    fileprivate var _options: UIViewAnimationOptions
+    fileprivate var _options: UIView.AnimationOptions
     
     public init(
       duration: TimeInterval,
       delay: TimeInterval = 0.0,
-      options: UIViewAnimationOptions = []) {
+      options: UIView.AnimationOptions = []) {
       
       _duration = duration
       _delay = delay
@@ -42,7 +42,7 @@ extension UIView {
       return self
     }
     
-    public func options(_ options: UIViewAnimationOptions) -> Self {
+    public func options(_ options: UIView.AnimationOptions) -> Self {
       _options = options
       return self
     }
@@ -88,7 +88,7 @@ extension UIView {
       delay: TimeInterval = 0.0,
       damping: CGFloat = 0.1,
       velocity: CGFloat = 0.1,
-      options: UIViewAnimationOptions = []) {
+      options: UIView.AnimationOptions = []) {
       
       _damping = damping
       _velocity = velocity

@@ -35,7 +35,7 @@ extension PhotoManager {
   open func checkCameraPermission() -> Observable<Bool> {
     return Observable.create { observer in
       let authStatus =
-        AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
+        AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
       
       if authStatus == .authorized {
         observer.onNext(true)
@@ -43,7 +43,7 @@ extension PhotoManager {
       }
       else {
         observer.onNext(false)
-        AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo) { granted in
+        AVCaptureDevice.requestAccess(for: AVMediaType.video) { granted in
           observer.onNext(granted)
           observer.onCompleted()
         }

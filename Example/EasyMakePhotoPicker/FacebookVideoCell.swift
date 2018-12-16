@@ -44,7 +44,7 @@ class FacebookVideoCell: FacebookPhotoCell, VideoCellable {
   }
   
   var playerView = PlayerView().then {
-    $0.playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
+    $0.playerLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
     $0.isHidden = true
   }
   
@@ -58,7 +58,7 @@ class FacebookVideoCell: FacebookPhotoCell, VideoCellable {
           object: player.currentItem,
           queue: nil) { _ in
             DispatchQueue.main.async {
-              player.seek(to: kCMTimeZero)
+              player.seek(to: CMTime.zero)
               player.play()
             }
         }

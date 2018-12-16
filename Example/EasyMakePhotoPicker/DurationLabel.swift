@@ -47,7 +47,7 @@ class DurationLabel: UILabel {
   }
   
   override func drawText(in rect: CGRect) {
-    super.drawText(in: UIEdgeInsetsInsetRect(rect, Constant.padding))
+    super.drawText(in: rect.inset(by: Constant.padding))
   }
   
   override var intrinsicContentSize: CGSize {

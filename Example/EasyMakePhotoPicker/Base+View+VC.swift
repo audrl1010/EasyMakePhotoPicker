@@ -74,7 +74,7 @@ open class BaseTableViewCell: UITableViewCell {
   // MARK: - View Life Cycle
   
   override public init(
-    style: UITableViewCellStyle,
+    style: UITableViewCell.CellStyle,
     reuseIdentifier: String?) {
     
     super.init(style: style, reuseIdentifier: reuseIdentifier)

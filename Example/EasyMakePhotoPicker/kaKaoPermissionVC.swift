@@ -189,7 +189,7 @@ class kaKaoPermissionVC: BaseVC {
     allowAccessButton.rx.controlEvent(.touchUpInside)
       .subscribe(onNext: {
         UIApplication.shared
-          .openURL(URL(string: UIApplicationOpenSettingsURLString)!)
+          .openURL(URL(string: UIApplication.openSettingsURLString)!)
       })
       .disposed(by: disposeBag)
   }
