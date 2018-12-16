@@ -26,11 +26,11 @@ If you need to create your own PhotoPicker, it is not easy to create because you
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Myung gi son' => 'audrl1010@naver.com' }
   s.source           = { :git => 'https://github.com/audrl1010/EasyMakePhotoPicker.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.platform = :ios, '9.1'
   s.ios.deployment_target = '9.1'
 
+  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.0' }
   s.source_files = 'EasyMakePhotoPicker/Classes/**/*'
   
   # s.resource_bundles = {
