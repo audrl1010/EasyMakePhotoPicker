@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'EasyMakePhotoPicker'
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.summary          = 'EasyPhotoPicker makes it easy to create your own PhotoPicker.'
 
 # This description is used to generate tags and improve search results.
@@ -39,6 +39,6 @@ If you need to create your own PhotoPicker, it is not easy to create because you
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'Photos', 'PhotosUI'
-  s.dependency 'RxSwift', '~> 3.0'
-  s.dependency 'RxCocoa', '~> 3.0'
+  s.dependency 'RxSwift', '>= 3.0'
+  s.dependency 'RxCocoa', '>= 3.0'
 end

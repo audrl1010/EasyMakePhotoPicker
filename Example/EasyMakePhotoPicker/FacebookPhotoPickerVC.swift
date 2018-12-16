@@ -93,12 +93,12 @@ class FacebookPhotoPickerVC: UIViewController, FacebookPhotoPickerOutput {
     navigationItem.rightBarButtonItem = doneButton
     navigationItem.titleView = titleView
     
-    if let navigationBar = navigationController?.navigationBar {
-      titleView
-        .fs_centerXAnchor(equalTo: navigationBar.centerXAnchor)
-        .fs_centerYAnchor(equalTo: navigationBar.centerYAnchor)
-        .fs_endSetup()
-    }
+//    if let navigationBar = navigationController?.navigationBar {
+//      titleView
+//        .fs_centerXAnchor(equalTo: navigationBar.centerXAnchor)
+//        .fs_centerYAnchor(equalTo: navigationBar.centerYAnchor)
+//        .fs_endSetup()
+//    }
     
     // load photoCollection to show initially.
     PhotoManager.shared
